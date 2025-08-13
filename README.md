@@ -1,6 +1,6 @@
 # Construccion2MarlonGranda
 
-##Integrante
+## Integrante
 ### Marlon Granda (Martes - jueves 8 - 10 pm)
 
 ## Tecnologias
