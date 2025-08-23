@@ -5,5 +5,6 @@ public enum Role {
     SUPPORT,
     NURSE,
     DOCTOR,
-    HRESOURCES
+    HRESOURCES,
+    PATIENT
 }

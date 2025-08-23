@@ -11,10 +11,14 @@ public class Person {
     private String Email;
     private int phoneNumber;
     private Date date;
-    private String addres;
     private Role role;
+    private String addres;
     private User loginDetails;
-    private Patient patientData;
+    
+    private String gender;
+    private String emergencyContactName;
+    private int emergencyContactNumber;
+    private String relationshipPatient;
 
     public long getId() {
         return id;
@@ -64,20 +68,20 @@ public class Person {
         this.date = date;
     }
 
-    public String getAddres() {
-        return addres;
-    }
-
-    public void setAddres(String addres) {
-        this.addres = addres;
-    }
-
     public Role getRole() {
         return role;
     }
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public String getAddres() {
+        return addres;
+    }
+
+    public void setAddres(String addres) {
+        this.addres = addres;
     }
 
     public User getLoginDetails() {
@@ -88,12 +92,36 @@ public class Person {
         this.loginDetails = loginDetails;
     }
 
-    public Patient getPatientData() {
-        return patientData;
+    public String getGender() {
+        return gender;
     }
 
-    public void setPatientData(Patient patientData) {
-        this.patientData = patientData;
+    public void setGender(String gender) {
+        this.gender = gender;
     }
-     
+
+    public String getEmergencyContactName() {
+        return emergencyContactName;
+    }
+
+    public void setEmergencyContactName(String emergencyContactName) {
+        this.emergencyContactName = emergencyContactName;
+    }
+
+    public int getEmergencyContactNumber() {
+        return emergencyContactNumber;
+    }
+
+    public void setEmergencyContactNumber(int emergencyContactNumber) {
+        this.emergencyContactNumber = emergencyContactNumber;
+    }
+
+    public String getRelationshipPatient() {
+        return relationshipPatient;
+    }
+
+    public void setRelationshipPatient(String relationshipPatient) {
+        this.relationshipPatient = relationshipPatient;
+    }
+  
 }
