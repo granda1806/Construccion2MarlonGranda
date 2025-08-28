@@ -1,12 +1,12 @@
 
 package app.domain.services;
-
 import app.domain.model.User;
 import app.domain.ports.UserPort;
+import app.domain.model.enums.Role;
+
 public class CreateUser {
-    
     private UserPort userPort;
-    public void cretae(User user) throws Exception {
+    public void create(User user) throws Exception {
         if (userPort.findByDocument(user) != null) {
             System.out.println("Ya hay un usuario registrado con este documento.");
         }
