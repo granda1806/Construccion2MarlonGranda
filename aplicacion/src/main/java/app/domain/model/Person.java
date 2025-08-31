@@ -8,6 +8,7 @@ public class Person {
     private long id;
     private String name;
     private long document;
+    private int age;
     private String Email;
     private int phoneNumber;
     private Date date;
@@ -123,5 +124,15 @@ public class Person {
     public void setRelationshipPatient(String relationshipPatient) {
         this.relationshipPatient = relationshipPatient;
     }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+    
+    
   
 }

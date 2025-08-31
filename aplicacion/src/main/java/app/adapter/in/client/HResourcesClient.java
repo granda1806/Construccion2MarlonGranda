@@ -2,10 +2,15 @@
 package app.adapter.in.client;
 
 import java.util.Scanner;
+import app.application.usecases.HResourcesUseCase;
+import app.domain.model.User;
+import app.adapter.in.builder.UserBuilder;
 
 public class HResourcesClient {
-    private static final String MENU = "Ingrese una opcion: \n 1. Crear Usuario \n 2. Actualizar datos personales \n 3. Eliminar usuario \n 4. Salir.";
+    private static final String MENU = "Ingrese una opcion: \n 1. Crear administrador \n 2. Crear soporte de informacion \n 3. Crear enfermera \n 4. Crear Doctor. \n 5. Crear Recuersos Humanos. \n 6. Salir.";
     private static Scanner reader = new Scanner(System.in);
+    private HResourcesUseCase resourcesUseCase;
+    private UserBuilder userBuilder;
     
     public void session() {
         boolean session = true;
@@ -20,15 +25,31 @@ public class HResourcesClient {
         String option = reader.nextLine();
         switch (option) {
             case "1": {
-            break;
+                User user = readInfoFromUser();
+                resourcesUseCase.createAdmin(user);
+            return true;
             }
             case "2": {
-            break;
+                User user = readInfoFromUser();
+                resourcesUseCase.createSupport(user);
+            return true;
             }
             case "3": {
-            break;
+                User user = readInfoFromUser();
+                resourcesUseCase.createNurse(user);
+            return true;
             }
             case "4": {
+                User user = readInfoFromUser();
+                resourcesUseCase.createDoctor(user);
+            return true;
+            }
+            case "5": {
+                User user = readInfoFromUser();
+                resourcesUseCase.createHResources(user);
+            return true;
+            }
+            case "6": {
                 System.out.println("Cerrando sesion.");
                 return false;
             } default: {
@@ -41,6 +62,19 @@ public class HResourcesClient {
         System.out.println(e.getMessage());
         return true;
         }
-        return false;
+    }
+    
+    private User readInfoFromUser() throws Exception {
+        System.out.println("Ingrese nombre: ");
+        String name = reader.nextLine();
+        System.out.println("Ingrese cedula: ");
+        String document = reader.nextLine();
+        System.out.println("Ingrese la edad: ");
+        String age = reader.nextLine();
+        System.out.println("Ingrese usuario: ");
+        String userName = reader.nextLine();
+        System.out.println("Ingrese Contraseña: ");
+        String password = reader.nextLine();
+        return userBuilder.build(name, document, age, userName, password);
     }
 }

@@ -27,4 +27,9 @@ public class HResourcesUseCase {
         user.setRole(Role.DOCTOR);
         createUser.create(user);
     }
+    
+    public void createHResources(User user) throws Exception {
+        user.setRole(Role.HRESOURCES);
+        createUser.create(user);
+    }
 }
