@@ -22,4 +22,28 @@ public class UserValidator extends SimpleValidator{
     public String passwordValidator(String value) throws Exception {
         return stringValidator("Contraseña de la persona",value);
     }
+    
+     public String dateValidator(String value) throws Exception {
+        return stringValidator("Fecha de nacimiento de la persona",value);
+    }
+     
+     public String genderValidator(String value) throws Exception {
+        return stringValidator("Genero de la persona",value);
+    }
+     
+     public String addresValidator(String value) throws Exception {
+        return stringValidator("Direccion de la persona",value);
+    }
+     
+     public String contactNameValidator(String value) throws Exception {
+        return stringValidator("Nombre de contacto de la persona",value);
+    }
+     
+     public String relationshipValidator(String value) throws Exception {
+        return stringValidator("Relacion con la persona",value);
+    }
+     
+     public long contactNumberValidator(String value) throws Exception {
+        return longValidator("Numero de contacto de la persona",value);
+    }
 }

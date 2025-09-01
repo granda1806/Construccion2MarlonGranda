@@ -75,6 +75,6 @@ public class HResourcesClient {
         String userName = reader.nextLine();
         System.out.println("Ingrese Contraseña: ");
         String password = reader.nextLine();
-        return userBuilder.build(name, document, age, userName, password);
+        return userBuilder.buildHResources(name, document, age, userName, password);
     }
 }

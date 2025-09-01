@@ -18,7 +18,7 @@ public class Person {
     
     private String gender;
     private String emergencyContactName;
-    private int emergencyContactNumber;
+    private long emergencyContactNumber;
     private String relationshipPatient;
 
     public long getId() {
@@ -109,11 +109,11 @@ public class Person {
         this.emergencyContactName = emergencyContactName;
     }
 
-    public int getEmergencyContactNumber() {
+    public long getEmergencyContactNumber() {
         return emergencyContactNumber;
     }
 
-    public void setEmergencyContactNumber(int emergencyContactNumber) {
+    public void setEmergencyContactNumber(long emergencyContactNumber) {
         this.emergencyContactNumber = emergencyContactNumber;
     }
 
