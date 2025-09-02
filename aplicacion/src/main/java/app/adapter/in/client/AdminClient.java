@@ -57,7 +57,7 @@ public class AdminClient {
         }
     }
     
-    private User readinfoFromUserAd() throws Exception {
+    private User readInfoFromUserAd() throws Exception {
         System.out.println("Ingrese nombre: ");
         String name = reader.nextLine();
         System.out.println("Ingrese cedula: ");
