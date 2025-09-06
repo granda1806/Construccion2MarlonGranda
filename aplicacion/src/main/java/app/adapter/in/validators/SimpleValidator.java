@@ -16,7 +16,7 @@ public abstract class SimpleValidator {
             int intValue = Integer.parseInt(value);
             return intValue;
         }catch(Exception e){
-            throw new Exception(element + " debe ser un valor numerotico.");
+            throw new Exception(element + " debe ser un valor numerico.");
         }
     }
     
@@ -26,7 +26,7 @@ public abstract class SimpleValidator {
             long longValue = Long.parseLong(value);
             return longValue;
         }catch(Exception e){
-            throw new Exception(element + " debe ser un valor numerotico.");
+            throw new Exception(element + " debe ser un valor numerico.");
         }
     }
     
@@ -36,7 +36,7 @@ public abstract class SimpleValidator {
             long longValue = Long.parseLong(value);
             return longValue;
         }catch(Exception e){
-            throw new Exception(element + " debe ser un valor numerotico.");
+            throw new Exception(element + " debe ser un valor numerico.");
         }
     }
 }
