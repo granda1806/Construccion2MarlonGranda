@@ -3,8 +3,13 @@ package app.domain.services;
 import app.domain.model.User;
 import app.domain.ports.UserPort;
 import app.domain.model.enums.Role;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CreateUser {
+    
+    @Autowired
     private UserPort userPort;
     public void create(User user) throws Exception {
         if (userPort.findByDocument(user) != null) {
