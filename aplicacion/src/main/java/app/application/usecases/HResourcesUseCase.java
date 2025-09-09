@@ -4,8 +4,13 @@ package app.application.usecases;
 import app.domain.model.User;
 import app.domain.model.enums.Role;
 import app.domain.services.CreateUser;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class HResourcesUseCase {
+    
+    @Autowired
     private CreateUser createUser;
     
     public void createAdmin(User user) throws Exception {
