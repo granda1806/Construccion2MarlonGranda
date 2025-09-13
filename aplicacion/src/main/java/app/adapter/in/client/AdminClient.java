@@ -73,7 +73,7 @@ public class AdminClient {
         System.out.println("Datos de contacto.");
         System.out.println("Ingrese nombre contacto de emergencia: ");
         String contactName = reader.nextLine();
-        System.out.println("Ingrese que relacion tiene con el paciente: ");
+        System.out.println("Ingrese que relacion que tiene con el paciente: ");
         String relationship = reader.nextLine();
         System.out.println("Ingrese numero contacto de emergencia: ");
         String contactNumber = reader.nextLine();
