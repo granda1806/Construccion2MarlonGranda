@@ -3,8 +3,12 @@ package app.adapter.in.builder;
 
 import app.adapter.in.validators.UserValidator;
 import app.domain.model.User;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+@Component
 public class UserBuilder {
+    
+    @Autowired
     private UserValidator userValidator;
     
     public User buildHResources(String name, String document, String age, String userName, String password)throws Exception{

@@ -5,11 +5,15 @@ import java.util.Scanner;
 import app.application.usecases.HResourcesUseCase;
 import app.domain.model.User;
 import app.adapter.in.builder.UserBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
+@Controller
 public class HResourcesClient {
     private static final String MENU = "Ingrese una opcion: \n 1. Crear administrador \n 2. Crear soporte de informacion \n 3. Crear enfermera \n 4. Crear Doctor. \n 5. Crear Recuersos Humanos. \n 6. Salir.";
     private static Scanner reader = new Scanner(System.in);
     private HResourcesUseCase resourcesUseCase;
+    @Autowired
     private UserBuilder userBuilder;
     
     public void session() {
