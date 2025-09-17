@@ -1,33 +1,37 @@
-package app.infrastructure.persistence.repository;
-
-import app.infrastructure.persistence.mapper.UserMapper;
-import app.infrastructure.persistence.entities.UserEntity;
-import java.util.Optional;
-
-
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import java.util.Optional;
+import app.domain.model.User;
+import app.domain.ports.UserPort;
+import app.infrastructure.persistence.entities.UserEntity;
+import app.infrastructure.persistence.mapper.UserMapper;
+import app.infrastructure.persistence.repository.UserJpaRepository;
 
 @Repository
-public interface UserRepositoryAdapter extends JpaRepository<UserEntity, Long> {
+public class UserRepositoryAdapter implements UserPort {
 
-    public UserEntity findByDocument(long document);
+    private final UserJpaRepository userJpaRepository;
 
-    public UserEntity findByUserName(String userName);
-    
-
- /*   @Override
-    public app.domain.model.User findByDocument(app.domain.model.User user) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public UserRepositoryAdapter(UserJpaRepository userJpaRepository) {
+        this.userJpaRepository = userJpaRepository;
     }
 
     @Override
-    public app.domain.model.User findByName(app.domain.model.User user) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public User findByDocument(User user) throws Exception {
+        Optional<UserEntity> entity = userJpaRepository.findByDocument(user.getDocument());
+        return entity.map(UserMapper::toDomain)
+                     .orElseThrow(() -> new Exception("User not found with document: " + user.getDocument()));
     }
 
     @Override
-    public void save(app.domain.model.User user) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }*/
+    public User findByName(User user) throws Exception {
+        Optional<UserEntity> entity = userJpaRepository.findByName(user.getName());
+        return entity.map(UserMapper::toDomain)
+                     .orElseThrow(() -> new Exception("User not found with name: " + user.getUserName()));
+    }
+
+    @Override
+    public void save(User user) throws Exception {
+        UserEntity entity = UserMapper.toEntity(user);
+        userJpaRepository.save(entity);
+    }
 }
