@@ -1,9 +1,11 @@
-package app.domain.estructure.repository;
+package app.infrastructure.persistence.repository;
 
+import app.infrastructure.persistence.mapper.UserMapper;
+import app.infrastructure.persistence.entities.UserEntity;
 import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
-import app.domain.User;
+import app.domain.model.User;
 import app.domain.ports.UserPort;
 
 @Repository
@@ -32,7 +34,7 @@ public class UserRepositoryAdapter implements UserPort {
         userJpaRepository.save(entity);
     }
 
-    @Override
+ /*   @Override
     public app.domain.model.User findByDocument(app.domain.model.User user) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
@@ -45,5 +47,5 @@ public class UserRepositoryAdapter implements UserPort {
     @Override
     public void save(app.domain.model.User user) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    }*/
 }

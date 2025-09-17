@@ -11,7 +11,7 @@ public class Person {
     private int age;
     private String Email;
     private int phoneNumber;
-    private Date date;
+    private String date;
     private Role role;
     private String addres;
     private User loginDetails;
@@ -61,11 +61,11 @@ public class Person {
         this.phoneNumber = phoneNumber;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -132,7 +132,5 @@ public class Person {
     public void setAge(int age) {
         this.age = age;
     }
-    
-    
-  
+
 }
