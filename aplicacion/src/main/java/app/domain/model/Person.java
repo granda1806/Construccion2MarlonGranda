@@ -2,7 +2,6 @@
 package app.domain.model;
 
 import app.domain.model.enums.Role;
-import java.sql.Date;
 
 public class Person {
     private long id;
@@ -14,7 +13,6 @@ public class Person {
     private String date;
     private Role role;
     private String addres;
-    private User loginDetails;
     
     private String gender;
     private String emergencyContactName;
@@ -83,14 +81,6 @@ public class Person {
 
     public void setAddres(String addres) {
         this.addres = addres;
-    }
-
-    public User getLoginDetails() {
-        return loginDetails;
-    }
-
-    public void setLoginDetails(User loginDetails) {
-        this.loginDetails = loginDetails;
     }
 
     public String getGender() {

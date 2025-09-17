@@ -43,9 +43,6 @@ public class UserEntity
     @Column(nullable = false)
     private String address;
     
-    @Column(nullable = true)
-    private User loginDetails;
-    
     @Column(nullable = true)    
     private String gender;
     
@@ -63,7 +60,7 @@ public class UserEntity
 
     public UserEntity(Long id, Long document, String name, String user, String password, int age,
                     String Email, int phoneNumber, String date, Role role,
-                    String address, User loginDetails, String gender, String emergencyContactName,
+                    String address, String gender, String emergencyContactName,
                     Long emergencyContactNumber, String relationshipPatient) {
         this.id = id;
         this.document = document;
@@ -76,7 +73,6 @@ public class UserEntity
         this.date = date;
         this.role = role;
         this.address = address;
-        this.loginDetails = loginDetails;
         this.gender = gender;
         this.emergencyContactName = emergencyContactName;
         this.emergencyContactNumber = emergencyContactNumber;
@@ -169,14 +165,6 @@ public class UserEntity
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public User getLoginDetails() {
-        return loginDetails;
-    }
-
-    public void setLoginDetails(User loginDetails) {
-        this.loginDetails = loginDetails;
     }
 
     public String getGender() {

@@ -20,7 +20,6 @@ public class UserMapper {
         entity.setDate(user.getDate());
         entity.setRole(user.getRole());
         entity.setAddress(user.getAddres());
-        entity.setLoginDetails(user.getLoginDetails());
         entity.setGender(user.getGender());
         entity.setEmergencyContactName(user.getEmergencyContactName());
         entity.setEmergencyContactNumber(user.getEmergencyContactNumber());
@@ -43,7 +42,6 @@ public class UserMapper {
                 user.setDate(entity.getDate());
                 user.setRole(entity.getRole());
                 user.setAddres(entity.getAddress());
-                user.setLoginDetails(entity.getLoginDetails());
                 user.setGender(entity.getGender());
                 user.setEmergencyContactName(entity.getEmergencyContactName());
                 user.setEmergencyContactNumber(entity.getEmergencyContactNumber());
