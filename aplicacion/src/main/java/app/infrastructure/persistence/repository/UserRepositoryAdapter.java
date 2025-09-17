@@ -4,35 +4,17 @@ import app.infrastructure.persistence.mapper.UserMapper;
 import app.infrastructure.persistence.entities.UserEntity;
 import java.util.Optional;
 
+
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import app.domain.model.User;
-import app.domain.ports.UserPort;
 
 @Repository
-public class UserRepositoryAdapter implements UserPort {
+public interface UserRepositoryAdapter extends JpaRepository<UserEntity, Long> {
 
-    private final UserJpaRepository userJpaRepository;
+    public UserEntity findByDocument(long document);
 
-    public UserRepositoryAdapter(UserJpaRepository userJpaRepository) {
-        this.userJpaRepository = userJpaRepository;
-    }
-
-    public User findByDocument(User user) throws Exception {
-        Optional<UserEntity> entity = userJpaRepository.findByDocument(user.getDocument());
-        return entity.map(UserMapper::toDomain)
-                     .orElseThrow(() -> new Exception("User not found with document: " + user.getDocument()));
-    }
+    public UserEntity findByUserName(String userName);
     
-    public User findByName(User user) throws Exception {
-        Optional<UserEntity> entity = userJpaRepository.findByName(user.getName());
-        return entity.map(UserMapper::toDomain)
-                     .orElseThrow(() -> new Exception("User not found with name: " + user.getName()));
-    }
-
-    public void save(User user) throws Exception {
-        UserEntity entity = UserMapper.toEntity(user);
-        userJpaRepository.save(entity);
-    }
 
  /*   @Override
     public app.domain.model.User findByDocument(app.domain.model.User user) throws Exception {
