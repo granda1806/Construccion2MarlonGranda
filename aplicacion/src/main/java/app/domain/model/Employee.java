@@ -1,33 +1,53 @@
 package app.domain.model;
 
-public class Employee {
+public class Employee
+{
+    
     private int id;
     private String name;
 
-    public Employee(int id, String name) {
+    public Employee(int id, String name)
+    {
+        
         this.id = id;
         this.name = name;
+        
     }
 
-    public int getId() {
+    public int getId()
+    {
+        
         return id;
+        
     }
 
-    public void setId(int id) {
+    public void setId(int id)
+    {
+        
         this.id = id;
+        
     }
 
-    public String getName() {
+    public String getName()
+    {
+        
         return name;
+        
     }
 
-    public void setName(String name) {
+    public void setName(String name)
+    {
+        
         this.name = name;
+        
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
        
         return "Empleado{id=" + id + ", nombre='" + name + "'}";
+        
     }
+    
 }

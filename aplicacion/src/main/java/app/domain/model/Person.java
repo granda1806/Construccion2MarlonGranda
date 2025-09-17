@@ -1,9 +1,9 @@
-
 package app.domain.model;
 
 import app.domain.model.enums.Role;
 
-public class Person {
+public class Person
+{
     private long id;
     private String name;
     private long document;
@@ -19,108 +19,186 @@ public class Person {
     private long emergencyContactNumber;
     private String relationshipPatient;
 
-    public long getId() {
+    public long getId()
+    {
+        
         return id;
+        
     }
 
-    public void setId(long id) {
+    public void setId(long id)
+    {
+        
         this.id = id;
+        
     }
 
-    public String getName() {
+    public String getName()
+    {
+        
         return name;
+        
     }
 
-    public void setName(String name) {
+    public void setName(String name)
+    {
+        
         this.name = name;
+        
     }
 
-    public long getDocument() {
+    public long getDocument()
+    {
+        
         return document;
+        
     }
 
-    public void setDocument(long document) {
+    public void setDocument(long document)
+    {
+        
         this.document = document;
+        
     }
 
-    public String getEmail() {
+    public String getEmail()
+    {
+        
         return Email;
+        
     }
 
-    public void setEmail(String Email) {
+    public void setEmail(String Email)
+    {
+        
         this.Email = Email;
+        
     }
 
-    public int getPhoneNumber() {
+    public int getPhoneNumber()
+    {
+        
         return phoneNumber;
+        
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(int phoneNumber)
+    {
+        
         this.phoneNumber = phoneNumber;
+        
     }
 
-    public String getDate() {
+    public String getDate()
+    {
+        
         return date;
+        
     }
 
-    public void setDate(String date) {
+    public void setDate(String date)
+    {
+        
         this.date = date;
+        
     }
 
-    public Role getRole() {
+    public Role getRole()
+    {
+        
         return role;
+        
     }
 
-    public void setRole(Role role) {
+    public void setRole(Role role)
+    {
+        
         this.role = role;
+        
     }
 
-    public String getAddres() {
+    public String getAddres()
+    {
+        
         return addres;
+        
     }
 
-    public void setAddres(String addres) {
+    public void setAddres(String addres)
+    {
+        
         this.addres = addres;
+        
     }
 
-    public String getGender() {
+    public String getGender()
+    {
+        
         return gender;
+        
     }
 
-    public void setGender(String gender) {
+    public void setGender(String gender)
+    {
+        
         this.gender = gender;
+        
     }
 
-    public String getEmergencyContactName() {
+    public String getEmergencyContactName()
+    {
+        
         return emergencyContactName;
+        
     }
 
-    public void setEmergencyContactName(String emergencyContactName) {
+    public void setEmergencyContactName(String emergencyContactName)
+    {
+        
         this.emergencyContactName = emergencyContactName;
+        
     }
 
-    public long getEmergencyContactNumber() {
+    public long getEmergencyContactNumber()
+    {
+        
         return emergencyContactNumber;
+        
     }
 
-    public void setEmergencyContactNumber(long emergencyContactNumber) {
+    public void setEmergencyContactNumber(long emergencyContactNumber)
+    {
+        
         this.emergencyContactNumber = emergencyContactNumber;
+        
     }
 
-    public String getRelationshipPatient() {
+    public String getRelationshipPatient()
+    {
+        
         return relationshipPatient;
+        
     }
 
-    public void setRelationshipPatient(String relationshipPatient) {
+    public void setRelationshipPatient(String relationshipPatient)
+    {
+        
         this.relationshipPatient = relationshipPatient;
+        
     }
 
-    public int getAge() {
+    public int getAge()
+    {
+        
         return age;
+        
     }
 
-    public void setAge(int age) {
+    public void setAge(int age)
+    {
+        
         this.age = age;
+        
     }
 
 }

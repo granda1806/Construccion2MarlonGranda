@@ -1,51 +1,82 @@
 package app.domain.model;
 
-public class HistoryRecord {
+public class HistoryRecord
+{
+    
     private String date;
     private String doctorId;
     private String reason;
     private String symptoms;
     private String diagnosis;
 
-    public String getDate() {
+    public String getDate()
+    {
+        
         return date;
+        
     }
 
-    public void setDate(String date) {
+    public void setDate(String date)
+    {
+        
         this.date = date;
+        
     }
 
-    public String getDoctorId() {
+    public String getDoctorId()
+    {
+        
         return doctorId;
+        
     }
 
-    public void setDoctorId(String doctorId) {
+    public void setDoctorId(String doctorId)
+    {
+        
         this.doctorId = doctorId;
+        
     }
 
-    public String getReason() {
+    public String getReason()
+    {
+        
         return reason;
+        
     }
 
-    public void setReason(String reason) {
+    public void setReason(String reason)
+    {
+        
         this.reason = reason;
+        
     }
 
-    public String getSymptoms() {
+    public String getSymptoms()
+    {
+        
         return symptoms;
+        
     }
 
-    public void setSymptoms(String symptoms) {
+    public void setSymptoms(String symptoms)
+    {
+        
         this.symptoms = symptoms;
+        
     }
 
-    public String getDiagnosis() {
+    public String getDiagnosis()
+    {
+    
         return diagnosis;
+        
     }
 
-    public void setDiagnosis(String diagnosis) {
+    public void setDiagnosis(String diagnosis)
+    {
+        
         this.diagnosis = diagnosis;
+        
     }
-
     
 }

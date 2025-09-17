@@ -1,12 +1,14 @@
 package app.infrastructure.persistence.mapper;
 
-
 import app.domain.model.User;
 import app.infrastructure.persistence.entities.UserEntity;
 
-public class UserMapper {
+public class UserMapper
+{
     
-    public static UserEntity toEntity(User user) {
+    public static UserEntity toEntity(User user)
+    {
+        
         if (user == null) return null;
         UserEntity entity = new UserEntity();
         entity.setId(user.getId());
@@ -28,7 +30,8 @@ public class UserMapper {
          
     }
 
-    public static User toDomain(UserEntity entity) {
+    public static User toDomain(UserEntity entity)
+    {
                 if (entity == null) return null;
                 User user = new User();
                 user.setId(entity.getId());
@@ -47,5 +50,7 @@ public class UserMapper {
                 user.setEmergencyContactNumber(entity.getEmergencyContactNumber());
                 user.setRelationshipPatient(entity.getRelationshipPatient());
                 return user;
+                
     }
+    
 }

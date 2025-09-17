@@ -3,18 +3,25 @@ package app.application.usecases;
 import app.domain.model.*;
 import java.util.Scanner;
 
-public class DoctorUseCase {
+public class DoctorUseCase
+{
+    
     private final Scanner reader = new Scanner(System.in);
-    private MedicalOrder currentOrder; // 🔹 Orden en construcción
+    private MedicalOrder currentOrder;
 
-    public void searchMedicalHistory() {
+    public void searchMedicalHistory()
+    {
+        
         System.out.print("\nIngrese el ID del paciente: ");
         String patientId = reader.nextLine();
 
         System.out.println("\nHistoria clínica encontrada para el paciente con ID: " + patientId);
 
         boolean alternatemenu  = true;
-        while (alternatemenu) {
+        
+        while (alternatemenu)
+        {
+            
             System.out.println("\nSUBMENU HISTORIA CLINICA");
             System.out.println("1. Agregar informacion de la consulta");
             System.out.println("2. Recetar medicamentos");
@@ -25,7 +32,8 @@ public class DoctorUseCase {
             System.out.print("Seleccione una opcion: ");
             String option = reader.nextLine();
 
-            switch (option) {
+            switch (option)
+            {
                 case "1" -> consultationInformation();
                 case "2" -> alternatemenu();
                 case "3" -> medicalProcedure();
@@ -34,10 +42,14 @@ public class DoctorUseCase {
                 case "6" -> alternatemenu = false;
                 default -> System.out.println("Opcion no valida.");
             }
+            
         }
+        
     }
 
-    private void consultationInformation() {
+    private void consultationInformation()
+    {
+        
         System.out.println("\nAGREGAR INFORMACION DE LA CONSULTA");
         HistoryRecord record = new HistoryRecord();
         System.out.print("Fecha: "); record.setDate(reader.nextLine());
@@ -46,13 +58,19 @@ public class DoctorUseCase {
         System.out.print("Sintomatologia: "); record.setSymptoms(reader.nextLine());
         System.out.print("Diagnostico: "); record.setDiagnosis(reader.nextLine());
         System.out.println("Consulta registrada.");
+        
     }
 
-    private void alternatemenu() {
-        if (currentOrder == null) {
+    private void alternatemenu()
+    {
+        
+        if (currentOrder == null)
+        {
+            
             currentOrder = new MedicalOrder();
             System.out.print("Ingrese numero de orden medica: ");
             currentOrder.setOrderNumber(reader.nextLine());
+            
         }
 
         Prescription prescription = new Prescription();
@@ -63,13 +81,19 @@ public class DoctorUseCase {
 
         currentOrder.addPrescription(prescription);
         System.out.println("Medicamento agregado a la orden.");
+        
     }
 
-    private void medicalProcedure() {
-        if (currentOrder == null) {
+    private void medicalProcedure()
+    {
+        
+        if (currentOrder == null)
+        {
+            
             currentOrder = new MedicalOrder();
             System.out.print("Ingrese numero de orden médica: ");
             currentOrder.setOrderNumber(reader.nextLine());
+            
         }
 
         Procedure procedure = new Procedure();
@@ -78,20 +102,31 @@ public class DoctorUseCase {
         System.out.print("Frecuencia: "); procedure.setFrequency(reader.nextLine());
         System.out.print("¿Requiere especialista? (si/no): ");
         String req = reader.nextLine();
-        if (req.equalsIgnoreCase("si")) {
+        
+        if (req.equalsIgnoreCase("si"))
+        {
+        
             System.out.print("ID especialista: "); procedure.setSpecialistId(reader.nextLine());
+            
         }
+        
         System.out.print("Item: "); procedure.setItem(reader.nextLine());
 
         currentOrder.addProcedure(procedure);
         System.out.println("Procedimiento agregado a la orden.");
+        
     }
 
-    private void diagnosticAssistance() {
-        if (currentOrder == null) {
+    private void diagnosticAssistance()
+    {
+        
+        if (currentOrder == null)
+        {
+            
             currentOrder = new MedicalOrder();
             System.out.print("Ingrese numero de orden medica: ");
             currentOrder.setOrderNumber(reader.nextLine());
+            
         }
 
         DiagnosticAid aid = new DiagnosticAid();
@@ -99,25 +134,38 @@ public class DoctorUseCase {
         System.out.print("Cantidad: "); aid.setQuantity(reader.nextLine());
         System.out.print("¿Requiere especialista? (si/no): ");
         String req = reader.nextLine();
-        if (req.equalsIgnoreCase("si")) {
+        
+        if (req.equalsIgnoreCase("si"))
+        {
+            
             System.out.print("ID especialista: "); aid.setSpecialistId(reader.nextLine());
+            
         }
+        
         System.out.print("Item: "); aid.setItem(reader.nextLine());
 
         currentOrder.addDiagnosticAid(aid);
         System.out.println("Ayuda diagnostica agregada a la orden.");
+        
     }
 
-    private void createMedicalOrder() {
-        if (currentOrder == null) {
+    private void createMedicalOrder()
+    {
+        
+        if (currentOrder == null)
+        {
+            
             System.out.println("No hay datos cargados en la orden.");
             return;
+            
         }
 
         System.out.println("\nORDEN MEDICA FINALIZADA:");
         System.out.println(currentOrder);
 
-        // ⚡ Aquí podrías persistir la orden en un repositorio
-        currentOrder = null; // limpiar para nueva orden
+        // Espacio para persistir la orden en un repositorio
+        currentOrder = null; // Vacía la instancia de registros para crear una nueva orden
+        
     }
+    
 }

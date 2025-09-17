@@ -56,12 +56,15 @@ public class UserEntity
     private String relationshipPatient;
     
 
-    public UserEntity() {}
+    public UserEntity()
+    {}
 
     public UserEntity(Long id, Long document, String name, String user, String password, int age,
                     String Email, int phoneNumber, String date, Role role,
                     String address, String gender, String emergencyContactName,
-                    Long emergencyContactNumber, String relationshipPatient) {
+                    Long emergencyContactNumber, String relationshipPatient)
+    {
+        
         this.id = id;
         this.document = document;
         this.name = name;
@@ -77,129 +80,217 @@ public class UserEntity
         this.emergencyContactName = emergencyContactName;
         this.emergencyContactNumber = emergencyContactNumber;
         this.relationshipPatient = relationshipPatient;
+        
     }
 
-    public Long getId() {
+    public Long getId()
+    {
+        
         return id;
+        
     }
 
-    public void setId(Long id) {
+    public void setId(Long id)
+    {
+        
         this.id = id;
+        
     }
 
-    public Long getDocument() {
+    public Long getDocument()
+    {
+        
         return document;
+        
     }
 
-    public void setDocument(Long document) {
+    public void setDocument(Long document)
+    {
+        
         this.document = document;
+        
     }
 
-    public String getName() {
+    public String getName()
+    {
+        
         return name;
+        
     }
 
-    public String getUser() {
+    public String getUser()
+    {
+        
         return user;
+        
     }
 
-    public void setUser(String user) {
+    public void setUser(String user)
+    {
+        
         this.user = user;
+        
     }
 
-    public String getPassword() {
+    public String getPassword()
+    {
+        
         return password;
+        
     }
 
-    public void setPassword(String password) {
+    public void setPassword(String password)
+    {
+        
         this.password = password;
+        
     }
 
-    public void setName(String name) {
+    public void setName(String name)
+    {
+        
         this.name = name;
+        
     }
 
-    public int getAge() {
+    public int getAge()
+    {
+        
         return age;
+        
     }
 
-    public void setAge(int age) {
+    public void setAge(int age)
+    {
+        
         this.age = age;
+        
     }
 
-    public String getEmail() {
+    public String getEmail()
+    {
+        
         return Email;
+        
     }
 
-    public void setEmail(String Email) {
+    public void setEmail(String Email)
+    {
+        
         this.Email = Email;
+        
     }
 
-    public int getPhoneNumber() {
+    public int getPhoneNumber()
+    {
+        
         return phoneNumber;
+        
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(int phoneNumber)
+    {
+        
         this.phoneNumber = phoneNumber;
+        
     }
 
-    public String getDate() {
+    public String getDate()
+    {
+        
         return date;
+        
     }
 
-    public void setDate(String date) {
+    public void setDate(String date)
+    {
+        
         this.date = date;
+        
     }
 
-    public Role getRole() {
+    public Role getRole()
+    {
+        
         return role;
+        
     }
 
-    public void setRole(Role role) {
+    public void setRole(Role role)
+    {
+        
         this.role = role;
+        
     }
 
-    public String getAddress() {
+    public String getAddress()
+    {
+        
         return address;
+        
     }
 
-    public void setAddress(String address) {
+    public void setAddress(String address)
+    {
+        
         this.address = address;
+        
     }
 
-    public String getGender() {
+    public String getGender()
+    {
+        
         return gender;
+        
     }
 
-    public void setGender(String gender) {
+    public void setGender(String gender)
+    {
+        
         this.gender = gender;
+        
     }
 
-    public String getEmergencyContactName() {
+    public String getEmergencyContactName()
+    {
+        
         return emergencyContactName;
+        
     }
 
-    public void setEmergencyContactName(String emergencyContactName) {
+    public void setEmergencyContactName(String emergencyContactName)
+    {
+        
         this.emergencyContactName = emergencyContactName;
+        
     }
 
-    public Long getEmergencyContactNumber() {
+    public Long getEmergencyContactNumber()
+    {
+        
         return emergencyContactNumber;
+        
     }
 
-    public void setEmergencyContactNumber(Long emergencyContactNumber) {
+    public void setEmergencyContactNumber(Long emergencyContactNumber)
+    {
+    
         this.emergencyContactNumber = emergencyContactNumber;
+        
     }
 
-    public String getRelationshipPatient() {
+    public String getRelationshipPatient()
+    {
+        
         return relationshipPatient;
+        
     }
 
-    public void setRelationshipPatient(String relationshipPatient) {
+    public void setRelationshipPatient(String relationshipPatient)
+    {
+        
         this.relationshipPatient = relationshipPatient;
+        
     }
-
-    
-    
     
 }
