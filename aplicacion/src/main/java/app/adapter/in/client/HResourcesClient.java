@@ -25,8 +25,7 @@ public class HResourcesClient
     @Autowired
     private UserBuilder userBuilder;
     
-    public void session()
-    {
+    public void session() {
         
         boolean session = true;
         
