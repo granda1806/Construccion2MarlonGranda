@@ -5,8 +5,9 @@ import app.adapter.in.client.HResourcesClient;
 import app.domain.model.enums.Role;
 import app.domain.services.CreateUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-
+@Service
 public class ClinicalUseCase {
     @Autowired
     private CreateUser createUser;
