@@ -17,15 +17,17 @@ public class HResourcesClient
                                        "2. Crear soporte de informacion \n" +
                                        "3. Crear enfermera \n" +
                                        "4. Crear Doctor. \n" +
-                                       "5. Crear Recuersos Humanos. \n"+
+                                       " 5. Crear Recuersos Humanos. \n"+
                                        "6. Salir.";
     
     private static Scanner reader = new Scanner(System.in);
+    @Autowired
     private HResourcesUseCase resourcesUseCase;
     @Autowired
     private UserBuilder userBuilder;
     
-    public void session() {
+    public void session()
+    {
         
         boolean session = true;
         
