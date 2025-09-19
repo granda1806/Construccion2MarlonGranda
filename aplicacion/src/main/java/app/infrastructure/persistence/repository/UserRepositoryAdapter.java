@@ -5,11 +5,9 @@ import app.infrastructure.persistence.entities.UserEntity;
 import app.infrastructure.persistence.mapper.UserMapper;
 import app.infrastructure.persistence.repository.UserJpaRepository;
 import app.domain.ports.UserPortIn;
-import app.domain.ports.UserPortOut;
 
 @Repository
-public class UserRepositoryAdapter implements UserPortOut
-{
+public class UserRepositoryAdapter implements UserPortIn {
 
     private final UserJpaRepository userJpaRepository;
 
