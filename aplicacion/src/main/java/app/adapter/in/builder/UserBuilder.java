@@ -32,7 +32,7 @@ public class UserBuilder
         user.setName(userValidator.nameValidator(name));
         user.setDocument(userValidator.documentValidator(document));
         user.setAge(userValidator.ageValidator(age));
-        /*user.setDate(userValidator.dateValidator(date));*/
+        user.setDate(userValidator.dateValidator(date));
         user.setGender(userValidator.genderValidator(gender));
         user.setAddres(userValidator.addresValidator(addres));
         user.setEmergencyContactName(userValidator.contactNameValidator(contactName));
