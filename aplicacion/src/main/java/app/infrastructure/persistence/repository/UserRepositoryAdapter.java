@@ -1,3 +1,5 @@
+package app.infrastructure.persistence.repository;
+        
 import org.springframework.stereotype.Repository;
 import java.util.Optional;
 import app.domain.model.User;
