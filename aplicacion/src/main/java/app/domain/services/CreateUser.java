@@ -2,12 +2,14 @@ package app.domain.services;
 
 import app.domain.model.User;
 import app.domain.ports.UserPortIn;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class CreateUser {
-
-    private final UserPortIn userPortOut;
+    
+    @Autowired
+    private UserPortIn userPortOut;
 
     public CreateUser(UserPortIn userPortOut) {
         this.userPortOut = userPortOut;
