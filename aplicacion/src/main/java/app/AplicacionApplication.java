@@ -18,7 +18,6 @@ public class AplicacionApplication implements CommandLineRunner{
         public void run(String... args) throws Exception
         {
             System.out.println("Esta corriendo...");
-            client.session();
         }
         
 }
