@@ -1,16 +1,10 @@
 package app.domain.ports;
 
 import app.domain.model.User;
-import java.util.Optional;
 
 public interface UserPortIn {
-
-    Optional<User> findByDocument(String document);
-
-    Optional<User> findByName(String name);
-
-    boolean existsByDocument(Long document);
-
-    User save(User user);
+	public User findByDocument(User user) throws Exception;
+	public User findByUserName(User user) throws Exception;
+	public void save(User user) throws Exception;
 }
 
