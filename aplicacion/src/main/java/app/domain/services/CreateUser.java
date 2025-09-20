@@ -2,29 +2,29 @@ package app.domain.services;
 
 import app.domain.model.User;
 import app.domain.ports.UserPortIn;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class CreateUser {
-    
-    @Autowired
-    private UserPortIn userPortOut;
 
-    public CreateUser(UserPortIn userPortOut) {
-        this.userPortOut = userPortOut;
+    private final UserPortIn userPortIn;
+
+    public CreateUser(UserPortIn userPortIn) {
+        this.userPortIn = userPortIn;
     }
 
-    public void create(User user) throws Exception {
+    public User create(User user) {
+        Long document = user.getDocument();
+        String username = user.getName();
 
-        if (userPortOut.findByDocument(user) != null) {
-            System.out.println("Ya hay un usuario registrado con este documento.");
+        if (userPortIn.existsByDocument(document)) {
+            throw new IllegalStateException("Ya hay un usuario registrado con este documento: " + document);
         }
 
-        if (userPortOut.findByName(user) != null) {
-            System.out.println("Ya hay una persona registrada con este nombre de usuario");
+        if (userPortIn.findByName(username).isPresent()) {
+            throw new IllegalStateException("Ya hay una persona registrada con este nombre de usuario: " + username);
         }
-
-        userPortOut.save(user);
+        return userPortIn.save(user);
     }
 }
+

@@ -1,13 +1,12 @@
 package app.infrastructure.persistence.repository;
-        
-import org.springframework.stereotype.Repository;
-import app.infrastructure.persistence.entities.UserEntity;
-import org.springframework.data.jpa.repository.JpaRepository;
 
-@Repository
+import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.Optional;
+import app.infrastructure.persistence.entities.UserEntity;
+
 public interface UserRepositoryAdapter extends JpaRepository<UserEntity, Long> {
-    
-    public UserEntity findByDocument(long document);
-    
-    public UserEntity findByUserName(String userName);
+    Optional<UserEntity> findByDocument(String document);
+    Optional<UserEntity> findByUserName(String userName);
+    boolean existsByDocument(String document);
 }
+
