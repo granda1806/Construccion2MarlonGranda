@@ -1,76 +1,74 @@
 package app.infrastructure.persistence.entities;
 
-import app.domain.model.User;
 import app.domain.model.enums.Role;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "users")
-public class UserEntity
-{
+public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id;   // ✅ lo genera la BD, no se setea en constructor
 
     @Column(nullable = false, unique = true)
     private Long document;
 
     @Column(nullable = false)
     private String name;
-    
+
     @Column(nullable = false, unique = true)
     private String user;
-    
-    @Column(nullable = false, unique = true)
-    private String password;
-    
+
+    @Column(nullable = false)
+    private String password;  // ⚠️ No debería ser unique, puedes dejarlo así si lo necesitas
+
     @Column(nullable = false)
     private int age;
-    
+
     @Column(nullable = true, unique = true)
-    private String Email;
-    
+    private String email;  // ✅ en minúscula por convención
+
     @Column(nullable = false, unique = true)
     private int phoneNumber;
-    
+
     @Column(nullable = false)
     private String date;
-    
+
+    @Enumerated(EnumType.STRING) // ✅ mejor guardar enums como texto legible
     @Column(nullable = false)
     private Role role;
-    
+
     @Column(nullable = false)
     private String address;
-    
-    @Column(nullable = true)    
+
+    @Column(nullable = true)
     private String gender;
-    
+
     @Column(nullable = true)
     private String emergencyContactName;
-    
+
     @Column(nullable = true)
     private Long emergencyContactNumber;
-    
+
     @Column(nullable = true)
     private String relationshipPatient;
-    
 
-    public UserEntity()
-    {}
+    // 🔹 Constructor vacío (obligatorio para JPA)
+    public UserEntity() {
+    }
 
-    public UserEntity(Long id, Long document, String name, String user, String password, int age,
-                    String Email, int phoneNumber, String date, Role role,
-                    String address, String gender, String emergencyContactName,
-                    Long emergencyContactNumber, String relationshipPatient)
-    {
-        
+    // 🔹 Constructor sin ID (la BD lo genera automáticamente)
+    public UserEntity(Long document, String name, String user, String password, int age,
+                      String email, int phoneNumber, String date, Role role,
+                      String address, String gender, String emergencyContactName,
+                      Long emergencyContactNumber, String relationshipPatient) {
         this.document = document;
         this.name = name;
         this.user = user;
         this.password = password;
         this.age = age;
-        this.Email = Email;
+        this.email = email;
         this.phoneNumber = phoneNumber;
         this.date = date;
         this.role = role;
@@ -79,7 +77,6 @@ public class UserEntity
         this.emergencyContactName = emergencyContactName;
         this.emergencyContactNumber = emergencyContactNumber;
         this.relationshipPatient = relationshipPatient;
-        
     }
 
     public Long getId()
@@ -169,14 +166,14 @@ public class UserEntity
     public String getEmail()
     {
         
-        return Email;
+        return email;
         
     }
 
     public void setEmail(String Email)
     {
         
-        this.Email = Email;
+        this.email = Email;
         
     }
 
