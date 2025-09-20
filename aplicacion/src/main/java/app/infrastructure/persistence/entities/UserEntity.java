@@ -4,289 +4,95 @@ import app.domain.model.enums.Role;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "users")
+@Table(name = "users") // nombre de la tabla en la BD
 public class UserEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;   // ✅ lo genera la BD, no se setea en constructor
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-incremental en BD
+    private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, length = 100)
+    private String name;
+
+    @Column(unique = true, nullable = false)
     private Long document;
 
     @Column(nullable = false)
-    private String name;
+    private Integer age;
 
-    @Column(nullable = false, unique = true)
-    private String user;
-
-    @Column(nullable = false)
-    private String password;  // ⚠️ No debería ser unique, puedes dejarlo así si lo necesitas
-
-    @Column(nullable = false)
-    private int age;
-
-    @Column(nullable = true, unique = true)
-    private String email;  // ✅ en minúscula por convención
-
-    @Column(nullable = false, unique = true)
-    private int phoneNumber;
-
-    @Column(nullable = false)
-    private String date;
-
-    @Enumerated(EnumType.STRING) // ✅ mejor guardar enums como texto legible
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role;
 
+    @Column(unique = true, nullable = false, length = 50)
+    private String userName;
+
     @Column(nullable = false)
-    private String address;
+    private String password;
 
-    @Column(nullable = true)
-    private String gender;
-
-    @Column(nullable = true)
-    private String emergencyContactName;
-
-    @Column(nullable = true)
-    private Long emergencyContactNumber;
-
-    @Column(nullable = true)
-    private String relationshipPatient;
-
-    // 🔹 Constructor vacío (obligatorio para JPA)
-    public UserEntity() {
+    // 🔹 Constructor vacío requerido por JPA
+    protected UserEntity() {
     }
 
-    // 🔹 Constructor sin ID (la BD lo genera automáticamente)
-    public UserEntity(Long document, String name, String user, String password, int age,
-                      String email, int phoneNumber, String date, Role role,
-                      String address, String gender, String emergencyContactName,
-                      Long emergencyContactNumber, String relationshipPatient) {
-        this.document = document;
-        this.name = name;
-        this.user = user;
-        this.password = password;
-        this.age = age;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.date = date;
-        this.role = role;
-        this.address = address;
-        this.gender = gender;
-        this.emergencyContactName = emergencyContactName;
-        this.emergencyContactNumber = emergencyContactNumber;
-        this.relationshipPatient = relationshipPatient;
-    }
-
-    public Long getId()
-    {
-        
-        return id;
-        
-    }
-
-    public void setId(Long id)
-    {
-        
+    // 🔹 Constructor completo
+    public UserEntity(Long id, String name, Long document, Integer age, Role role, String userName, String password) {
         this.id = id;
-        
-    }
-
-    public Long getDocument()
-    {
-        
-        return document;
-        
-    }
-
-    public void setDocument(Long document)
-    {
-        
-        this.document = document;
-        
-    }
-
-    public String getName()
-    {
-        
-        return name;
-        
-    }
-
-    public String getUser()
-    {
-        
-        return user;
-        
-    }
-
-    public void setUser(String user)
-    {
-        
-        this.user = user;
-        
-    }
-
-    public String getPassword()
-    {
-        
-        return password;
-        
-    }
-
-    public void setPassword(String password)
-    {
-        
-        this.password = password;
-        
-    }
-
-    public void setName(String name)
-    {
-        
         this.name = name;
-        
-    }
-
-    public int getAge()
-    {
-        
-        return age;
-        
-    }
-
-    public void setAge(int age)
-    {
-        
+        this.document = document;
         this.age = age;
-        
-    }
-
-    public String getEmail()
-    {
-        
-        return email;
-        
-    }
-
-    public void setEmail(String Email)
-    {
-        
-        this.email = Email;
-        
-    }
-
-    public int getPhoneNumber()
-    {
-        
-        return phoneNumber;
-        
-    }
-
-    public void setPhoneNumber(int phoneNumber)
-    {
-        
-        this.phoneNumber = phoneNumber;
-        
-    }
-
-    public String getDate()
-    {
-        
-        return date;
-        
-    }
-
-    public void setDate(String date)
-    {
-        
-        this.date = date;
-        
-    }
-
-    public Role getRole()
-    {
-        
-        return role;
-        
-    }
-
-    public void setRole(Role role)
-    {
-        
         this.role = role;
-        
+        this.userName = userName;
+        this.password = password;
     }
 
-    public String getAddress()
-    {
-        
-        return address;
-        
+    // 🔹 Getters y setters
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void setAddress(String address)
-    {
-        
-        this.address = address;
-        
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getGender()
-    {
-        
-        return gender;
-        
+    public Long getDocument() {
+        return document;
+    }
+    public void setDocument(Long document) {
+        this.document = document;
     }
 
-    public void setGender(String gender)
-    {
-        
-        this.gender = gender;
-        
+    public Integer getAge() {
+        return age;
+    }
+    public void setAge(Integer age) {
+        this.age = age;
     }
 
-    public String getEmergencyContactName()
-    {
-        
-        return emergencyContactName;
-        
+    public Role getRole() {
+        return role;
+    }
+    public void setRole(Role role) {
+        this.role = role;
     }
 
-    public void setEmergencyContactName(String emergencyContactName)
-    {
-        
-        this.emergencyContactName = emergencyContactName;
-        
+    public String getUserName() {
+        return userName;
+    }
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public Long getEmergencyContactNumber()
-    {
-        
-        return emergencyContactNumber;
-        
+    public String getPassword() {
+        return password;
     }
-
-    public void setEmergencyContactNumber(Long emergencyContactNumber)
-    {
-    
-        this.emergencyContactNumber = emergencyContactNumber;
-        
+    public void setPassword(String password) {
+        this.password = password;
     }
-
-    public String getRelationshipPatient()
-    {
-        
-        return relationshipPatient;
-        
-    }
-
-    public void setRelationshipPatient(String relationshipPatient)
-    {
-        
-        this.relationshipPatient = relationshipPatient;
-        
-    }
-    
 }
+

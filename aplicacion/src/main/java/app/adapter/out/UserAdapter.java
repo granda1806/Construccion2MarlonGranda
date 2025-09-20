@@ -12,11 +12,13 @@ import app.infrastructure.persistence.repository.UserRepository;
 public class UserAdapter implements UserPortOut {
     @Autowired
     private UserRepository userRepository;
+    
 
     @Override
     public User findByDocument(User user) throws Exception {
         UserEntity userEntity = userRepository.findById(user.getId());
-        return UserMapper.toDomain(userEntity) ;  
+        return UserMapper.toDomain(userEntity);
+ 
     }
 
     @Override
