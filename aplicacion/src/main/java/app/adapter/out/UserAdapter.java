@@ -1,9 +1,9 @@
 package app.adapter.out;
 
 import app.domain.model.User;
-import app.domain.ports.UserPortIn;
+import app.domain.ports.UserPortOut;
 
-public class UserAdapter implements UserPortIn
+public class UserAdapter implements UserPortOut
 {
 
     @Override
