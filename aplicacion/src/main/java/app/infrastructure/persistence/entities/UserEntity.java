@@ -65,7 +65,6 @@ public class UserEntity
                     Long emergencyContactNumber, String relationshipPatient)
     {
         
-        this.id = id;
         this.document = document;
         this.name = name;
         this.user = user;
