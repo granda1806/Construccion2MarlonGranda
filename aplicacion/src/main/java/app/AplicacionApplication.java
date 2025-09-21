@@ -1,5 +1,6 @@
 package app;
 
+import app.adapter.in.client.AdminClient;
 import app.adapter.in.client.HResourcesClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -10,7 +11,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class AplicacionApplication implements CommandLineRunner{
     
         @Autowired
-        private HResourcesClient client;
+        private AdminClient clientAdmin;
+        
 	public static void main(String[] args)
         {
 		SpringApplication.run(AplicacionApplication.class, args);
@@ -20,7 +22,7 @@ public class AplicacionApplication implements CommandLineRunner{
         public void run(String... args) throws Exception
         {
             System.out.println("Esta corriendo...");
-            client.session();
+            clientAdmin.session();
         }
         
 }

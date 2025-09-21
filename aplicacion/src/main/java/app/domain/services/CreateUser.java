@@ -21,6 +21,26 @@ public class CreateUser {
         if (!user.getRole().equals(Role.ADMIN) && userPortIn.findByName(user) != null) {
             throw new Exception("ya existe una persona registrada con ese nombre de usuario");
 	}
+        
+        if (!user.getRole().equals(Role.DOCTOR) && userPortIn.findByName(user) != null) {
+            throw new Exception("ya existe una persona registrada con ese nombre de usuario");
+	}
+        
+        if (!user.getRole().equals(Role.HRESOURCES) && userPortIn.findByName(user) != null) {
+            throw new Exception("ya existe una persona registrada con ese nombre de usuario");
+	}
+        
+        if (!user.getRole().equals(Role.NURSE) && userPortIn.findByName(user) != null) {
+            throw new Exception("ya existe una persona registrada con ese nombre de usuario");
+	}
+        
+        if (!user.getRole().equals(Role.PATIENT) && userPortIn.findByName(user) != null) {
+            throw new Exception("ya existe una persona registrada con ese nombre de usuario");
+	}
+        
+        if (!user.getRole().equals(Role.SUPPORT) && userPortIn.findByName(user) != null) {
+            throw new Exception("ya existe una persona registrada con ese nombre de usuario");
+	}
             userPortIn.save(user);
     }
 }

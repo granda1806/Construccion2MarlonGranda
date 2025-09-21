@@ -4,7 +4,10 @@ import app.adapter.in.builder.UserBuilder;
 import app.application.usecases.AdminUseCase;
 import java.util.Scanner;
 import app.domain.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
+@Controller
 public class AdminClient
 {
     
@@ -16,85 +19,66 @@ public class AdminClient
                                        " 5. Salir.";
     
     private static Scanner reader = new Scanner(System.in);
+    @Autowired
     private AdminUseCase adminUseCase;
+    @Autowired
     private UserBuilder userBuilder;
     
     public void session()
     {
-        
         boolean session = true;
         
         while(session)
         {
-            
-            session = menu();
-            
-        }
-        
+            session = menu(); 
+        }   
     }
     
     private boolean menu()
-    {
-        
+    { 
         try
         {
-            
             System.out.println(MENU);
             String option = reader.nextLine();
             switch(option)
             {
-                
                 case "1":
                 {
-                    
                     User user = readInfoFromUserAd();
                     adminUseCase.createPatient(user);
                     return true;
-                    
                 }
                 
                 case "2":
                 {
-                    
                     System.out.println("En proceso...");
                     return true;
-                    
                 }
                 
                 case "3":
                 {
-                    
                     System.out.println("En proceso...");
                     return true;
-                    
                 }
                 
                 case "4":
                 {
-                    
                     System.out.println("En proceso...");
                     return true;
-                    
                 }
                 
                 case "5":
-                {
-                    
+                { 
                     System.out.println("Cerrando sesion...");
                     return false;
-                    
                 }
                 
                 default:
                 {
-                    
                     System.out.println("Ingrese una opcion valida.");
-                    return true;
-                    
-                }
-                
+                    return true;  
+                }  
             }
-        
         }
         catch(Exception e)
         {
