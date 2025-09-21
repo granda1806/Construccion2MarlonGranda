@@ -8,29 +8,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 @Controller
-public class HResourcesClient
-{
-    
+public class HResourcesClient {
     private static final String MENU = "Ingrese una opcion: \n" +
             
                                        "1. Crear administrador \n" +
                                        "2. Crear soporte de informacion \n" +
                                        "3. Crear enfermera \n" +
                                        "4. Crear Doctor. \n" +
-                                       " 5. Crear Recuersos Humanos. \n"+
-                                       "6. Salir.";
+                                       "5. Crear Recuersos Humanos. \n"+
+                                       "6. Regresar al men principal.";
     
     private static Scanner reader = new Scanner(System.in);
     @Autowired
     private HResourcesUseCase resourcesUseCase;
     @Autowired
     private UserBuilder userBuilder;
+    @Autowired
+    private LoginClient loginClient;
     
-    public void session()
-    {
+    public void session() {
         
         boolean session = true;
-        
         while(session)
         {
             session = menu();
@@ -87,7 +85,8 @@ public class HResourcesClient
 
                 case "6":
                 {
-                    System.out.println("Cerrando sesion.");
+                    System.out.println("Salindo de Recursos humanos...");
+                    loginClient.session();
                     return false;
                 }
 
