@@ -16,15 +16,13 @@ public class HResourcesClient {
                                        "3. Crear enfermera \n" +
                                        "4. Crear Doctor. \n" +
                                        "5. Crear Recuersos Humanos. \n"+
-                                       "6. Regresar al men principal.";
+                                       "6. Regresar al menu principal.";
     
     private static Scanner reader = new Scanner(System.in);
     @Autowired
     private HResourcesUseCase resourcesUseCase;
     @Autowired
     private UserBuilder userBuilder;
-    @Autowired
-    private LoginClient loginClient;
     
     public void session() {
         
@@ -86,7 +84,6 @@ public class HResourcesClient {
                 case "6":
                 {
                     System.out.println("Salindo de Recursos humanos...");
-                    loginClient.session();
                     return false;
                 }
 

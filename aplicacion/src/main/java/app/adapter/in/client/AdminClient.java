@@ -16,7 +16,7 @@ public class AdminClient
                                        " 2. Programar cita \n" +
                                        " 3. Facturacion \n" +
                                        " 4. Seguros medicos \n" +
-                                       " 5. Salir.";
+                                       " 5. Regresar al menu principal.";
     
     private static Scanner reader = new Scanner(System.in);
     @Autowired
@@ -69,7 +69,7 @@ public class AdminClient
                 
                 case "5":
                 { 
-                    System.out.println("Cerrando sesion...");
+                    System.out.println("Saliendo de Adminitrador...");
                     return false;
                 }
                 
