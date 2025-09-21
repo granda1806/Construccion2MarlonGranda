@@ -25,7 +25,7 @@ public class UserBuilder
     
     public User buildAdmin(String name, String document, String age, String date,
                            String gender, String addres, String contactName,
-                           String relationship, String contactNumber
+                           String relationship, String contactNumber, String userA, String password
                           )throws Exception
     {
         User user = new User();
@@ -38,6 +38,8 @@ public class UserBuilder
         user.setEmergencyContactName(userValidator.contactNameValidator(contactName));
         user.setRelationshipPatient(userValidator.relationshipValidator(relationship));
         user.setEmergencyContactNumber(userValidator.contactNumberValidator(contactNumber));
+        user.setUserName(userValidator.userNameValidator(userA));
+        user.setPassword(userValidator.passwordValidator(password));
         return user;
     }
 }

@@ -112,7 +112,11 @@ public class AdminClient
         String relationship = reader.nextLine();
         System.out.println("Ingrese numero contacto de emergencia: ");
         String contactNumber = reader.nextLine();
-        return userBuilder.buildAdmin(name, document, age, date, gender, addres, contactName, relationship, contactNumber);
+        System.out.println("Ingrese Usuario: ");
+        String user = reader.nextLine();
+        System.out.println("Ingrese contrseña: ");
+        String password = reader.nextLine();
+        return userBuilder.buildAdmin(name, document, age, date, gender, addres, contactName, relationship, contactNumber, user, password);
         
     }
     
