@@ -3,74 +3,113 @@ package app.application.usecases;
 import app.domain.model.*;
 import java.util.*;
 
-public class NursesUseCase
-{
-    
+public class NursesUseCase {
+
     private final Scanner reader = new Scanner(System.in);
 
     // Simulación de bases de datos en memoria
-    private static final Map<Long, Person> pacientes = new HashMap<>();
-    private static final Map<String, MedicalOrder> ordenes = new HashMap<>();
+    private static final Map<Long, Person> patients = new HashMap<>();
+    private static final Map<String, MedicalOrder> orders = new HashMap<>();
 
-    // Método para registrar datos desde AdminClient y DoctorUseCase
-    public static void addPaciente(Person person)
-    {
-        
-        pacientes.put(person.getDocument(), person); // usamos getDocument() de Person
-        
+    public static void addPatient(Person person) {
+        patients.put(person.getDocument(), person);
     }
 
-    public static void addOrden(MedicalOrder orden)
-    {
-        
-        ordenes.put(orden.getOrderNumber(), orden);
-        
+    public static void addOrder(MedicalOrder order) {
+        orders.put(order.getOrderNumber(), order);
     }
 
-    public void buscarPaciente()
-    {
-        
+    public void searchForPatient() {
         System.out.print("\nIngrese la cedula del paciente: ");
-        long cedula = Long.parseLong(reader.nextLine());
+        long idCard = Long.parseLong(reader.nextLine());
 
-        Person paciente = pacientes.get(cedula);
-        
-        if (paciente == null)
-        {
-            
-            System.out.println("No se encontró el paciente con cedula: " + cedula);
+        Person patient = patients.get(idCard);
+        if (patient == null) {
+            System.out.println("No se encontro el paciente con cedula: " + idCard);
             return;
-            
         }
 
-        System.out.println("\nInformación del paciente:");
-        System.out.println("Nombre: " + paciente.getName());
-        System.out.println("Documento: " + paciente.getDocument());
-        System.out.println("Edad: " + paciente.getAge());
-        System.out.println("Genero: " + paciente.getGender());
-        System.out.println("Direccion: " + paciente.getAddres());
-        System.out.println("Telefono: " + paciente.getPhoneNumber());
-        System.out.println("Email: " + paciente.getEmail());
-        System.out.println("Contacto emergencia: " + paciente.getEmergencyContactName()
-                           + " (" + paciente.getRelationshipPatient() + "), Tel: "
-                           + paciente.getEmergencyContactNumber());
-
-        System.out.print("\n¿Desea registrar signos vitales? (si/no): ");
-        String respuesta = reader.nextLine();
-        
-        if (respuesta.equalsIgnoreCase("si"))
-        {
-            
-            registrarSignosVitales(paciente);
-            
-        }
-        
+        System.out.println("\nInformacion del paciente");
+        System.out.println("Nombre: " + patient.getName());
+        System.out.println("Documento: " + patient.getDocument());
+        System.out.println("Edad: " + patient.getAge());
+        System.out.println("Genero: " + patient.getGender());
+        System.out.println("Direccion: " + patient.getAddres());
+        System.out.println("Telefono: " + patient.getPhoneNumber());
+        System.out.println("Email: " + patient.getEmail());
+        System.out.println("Contacto emergencia: " + patient.getEmergencyContactName()
+                + " (" + patient.getRelationshipPatient() + "), Tel: "
+                + patient.getEmergencyContactNumber());
     }
 
-    private void registrarSignosVitales(Person paciente)
-    {
-        
+    public void registerOrderAdministration() {
+        System.out.print("\nIngrese numero de orden medica: ");
+        String orderNum = reader.nextLine();
+
+        MedicalOrder order = orders.get(orderNum);
+        if (order == null) {
+            System.out.println("No se encontro la orden " + orderNum);
+            return;
+        }
+
+        boolean submenu = true;
+        while (submenu) {
+            System.out.println("\nSUBMENU ADMINISTRACION ORDEN");
+            System.out.println("1. Registrar medicamento administrado");
+            System.out.println("2. Registrar procedimiento realizado");
+            System.out.println("3. Registrar prueba diagnostica realizada");
+            System.out.println("4. Registrar observaciones");
+            System.out.println("5. Volver");
+            System.out.print("Seleccione una opcion: ");
+            String option = reader.nextLine();
+
+            switch (option) {
+                case "1" -> {
+                    System.out.print("Ingrese ID del medicamento: ");
+                    String medId = reader.nextLine();
+                    System.out.print("Ingrese item asociado: ");
+                    String item = reader.nextLine();
+                    System.out.println("Medicamento administrado: " + medId + " (Item " + item + ")");
+                }
+                case "2" -> {
+                    System.out.print("Ingrese ID del procedimiento: ");
+                    String procId = reader.nextLine();
+                    System.out.print("Ingrese item asociado: ");
+                    String item = reader.nextLine();
+                    System.out.println("Procedimiento realizado: " + procId + " (Item " + item + ")");
+                }
+                case "3" -> {
+                    System.out.print("Ingrese ID de la prueba diagnostica: ");
+                    String testId = reader.nextLine();
+                    System.out.print("Ingrese item asociado: ");
+                    String item = reader.nextLine();
+                    System.out.println("Prueba diagnostica realizada: " + testId + " (Item " + item + ")");
+                }
+                case "4" -> {
+                    System.out.print("Ingrese observaciones: ");
+                    String obs = reader.nextLine();
+                    System.out.println("Observacion registrada: " + obs);
+                }
+                case "5" ->
+                    submenu = false;
+                default ->
+                    System.out.println("Opcion invalida.");
+            }
+        }
+    }
+
+    public void registerVitalSigns() {
+        System.out.print("\nIngrese la cedula del paciente: ");
+        long idCard = Long.parseLong(reader.nextLine());
+
+        Person patient = patients.get(idCard);
+        if (patient == null) {
+            System.out.println("Paciente no encontrado.");
+            return;
+        }
+
         VitalSignsRecord signos = new VitalSignsRecord();
+        signos.setPatientId(String.valueOf(patient.getDocument())); // 🔹 Ahora sí guardamos el ID
 
         System.out.print("Presion arterial: ");
         signos.setBloodPressure(reader.nextLine());
@@ -81,38 +120,29 @@ public class NursesUseCase
         System.out.print("Nivel de oxigeno: ");
         signos.setBloodOxygenLevel(reader.nextLine());
 
-        System.out.println("Signos vitales registrados para " + paciente.getName());
+        System.out.println("\nSignos vitales registrados para " + patient.getName());
+        signos.showData();
 
-        // Registrar órdenes médicas asociadas
+        // Asociar orden médica existente
         System.out.print("\n¿Desea asociar a una orden medica existente? (si/no): ");
-        
-        if (reader.nextLine().equalsIgnoreCase("si"))
-        {
+        if (reader.nextLine().equalsIgnoreCase("si")) {
             System.out.print("Ingrese numero de orden: ");
-            String ordenNum = reader.nextLine();
-            MedicalOrder orden = ordenes.get(ordenNum);
-            
-            if (orden != null)
-            {
-                
-                System.out.println("Orden encontrada: " + orden);
+            String orderNum = reader.nextLine();
+            MedicalOrder order = orders.get(orderNum);
+
+            if (order != null) {
+                System.out.println("Orden encontrada: " + order);
                 System.out.println("Registro de administracion realizado.");
-                
-            }
-            else
-            {
-                
+            } else {
                 System.out.println("No se encontro la orden.");
                 
             }
             
         }
 
+        // Observaciones
         System.out.print("\n¿Desea registrar observaciones adicionales? (si/no): ");
-        
-        if (reader.nextLine().equalsIgnoreCase("si"))
-        {
-            
+        if (reader.nextLine().equalsIgnoreCase("si")) {
             Observation obs = new Observation();
             System.out.print("Escriba observaciones: ");
             obs.setNotes(reader.nextLine());
@@ -123,27 +153,18 @@ public class NursesUseCase
         
     }
 
-    public void buscarOrdenMedica()
-    {
-        
+    public void searchForAMedicalOrder() {
         System.out.print("\nIngrese numero de orden medica: ");
-        String ordenNum = reader.nextLine();
+        String orderNum = reader.nextLine();
 
-        MedicalOrder orden = ordenes.get(ordenNum);
-        
-        if (orden == null)
-        {
-        
-            System.out.println("No se encontro la orden " + ordenNum);
-            
-        }
-        else
-        {
-            
-            System.out.println("\n?Orden medica encontrada:");
-            System.out.println(orden);
-            
-        }
+        MedicalOrder order = orders.get(orderNum);
+        if (order == null) {
+            System.out.println("No se encontro la orden " + orderNum);
+        } else {
+            System.out.println("\nOrden medica encontrada:");
+            System.out.println(order);
+ 
+        } 
         
     }
     

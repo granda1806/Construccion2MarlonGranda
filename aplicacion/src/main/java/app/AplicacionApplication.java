@@ -16,13 +16,11 @@ public class AplicacionApplication implements CommandLineRunner{
         {
 		SpringApplication.run(AplicacionApplication.class, args);
 	}
-         
-
+        
         @Override
         public void run(String... args) throws Exception
         {
             System.out.println("Esta corriendo...");
             login.session();
-        }
-        
+        }   
 }

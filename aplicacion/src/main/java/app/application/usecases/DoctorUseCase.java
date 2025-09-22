@@ -91,7 +91,7 @@ public class DoctorUseCase
         {
             
             currentOrder = new MedicalOrder();
-            System.out.print("Ingrese numero de orden médica: ");
+            System.out.print("Ingrese numero de orden medica: ");
             currentOrder.setOrderNumber(reader.nextLine());
             
         }

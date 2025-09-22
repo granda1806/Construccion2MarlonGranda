@@ -17,7 +17,9 @@ public class DoctorClient
         {
             
             System.out.println("\nMENU MEDICO ");
-            System.out.println("1. Buscar historia clinica.");
+            System.out.println("1. Registar historia clinica.");
+            System.out.println("2. Crear registro medico");
+            System.out.println("3. Actualizar registro medico");
             System.out.println("2. Salir");
             System.out.print("Seleccione una opcion: ");
             String option = reader.nextLine();
@@ -33,9 +35,7 @@ public class DoctorClient
                     session = false;
                     
                 }
-                
                 default -> System.out.println("Opcion no valida, intente nuevamente.");
-                
             }
             
         }
