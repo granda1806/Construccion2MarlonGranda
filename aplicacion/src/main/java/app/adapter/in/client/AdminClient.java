@@ -90,6 +90,7 @@ public class AdminClient {
         
     }
     
+<<<<<<< HEAD
     private User readInfoFromPatient() throws Exception
     {
         
@@ -120,4 +121,55 @@ public class AdminClient {
         return patientBuilder.buildPatient(name, document, age, date, gender, addres, Email, PhoneNumber,
                 contactName, relationship, contactNumber);
     } 
+=======
+private User readInfoFromUserAd() throws Exception {
+
+    System.out.println("Ingrese nombre: ");
+    String nameComplete = reader.nextLine();
+    System.out.println("Ingrese apellido: ");
+    String lastnameComplete = reader.nextLine();
+    System.out.println("Ingrese cedula: ");
+    String document = reader.nextLine();
+    System.out.println("Ingrese edad: ");
+    String age = reader.nextLine();
+    System.out.println("Ingrese fecha de nacimiento: ");
+    String date = reader.nextLine();
+    System.out.println("Ingrese genero: ");
+    String gender = reader.nextLine();
+    System.out.println("Ingrese direccion: ");
+    String address = reader.nextLine();
+
+    System.out.println("Datos de contacto.");
+    System.out.println("Ingrese nombre contacto de emergencia: ");
+    String contactName = reader.nextLine();
+    System.out.println("Ingrese genero contacto de emergencia: ");
+    String genderContact = reader.nextLine();
+    System.out.println("Ingrese que relacion tiene con el paciente: ");
+    String relationship = reader.nextLine();
+    System.out.println("Ingrese numero contacto de emergencia: ");
+    String contactNumber = reader.nextLine();
+
+    System.out.println("Ingrese Usuario: ");
+    String userName = reader.nextLine();
+    System.out.println("Ingrese contraseña: ");
+    String password = reader.nextLine();
+
+    return userBuilder.buildAdmin(
+            nameComplete,
+            lastnameComplete,
+            document,
+            age,
+            date,
+            gender,
+            address,
+            contactName,
+            genderContact,
+            relationship,
+            contactNumber,
+            userName,
+            password
+    );
+}
+    
+>>>>>>> 9542caac1b9325a98c02d414474bdf3298dc734a
 }
