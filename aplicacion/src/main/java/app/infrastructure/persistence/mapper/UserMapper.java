@@ -11,7 +11,7 @@ public class UserMapper {
         if (user == null) return null;
         return new UserEntity(
                 null,
-                user.getName(),
+                user.getNameComplete(),
                 user.getDocument(),
                 user.getAge(),
                 user.getRole(),

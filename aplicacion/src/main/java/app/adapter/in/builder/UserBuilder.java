@@ -27,14 +27,6 @@ public class UserBuilder {
 
         return user;
     }
-<<<<<<< HEAD
-    
-    public User buildPatient(String name, String document, String age, String date,
-                           String gender, String addres, String Email, String PhoneNumber, String contactName,
-                           String relationship, String contactNumber
-                          )throws Exception
-    {
-=======
 
     /**
      * Construye un usuario de tipo Admin
@@ -44,7 +36,6 @@ public class UserBuilder {
                            String contactName, String genderContact, String relationship,
                            String contactNumber, String userName, String password) throws Exception {
 
->>>>>>> 9542caac1b9325a98c02d414474bdf3298dc734a
         User user = new User();
         user.setNameComplete(userValidator.nameValidator(nameComplete));
         user.setLastnameComplete(userValidator.nameValidator(lastnameComplete));
@@ -52,24 +43,14 @@ public class UserBuilder {
         user.setAge(userValidator.ageValidator(age));
         user.setDate(userValidator.dateValidator(date));
         user.setGender(userValidator.genderValidator(gender));
-<<<<<<< HEAD
-        user.setAddres(userValidator.addresValidator(addres));
-        user.setEmail(userValidator.EmailValidator(Email));
-        user.setPhoneNumber(userValidator.PhoneNumber(PhoneNumber));
-=======
         user.setAddress(userValidator.addressValidator(address));
->>>>>>> 9542caac1b9325a98c02d414474bdf3298dc734a
         user.setEmergencyContactName(userValidator.contactNameValidator(contactName));
         user.setGenderEmergencyContact(userValidator.genderValidator(genderContact));
         user.setRelationshipPatient(userValidator.relationshipValidator(relationship));
         user.setEmergencyContactNumber(userValidator.contactNumberValidator(contactNumber));
-<<<<<<< HEAD
-=======
         user.setUserName(userValidator.userNameValidator(userName));
         user.setPassword(userValidator.passwordValidator(password));
 
->>>>>>> 9542caac1b9325a98c02d414474bdf3298dc734a
         return user;
     }
-   
 }

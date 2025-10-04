@@ -11,11 +11,11 @@ public class PatientMapper {
         }
         return new PatientEntity(
                 null,
-                patient.getName(),
+                patient.getNameComplete(),
                 patient.getDocument(),
                 patient.getDate(),
                 patient.getGender(),
-                patient.getAddres(),
+                patient.getAddress(),
                 patient.getPhoneNumber(),
                 patient.getEmail(),
                 patient.getEmergencyContactName(),
@@ -31,11 +31,11 @@ public class PatientMapper {
         Person user = new Person();
         Person person = new Person();
         person.setId(entity.getId());
-        person.setName(entity.getName());
+        person.setNameComplete(entity.getName());
         person.setDocument(entity.getDocument());
         person.setDate(entity.getDate());
         person.setGender(entity.getGender());
-        person.setAddres(entity.getAddress());
+        person.setAddress(entity.getAddress());
         person.setPhoneNumber(entity.getPhoneNumber());
         person.setEmail(entity.getEmail());
         person.setEmergencyContactName(entity.getEmergencyContactName());

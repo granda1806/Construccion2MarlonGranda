@@ -30,11 +30,11 @@ public class NursesUseCase {
         }
 
         System.out.println("\nInformacion del paciente");
-        System.out.println("Nombre: " + patient.getName());
+        System.out.println("Nombre: " + patient.getNameComplete());
         System.out.println("Documento: " + patient.getDocument());
         System.out.println("Edad: " + patient.getAge());
         System.out.println("Genero: " + patient.getGender());
-        System.out.println("Direccion: " + patient.getAddres());
+        System.out.println("Direccion: " + patient.getAddress());
         System.out.println("Telefono: " + patient.getPhoneNumber());
         System.out.println("Email: " + patient.getEmail());
         System.out.println("Contacto emergencia: " + patient.getEmergencyContactName()
@@ -120,7 +120,7 @@ public class NursesUseCase {
         System.out.print("Nivel de oxigeno: ");
         signos.setBloodOxygenLevel(reader.nextLine());
 
-        System.out.println("\nSignos vitales registrados para " + patient.getName());
+        System.out.println("\nSignos vitales registrados para " + patient.getNameComplete());
         signos.showData();
 
         // Asociar orden médica existente

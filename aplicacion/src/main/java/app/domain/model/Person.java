@@ -7,35 +7,20 @@ public class Person
 
     private String typeId;
     private long id;
-<<<<<<< HEAD
-    private String name;
-    private long document;
-    private int age;
-    private String Email;
-    private Long phoneNumber;
-    private String date;
-    private Role role;
-    private String addres;
-    
-=======
     private String nameComplete;
+    private long Document;
     private String lastnameComplete;
->>>>>>> 9542caac1b9325a98c02d414474bdf3298dc734a
     private String gender;
     private String date;
     private int age;
     private Role role;
     private String email;
-    private int phoneNumber;
+    private long phoneNumber;
     private String address;
     
     private String emergencyContactName;
-<<<<<<< HEAD
-    private Long emergencyContactNumber;
-=======
     private String genderEmergencyContact;
     private long emergencyContactNumber;
->>>>>>> 9542caac1b9325a98c02d414474bdf3298dc734a
     private String relationshipPatient;
 
 
@@ -60,6 +45,14 @@ public class Person
         this.nameComplete = nameComplete;
         
     }
+
+    public long getDocument() {
+        return Document;
+    }
+
+    public void setDocument(long Document) {
+        this.Document = Document;
+    }
     
     public void setLastnameComplete(String lastnameComplete)
     {
@@ -67,102 +60,7 @@ public class Person
         this.lastnameComplete = lastnameComplete;
         
     }
-<<<<<<< HEAD
-
-    public long getDocument()
-    {
-        
-        return document;
-        
-    }
-
-    public void setDocument(long document)
-    {
-        
-        this.document = document;
-        
-    }
-
-    public String getEmail()
-    {
-        
-        return Email;
-        
-    }
-
-    public void setEmail(String Email)
-    {
-        
-        this.Email = Email;
-        
-    }
-
-    public Long getPhoneNumber()
-    {
-        
-        return phoneNumber;
-        
-    }
-
-    public void setPhoneNumber(Long phoneNumber)
-    {
-        
-        this.phoneNumber = phoneNumber;
-        
-    }
-
-    public String getDate()
-    {
-        
-        return date;
-        
-    }
-
-    public void setDate(String date)
-    {
-        
-        this.date = date;
-        
-    }
-
-    public Role getRole()
-    {
-        
-        return role;
-        
-    }
-
-    public void setRole(Role role)
-    {
-        
-        this.role = role;
-        
-    }
-
-    public String getAddres()
-    {
-        
-        return addres;
-        
-    }
-
-    public void setAddres(String addres)
-    {
-        
-        this.addres = addres;
-        
-    }
-
-    public String getGender()
-    {
-        
-        return gender;
-        
-    }
-
-=======
     
->>>>>>> 9542caac1b9325a98c02d414474bdf3298dc734a
     public void setGender(String gender)
     {
         
@@ -198,7 +96,7 @@ public class Person
         
     }
     
-    public void setPhoneNumber(int phoneNumber)
+    public void setPhoneNumber(long phoneNumber)
     {
         
         this.phoneNumber = phoneNumber;
@@ -219,18 +117,14 @@ public class Person
         
     }
 
-<<<<<<< HEAD
-    public Long getEmergencyContactNumber()
-=======
     public void setGenderEmergencyContact(String genderEmergencyContact)
->>>>>>> 9542caac1b9325a98c02d414474bdf3298dc734a
     {
         
         this.genderEmergencyContact = genderEmergencyContact;
         
     }
 
-    public void setEmergencyContactNumber(Long emergencyContactNumber)
+    public void setEmergencyContactNumber(long emergencyContactNumber)
     {
         
         this.emergencyContactNumber = emergencyContactNumber;
@@ -300,9 +194,6 @@ public class Person
         return role;
 
     }
-<<<<<<< HEAD
-}
-=======
 
     public String getEmail()
     {
@@ -311,7 +202,7 @@ public class Person
 
     }
 
-    public int getPhoneNumber()
+    public long getPhoneNumber()
     {
 
         return phoneNumber;
@@ -352,18 +243,5 @@ public class Person
         return relationshipPatient;
 
     }
-
-    public Long getDocument() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public String getName() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public String getAddres() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
     
 }
->>>>>>> 9542caac1b9325a98c02d414474bdf3298dc734a

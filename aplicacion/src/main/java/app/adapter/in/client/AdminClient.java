@@ -2,14 +2,14 @@ package app.adapter.in.client;
 
 import app.adapter.in.builder.UserBuilder;
 import app.application.usecases.AdminUseCase;
-import app.domain.model.Person;
 import java.util.Scanner;
 import app.domain.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 @Controller
-public class AdminClient {
+public class AdminClient
+{
     
     private static final String MENU = "Ingrese una opcion: \n" +
                                        " 1. Crear paciente \n" +
@@ -22,7 +22,7 @@ public class AdminClient {
     @Autowired
     private AdminUseCase adminUseCase;
     @Autowired
-    private UserBuilder patientBuilder;
+    private UserBuilder userBuilder;
     
     public void session()
     {
@@ -44,8 +44,8 @@ public class AdminClient {
             {
                 case "1":
                 {
-                    Person patient = readInfoFromPatient();
-                    adminUseCase.createPatient(patient);
+                    User user = readInfoFromUserAd();
+                    adminUseCase.createPatient(user);
                     return true;
                 }
                 
@@ -90,38 +90,6 @@ public class AdminClient {
         
     }
     
-<<<<<<< HEAD
-    private User readInfoFromPatient() throws Exception
-    {
-        
-        System.out.println("Ingrese nombre: ");
-        String name = reader.nextLine();
-        System.out.println("Ingrese cedula: ");
-        String document = reader.nextLine();
-        System.out.println("Ingrese edad: ");
-        String age = reader.nextLine();
-        System.out.println("Ingrese fecha de nacimiento: ");
-        String date = reader.nextLine();
-        System.out.println("Ingrese genero: ");
-        String gender = reader.nextLine();
-        System.out.println("Ingrese direccion: ");
-        String addres = reader.nextLine();
-        System.out.println("Ingrese correo electronico: ");
-        String Email = reader.nextLine();
-        System.out.println("Ingrese numero telefonico de paciente: ");
-        String PhoneNumber = reader.nextLine();
-        System.out.println("Datos de contacto.");
-        System.out.println("Ingrese nombre contacto de emergencia: ");
-        String contactName = reader.nextLine();
-        System.out.println("Ingrese que relacion que tiene con el paciente: ");
-        String relationship = reader.nextLine();
-        System.out.println("Ingrese numero contacto de emergencia: ");
-        String contactNumber = reader.nextLine();
-
-        return patientBuilder.buildPatient(name, document, age, date, gender, addres, Email, PhoneNumber,
-                contactName, relationship, contactNumber);
-    } 
-=======
 private User readInfoFromUserAd() throws Exception {
 
     System.out.println("Ingrese nombre: ");
@@ -171,5 +139,4 @@ private User readInfoFromUserAd() throws Exception {
     );
 }
     
->>>>>>> 9542caac1b9325a98c02d414474bdf3298dc734a
 }
