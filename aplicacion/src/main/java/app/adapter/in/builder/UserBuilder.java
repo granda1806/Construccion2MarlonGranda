@@ -23,9 +23,9 @@ public class UserBuilder
         return user;
     }
     
-    public User buildAdmin(String name, String document, String age, String date,
-                           String gender, String addres, String contactName,
-                           String relationship, String contactNumber, String userA, String password
+    public User buildPatient(String name, String document, String age, String date,
+                           String gender, String addres, String Email, String PhoneNumber, String contactName,
+                           String relationship, String contactNumber
                           )throws Exception
     {
         User user = new User();
@@ -35,11 +35,12 @@ public class UserBuilder
         user.setDate(userValidator.dateValidator(date));
         user.setGender(userValidator.genderValidator(gender));
         user.setAddres(userValidator.addresValidator(addres));
+        user.setEmail(userValidator.EmailValidator(Email));
+        user.setPhoneNumber(userValidator.PhoneNumber(PhoneNumber));
         user.setEmergencyContactName(userValidator.contactNameValidator(contactName));
         user.setRelationshipPatient(userValidator.relationshipValidator(relationship));
         user.setEmergencyContactNumber(userValidator.contactNumberValidator(contactNumber));
-        user.setUserName(userValidator.userNameValidator(userA));
-        user.setPassword(userValidator.passwordValidator(password));
         return user;
     }
+   
 }

@@ -54,6 +54,20 @@ public class UserValidator extends SimpleValidator
         return stringValidator("Genero de la persona",value);
         
     }
+    
+    public String EmailValidator(String value) throws Exception
+    {
+        
+        return stringValidator("Email de la persona",value);
+        
+    }
+    
+    public long PhoneNumber(String value) throws Exception
+    {
+        
+        return longValidator("Telefono de la persona",value);
+        
+    }
      
     public String addresValidator(String value) throws Exception
     {

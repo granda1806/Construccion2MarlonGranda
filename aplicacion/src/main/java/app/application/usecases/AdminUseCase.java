@@ -1,8 +1,8 @@
 package app.application.usecases;
 
+import app.domain.model.Person;
 import app.domain.model.enums.Role;
-import app.domain.model.User;
-import app.domain.services.CreateUser;
+import app.domain.services.CreatePatient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,12 +10,11 @@ import org.springframework.stereotype.Service;
 public class AdminUseCase
 {
     @Autowired
-    private CreateUser createUSer;
+    private CreatePatient createPatient;
     
-    public void createPatient(User user) throws Exception
+    public void createPatient(Person patient) throws Exception
     {
-        user.setRole(Role.PATIENT);
-        createUSer.create(user); 
+        createPatient.create(patient); 
     }
     
 }

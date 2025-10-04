@@ -2,14 +2,14 @@ package app.adapter.in.client;
 
 import app.adapter.in.builder.UserBuilder;
 import app.application.usecases.AdminUseCase;
+import app.domain.model.Person;
 import java.util.Scanner;
 import app.domain.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 @Controller
-public class AdminClient
-{
+public class AdminClient {
     
     private static final String MENU = "Ingrese una opcion: \n" +
                                        " 1. Crear paciente \n" +
@@ -22,7 +22,7 @@ public class AdminClient
     @Autowired
     private AdminUseCase adminUseCase;
     @Autowired
-    private UserBuilder userBuilder;
+    private UserBuilder patientBuilder;
     
     public void session()
     {
@@ -44,8 +44,8 @@ public class AdminClient
             {
                 case "1":
                 {
-                    User user = readInfoFromUserAd();
-                    adminUseCase.createPatient(user);
+                    Person patient = readInfoFromPatient();
+                    adminUseCase.createPatient(patient);
                     return true;
                 }
                 
@@ -90,7 +90,7 @@ public class AdminClient
         
     }
     
-    private User readInfoFromUserAd() throws Exception
+    private User readInfoFromPatient() throws Exception
     {
         
         System.out.println("Ingrese nombre: ");
@@ -105,6 +105,10 @@ public class AdminClient
         String gender = reader.nextLine();
         System.out.println("Ingrese direccion: ");
         String addres = reader.nextLine();
+        System.out.println("Ingrese correo electronico: ");
+        String Email = reader.nextLine();
+        System.out.println("Ingrese numero telefonico de paciente: ");
+        String PhoneNumber = reader.nextLine();
         System.out.println("Datos de contacto.");
         System.out.println("Ingrese nombre contacto de emergencia: ");
         String contactName = reader.nextLine();
@@ -112,12 +116,8 @@ public class AdminClient
         String relationship = reader.nextLine();
         System.out.println("Ingrese numero contacto de emergencia: ");
         String contactNumber = reader.nextLine();
-        System.out.println("Ingrese Usuario: ");
-        String user = reader.nextLine();
-        System.out.println("Ingrese contrseña: ");
-        String password = reader.nextLine();
-        return userBuilder.buildAdmin(name, document, age, date, gender, addres, contactName, relationship, contactNumber, user, password);
-        
-    }
-    
+
+        return patientBuilder.buildPatient(name, document, age, date, gender, addres, Email, PhoneNumber,
+                contactName, relationship, contactNumber);
+    } 
 }

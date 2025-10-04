@@ -4,11 +4,11 @@ import app.domain.model.enums.Role;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "users") // nombre de la tabla en la BD
+@Table(name = "users")
 public class UserEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-incremental en BD
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false, length = 100)
@@ -30,11 +30,10 @@ public class UserEntity {
     @Column(nullable = false)
     private String password;
 
-    // 🔹 Constructor vacío requerido por JPA
+   
     protected UserEntity() {
     }
 
-    // 🔹 Constructor completo
     public UserEntity(Long id, String name, Long document, Integer age, Role role, String userName, String password) {
         this.id = id;
         this.name = name;
@@ -45,7 +44,6 @@ public class UserEntity {
         this.password = password;
     }
 
-    // 🔹 Getters y setters
     public Long getId() {
         return id;
     }

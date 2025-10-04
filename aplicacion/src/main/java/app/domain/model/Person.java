@@ -9,14 +9,14 @@ public class Person
     private long document;
     private int age;
     private String Email;
-    private int phoneNumber;
+    private Long phoneNumber;
     private String date;
     private Role role;
     private String addres;
     
     private String gender;
     private String emergencyContactName;
-    private long emergencyContactNumber;
+    private Long emergencyContactNumber;
     private String relationshipPatient;
 
     public long getId()
@@ -75,14 +75,14 @@ public class Person
         
     }
 
-    public int getPhoneNumber()
+    public Long getPhoneNumber()
     {
         
         return phoneNumber;
         
     }
 
-    public void setPhoneNumber(int phoneNumber)
+    public void setPhoneNumber(Long phoneNumber)
     {
         
         this.phoneNumber = phoneNumber;
@@ -159,14 +159,14 @@ public class Person
         
     }
 
-    public long getEmergencyContactNumber()
+    public Long getEmergencyContactNumber()
     {
         
         return emergencyContactNumber;
         
     }
 
-    public void setEmergencyContactNumber(long emergencyContactNumber)
+    public void setEmergencyContactNumber(Long emergencyContactNumber)
     {
         
         this.emergencyContactNumber = emergencyContactNumber;
@@ -200,5 +200,4 @@ public class Person
         this.age = age;
         
     }
-
 }
