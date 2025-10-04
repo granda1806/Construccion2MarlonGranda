@@ -104,21 +104,30 @@ public class HResourcesClient {
         
     }
     
-    private User readInfoFromUser() throws Exception
-    {
-        
-        System.out.println("Ingrese nombre: ");
-        String name = reader.nextLine();
-        System.out.println("Ingrese cedula: ");
-        String document = reader.nextLine();
-        System.out.println("Ingrese la edad: ");
-        String age = reader.nextLine();
-        System.out.println("Ingrese usuario: ");
-        String userName = reader.nextLine();
-        System.out.println("Ingrese Contraseña: ");
-        String password = reader.nextLine();
-        return userBuilder.buildHResources(name, document, age, userName, password);
-        
-    }
+ private User readInfoFromUser() throws Exception {
+
+    System.out.println("Ingrese nombre: ");
+    String nameComplete = reader.nextLine();
+    System.out.println("Ingrese apellido: ");
+    String lastnameComplete = reader.nextLine();
+    System.out.println("Ingrese cedula: ");
+    String document = reader.nextLine();
+    System.out.println("Ingrese la edad: ");
+    String age = reader.nextLine();
+    System.out.println("Ingrese usuario: ");
+    String userName = reader.nextLine();
+    System.out.println("Ingrese Contraseña: ");
+    String password = reader.nextLine();
+
+    return userBuilder.buildHResources(
+            nameComplete,
+            lastnameComplete,
+            document,
+            age,
+            userName,
+            password
+    );
+}
+
     
 }

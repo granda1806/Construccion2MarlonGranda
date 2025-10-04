@@ -4,154 +4,103 @@ import app.domain.model.enums.Role;
 
 public class Person
 {
+
+    private String typeId;
     private long id;
-    private String name;
-    private long document;
-    private int age;
-    private String Email;
-    private int phoneNumber;
-    private String date;
-    private Role role;
-    private String addres;
-    
+    private String nameComplete;
+    private String lastnameComplete;
     private String gender;
+    private String date;
+    private int age;
+    private Role role;
+    private String email;
+    private int phoneNumber;
+    private String address;
+    
     private String emergencyContactName;
+    private String genderEmergencyContact;
     private long emergencyContactNumber;
     private String relationshipPatient;
 
-    public long getId()
+
+    /*Methods setter*/
+    public void setTypeId(String typeId)
     {
         
-        return id;
+        this.typeId = typeId;
         
     }
-
+    
     public void setId(long id)
     {
         
         this.id = id;
         
     }
-
-    public String getName()
+    
+    public void setNameComplete(String nameComplete)
     {
         
-        return name;
+        this.nameComplete = nameComplete;
         
     }
-
-    public void setName(String name)
+    
+    public void setLastnameComplete(String lastnameComplete)
     {
         
-        this.name = name;
+        this.lastnameComplete = lastnameComplete;
         
     }
-
-    public long getDocument()
-    {
-        
-        return document;
-        
-    }
-
-    public void setDocument(long document)
-    {
-        
-        this.document = document;
-        
-    }
-
-    public String getEmail()
-    {
-        
-        return Email;
-        
-    }
-
-    public void setEmail(String Email)
-    {
-        
-        this.Email = Email;
-        
-    }
-
-    public int getPhoneNumber()
-    {
-        
-        return phoneNumber;
-        
-    }
-
-    public void setPhoneNumber(int phoneNumber)
-    {
-        
-        this.phoneNumber = phoneNumber;
-        
-    }
-
-    public String getDate()
-    {
-        
-        return date;
-        
-    }
-
-    public void setDate(String date)
-    {
-        
-        this.date = date;
-        
-    }
-
-    public Role getRole()
-    {
-        
-        return role;
-        
-    }
-
-    public void setRole(Role role)
-    {
-        
-        this.role = role;
-        
-    }
-
-    public String getAddres()
-    {
-        
-        return addres;
-        
-    }
-
-    public void setAddres(String addres)
-    {
-        
-        this.addres = addres;
-        
-    }
-
-    public String getGender()
-    {
-        
-        return gender;
-        
-    }
-
+    
     public void setGender(String gender)
     {
         
         this.gender = gender;
         
     }
-
-    public String getEmergencyContactName()
+    
+    public void setDate(String date)
     {
         
-        return emergencyContactName;
+        this.date = date;
         
     }
-
+    
+    public void setAge(int age)
+    {
+        
+        this.age = age;
+        
+    }
+    
+    public void setRole(Role role)
+    {
+        
+        this.role = role;
+        
+    }
+    
+    public void setEmail(String email)
+    {
+        
+        this.email = email;
+        
+    }
+    
+    public void setPhoneNumber(int phoneNumber)
+    {
+        
+        this.phoneNumber = phoneNumber;
+        
+    }
+    
+    public void setAddress(String address)
+    {
+        
+        this.address = address;
+        
+    }
+    
     public void setEmergencyContactName(String emergencyContactName)
     {
         
@@ -159,10 +108,10 @@ public class Person
         
     }
 
-    public long getEmergencyContactNumber()
+    public void setGenderEmergencyContact(String genderEmergencyContact)
     {
         
-        return emergencyContactNumber;
+        this.genderEmergencyContact = genderEmergencyContact;
         
     }
 
@@ -173,32 +122,129 @@ public class Person
         
     }
 
-    public String getRelationshipPatient()
-    {
-        
-        return relationshipPatient;
-        
-    }
-
     public void setRelationshipPatient(String relationshipPatient)
     {
         
         this.relationshipPatient = relationshipPatient;
         
     }
+    
+    /*Methods getter*/
+    public String getTypeId()
+    {
+    
+        return typeId;
+    
+    }
+
+    public long getId()
+    {
+
+        return id;
+
+    }
+
+    public String getNameComplete()
+    {
+
+        return nameComplete;
+
+    }
+
+    public String getLastnameComplete()
+    {
+
+        return lastnameComplete;
+
+    }
+
+    public String getGender()
+    {
+
+        return gender;
+
+    }
+
+    public String getDate()
+    {
+
+        return date;
+
+    }
 
     public int getAge()
     {
-        
+
         return age;
-        
+
     }
 
-    public void setAge(int age)
+    public Role getRole()
     {
-        
-        this.age = age;
-        
+
+        return role;
+
     }
 
+    public String getEmail()
+    {
+
+        return email;
+
+    }
+
+    public int getPhoneNumber()
+    {
+
+        return phoneNumber;
+
+    }
+
+    public String getAddress()
+    {
+
+        return address;
+
+    }
+
+    public String getEmergencyContactName()
+    {
+
+        return emergencyContactName;
+
+    }
+
+    public String getGenderEmergencyContact()
+    {
+
+        return genderEmergencyContact;
+
+    }
+
+    public long getEmergencyContactNumber()
+    {
+
+        return emergencyContactNumber;
+
+    }
+
+    public String getRelationshipPatient()
+    {
+
+        return relationshipPatient;
+
+    }
+
+    public Long getDocument() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public String getName() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public String getAddres() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
 }

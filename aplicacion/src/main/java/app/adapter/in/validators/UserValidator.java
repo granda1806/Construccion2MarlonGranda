@@ -82,5 +82,9 @@ public class UserValidator extends SimpleValidator
         return longValidator("Numero de contacto de la persona",value);
         
     }
+
+    public String addressValidator(String address) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
 }

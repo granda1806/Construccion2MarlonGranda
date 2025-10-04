@@ -10,27 +10,25 @@ import app.infrastructure.persistence.repository.UserRepository;
 
 @Service
 public class UserAdapter implements UserPortOut {
+
     @Autowired
     private UserRepository userRepository;
-    
 
     @Override
     public User findByDocument(User user) throws Exception {
-        UserEntity userEntity = userRepository.findById(user.getId());
-        return UserMapper.toDomain(userEntity);
- 
+        UserEntity entity = userRepository.findByDocument(user.getDocument());
+        return UserMapper.toDomain(entity);
     }
 
     @Override
-    public User findByName(User user) throws Exception
-    {
-        return null;   
+    public User findByName(User user) throws Exception {
+        UserEntity entity = userRepository.findByUserName(user.getUserName());
+        return UserMapper.toDomain(entity);
     }
 
     @Override
     public void save(User user) throws Exception {
         userRepository.save(UserMapper.toEntity(user));
-        System.out.println("Se ha creado el usuario.");  
+        System.out.println("Usuario creado exitosamente.");
     }
-    
 }
