@@ -8,10 +8,10 @@ public class NursesUseCase {
     private final Scanner reader = new Scanner(System.in);
 
     // Simulación de bases de datos en memoria
-    private static final Map<Long, Person> patients = new HashMap<>();
+    private static final Map<Long, Patient> patients = new HashMap<>();
     private static final Map<String, MedicalOrder> orders = new HashMap<>();
 
-    public static void addPatient(Person person) {
+    public static void addPatient(Patient person) {
         patients.put(person.getDocument(), person);
     }
 
@@ -23,7 +23,7 @@ public class NursesUseCase {
         System.out.print("\nIngrese la cedula del paciente: ");
         long idCard = Long.parseLong(reader.nextLine());
 
-        Person patient = patients.get(idCard);
+        Patient patient = patients.get(idCard);
         if (patient == null) {
             System.out.println("No se encontro el paciente con cedula: " + idCard);
             return;

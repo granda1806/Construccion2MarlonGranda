@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class PatientUseCase {
-    private final Map<Integer, Patient> patients = new HashMap<>();
+    private final Map<Long, Patient> patients = new HashMap<>();
 
     
     public Patient create(Patient patient) {
@@ -19,7 +19,7 @@ public class PatientUseCase {
         if (existing == null) {
             throw new RuntimeException("Paciente no encontrado con id: " + id);
         }
-        existing.updateFrom(patient);
+       // existing.updateFrom(patient);
         return existing;
     }
 

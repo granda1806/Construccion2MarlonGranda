@@ -1,7 +1,7 @@
 
 package app.adapter.out;
 
-import app.domain.model.Person;
+import app.domain.model.Patient;
 import app.domain.ports.UserPortPatient;
 import app.infrastructure.persistence.entities.PatientEntity;
 import app.infrastructure.persistence.mapper.PatientMapper;
@@ -15,21 +15,24 @@ public class PatientAdapter implements UserPortPatient{
     private PatientRepository patientRepository;
     
     @Override
-    public Person findByDocument(Person user) throws Exception {
-        PatientEntity patientEntity = patientRepository.findById(user.getId());
-        return PatientMapper.toDomain(patientEntity);
- 
+    public Patient findByDocument(Patient user) throws Exception {
+    PatientEntity patientEntity = patientRepository.findByDocument(user.getDocument());
+    if (patientEntity == null) {
+        return null;
     }
+    return PatientMapper.toDomain(patientEntity);
+}
+
     
     @Override
-    public Person findByName(Person user) throws Exception
+    public Patient findByName(Patient user) throws Exception
     {
         return null;   
     }
     
     @Override
-    public void save(Person user) throws Exception {
+    public void save(Patient user) throws Exception {
         patientRepository.save(PatientMapper.toEntity(user));
-        System.out.println("Se ha creado el paciente.");  
+        System.out.println("Se ha creado el paciente "+ user.getNameComplete() +" correctamente");  
     }
 }

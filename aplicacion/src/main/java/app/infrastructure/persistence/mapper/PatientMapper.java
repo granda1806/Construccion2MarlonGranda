@@ -1,11 +1,12 @@
 package app.infrastructure.persistence.mapper;
 
+import app.domain.model.Patient;
 import app.domain.model.Person;
 import app.infrastructure.persistence.entities.PatientEntity;
 
 public class PatientMapper {
 
-    public static PatientEntity toEntity(Person patient) {
+    public static PatientEntity toEntity(Patient patient) {
         if (patient == null) {
             return null;
         }
@@ -25,11 +26,10 @@ public class PatientMapper {
     }
     
     // Entity -> Domain
-    public static Person toDomain(PatientEntity entity) {
+    public static Patient toDomain(PatientEntity entity) {
         if (entity == null) return null;
         
-        Person user = new Person();
-        Person person = new Person();
+        Patient person = new Patient();
         person.setId(entity.getId());
         person.setNameComplete(entity.getName());
         person.setDocument(entity.getDocument());

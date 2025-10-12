@@ -1,53 +1,44 @@
 package app.domain.model;
 
-public class Appointment
-{
+import java.sql.Date;
+
+public class Appointment {
     
-    private int id;
-    private String description;
+    private Integer id;
+    private User admin;
+    private Patient patient;
+    private Date date;
 
-    public Appointment(int id, String description)
-    {
-        
-        this.id = id;
-        this.description = description;
-        
-    }
-   
-    public int getId()
-    {
-        
+    public Integer getId() {
         return id;
-        
     }
 
-    public void setId(int id)
-    {
-        
+    public void setId(Integer id) {
         this.id = id;
-        
     }
 
-    public String getDescription()
-    {
-        
-        return description;
-        
+    public User getAdmin() {
+        return admin;
     }
 
-    public void setDescription(String description)
-    {
-        
-        this.description = description;
-        
+    public void setAdmin(User admin) {
+        this.admin = admin;
     }
 
-    @Override
-    public String toString()
-    {
-        
-        return "Cita{id=" + id + ", descripcion='" + description + "'}";
-        
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
     
 }

@@ -31,8 +31,9 @@ public class UserEntity {
     private String password;
 
    
-    protected UserEntity() {
+    public UserEntity() {
     }
+    
 
     public UserEntity(Long id, String name, Long document, Integer age, Role role, String userName, String password) {
         this.id = id;

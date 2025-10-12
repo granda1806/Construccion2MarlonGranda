@@ -7,21 +7,18 @@ public class Person
 
     private String typeId;
     private long id;
-    private String nameComplete;
-    private long Document;
+    public String nameComplete;
+    public long document;
     private String lastnameComplete;
     private String gender;
     private String date;
     private int age;
     private Role role;
     private String email;
-    private long phoneNumber;
+    private Long phoneNumber;
     private String address;
     
-    private String emergencyContactName;
-    private String genderEmergencyContact;
-    private long emergencyContactNumber;
-    private String relationshipPatient;
+    
 
 
     /*Methods setter*/
@@ -38,20 +35,23 @@ public class Person
         this.id = id;
         
     }
-    
-    public void setNameComplete(String nameComplete)
-    {
-        
-        this.nameComplete = nameComplete;
-        
+
+    public String getNameComplete() {
+        return nameComplete;
     }
+
+    public void setNameComplete(String nameComplete) {
+        this.nameComplete = nameComplete;
+    }
+    
+    
 
     public long getDocument() {
-        return Document;
+        return document;
     }
 
-    public void setDocument(long Document) {
-        this.Document = Document;
+    public void setDocument(long document) {
+        this.document = document;
     }
     
     public void setLastnameComplete(String lastnameComplete)
@@ -96,7 +96,7 @@ public class Person
         
     }
     
-    public void setPhoneNumber(long phoneNumber)
+    public void setPhoneNumber(Long phoneNumber)
     {
         
         this.phoneNumber = phoneNumber;
@@ -107,34 +107,6 @@ public class Person
     {
         
         this.address = address;
-        
-    }
-    
-    public void setEmergencyContactName(String emergencyContactName)
-    {
-        
-        this.emergencyContactName = emergencyContactName;
-        
-    }
-
-    public void setGenderEmergencyContact(String genderEmergencyContact)
-    {
-        
-        this.genderEmergencyContact = genderEmergencyContact;
-        
-    }
-
-    public void setEmergencyContactNumber(long emergencyContactNumber)
-    {
-        
-        this.emergencyContactNumber = emergencyContactNumber;
-        
-    }
-
-    public void setRelationshipPatient(String relationshipPatient)
-    {
-        
-        this.relationshipPatient = relationshipPatient;
         
     }
     
@@ -153,12 +125,6 @@ public class Person
 
     }
 
-    public String getNameComplete()
-    {
-
-        return nameComplete;
-
-    }
 
     public String getLastnameComplete()
     {
@@ -202,7 +168,7 @@ public class Person
 
     }
 
-    public long getPhoneNumber()
+    public Long getPhoneNumber()
     {
 
         return phoneNumber;
@@ -213,34 +179,6 @@ public class Person
     {
 
         return address;
-
-    }
-
-    public String getEmergencyContactName()
-    {
-
-        return emergencyContactName;
-
-    }
-
-    public String getGenderEmergencyContact()
-    {
-
-        return genderEmergencyContact;
-
-    }
-
-    public long getEmergencyContactNumber()
-    {
-
-        return emergencyContactNumber;
-
-    }
-
-    public String getRelationshipPatient()
-    {
-
-        return relationshipPatient;
 
     }
     

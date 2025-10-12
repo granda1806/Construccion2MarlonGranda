@@ -1,9 +1,11 @@
 package app.adapter.in.client;
 
+import app.adapter.in.builder.AppointmentBuilder;
 import app.adapter.in.builder.UserBuilder;
 import app.application.usecases.AdminUseCase;
+import app.domain.model.Appointment;
+import app.domain.model.Patient;
 import java.util.Scanner;
-import app.domain.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -23,6 +25,8 @@ public class AdminClient
     private AdminUseCase adminUseCase;
     @Autowired
     private UserBuilder userBuilder;
+    @Autowired
+    private AppointmentBuilder appointmentBuilder;
     
     public void session()
     {
@@ -44,14 +48,15 @@ public class AdminClient
             {
                 case "1":
                 {
-                    User user = readInfoFromUserAd();
-                    adminUseCase.createPatient(user);
+                    Patient patient = readInfoFromPatient();
+                    adminUseCase.createPatient(patient);
                     return true;
                 }
                 
                 case "2":
                 {
-                    System.out.println("En proceso...");
+                    Appointment appointment = readInfoFromAppointment();
+                    adminUseCase.createAppointment(appointment);
                     return true;
                 }
                 
@@ -90,7 +95,7 @@ public class AdminClient
         
     }
     
-private User readInfoFromUserAd() throws Exception {
+private Patient readInfoFromPatient() throws Exception {
 
     System.out.println("Ingrese nombre: ");
     String nameComplete = reader.nextLine();
@@ -110,17 +115,10 @@ private User readInfoFromUserAd() throws Exception {
     System.out.println("Datos de contacto.");
     System.out.println("Ingrese nombre contacto de emergencia: ");
     String contactName = reader.nextLine();
-    System.out.println("Ingrese genero contacto de emergencia: ");
-    String genderContact = reader.nextLine();
     System.out.println("Ingrese que relacion tiene con el paciente: ");
     String relationship = reader.nextLine();
     System.out.println("Ingrese numero contacto de emergencia: ");
     String contactNumber = reader.nextLine();
-
-    System.out.println("Ingrese Usuario: ");
-    String userName = reader.nextLine();
-    System.out.println("Ingrese contraseña: ");
-    String password = reader.nextLine();
 
     return userBuilder.buildAdmin(
             nameComplete,
@@ -131,12 +129,17 @@ private User readInfoFromUserAd() throws Exception {
             gender,
             address,
             contactName,
-            genderContact,
             relationship,
-            contactNumber,
-            userName,
-            password
+            contactNumber
     );
 }
+
+private Appointment readInfoFromAppointment() throws Exception {
+    System.out.println("Ingrese documento de admin: ");
+    String documentAdmin = reader.nextLine();
+    System.out.println("Ingrese documento de paciente: ");
+    String documentPatient = reader.nextLine();
     
+    return appointmentBuilder.appointmentBuilder(documentAdmin,documentPatient);
+    }
 }

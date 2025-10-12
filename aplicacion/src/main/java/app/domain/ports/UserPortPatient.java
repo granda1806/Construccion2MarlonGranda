@@ -1,10 +1,10 @@
 package app.domain.ports;
 
-import app.domain.model.Person;
+import app.domain.model.Patient;
 
 public interface UserPortPatient {
-    public Person findByDocument(Person petient) throws Exception;
-    public Person findByName(Person petient) throws Exception;
-    public void save(Person petient) throws Exception;
+    public Patient findByDocument(Patient petient) throws Exception;
+    public Patient findByName(Patient petient) throws Exception;
+    public void save(Patient petient) throws Exception;
 }
 

@@ -41,7 +41,7 @@ public class PatientEntity {
     @Column(nullable = false, length = 100)
     private String relationshipPatient;
     
-    protected PatientEntity() {
+    public PatientEntity() {
     }
 
     public PatientEntity(Long id, String name, Long document, String date, String gender, String address, Long phoneNumber,
