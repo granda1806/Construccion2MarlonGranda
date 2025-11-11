@@ -76,11 +76,11 @@ public class User extends Person {
     }
 
     // 🔧 FIX: Métodos corregidos
-    public void setDocument(long document) {
+    public void setDocument(Long document) {
         this.document = document; 
     }
 
-    public long getDocument() {
+    public Long getDocument() {
         return this.document;
     }
 

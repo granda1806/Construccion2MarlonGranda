@@ -7,7 +7,6 @@ public enum Role
     SUPPORT,
     NURSE,
     DOCTOR,
-    HRESOURCES,
-    PATIENT
+    HRESOURCES
     
 }

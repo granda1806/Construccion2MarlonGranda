@@ -1,46 +1,68 @@
 package app.infrastructure.persistence.mapper;
 
 import app.domain.model.Patient;
-import app.domain.model.Person;
 import app.infrastructure.persistence.entities.PatientEntity;
 
 public class PatientMapper {
 
+    // Domain → Entity
     public static PatientEntity toEntity(Patient patient) {
         if (patient == null) {
             return null;
         }
+
         return new PatientEntity(
-                null,
+                null, // ID autogenerado por la BD
                 patient.getNameComplete(),
                 patient.getDocument(),
-                patient.getDate(),
+                patient.getDate(), // 🔹 String, igual que en tu dominio
                 patient.getGender(),
                 patient.getAddress(),
-                patient.getPhoneNumber(),
+                patient.getPhoneNumber() != null ? String.valueOf(patient.getPhoneNumber()) : null,
                 patient.getEmail(),
                 patient.getEmergencyContactName(),
-                patient.getEmergencyContactNumber(),
+                String.valueOf(patient.getEmergencyContactNumber()),
                 patient.getRelationshipPatient()
         );
     }
-    
-    // Entity -> Domain
+
+    // Entity → Domain
     public static Patient toDomain(PatientEntity entity) {
-        if (entity == null) return null;
-        
-        Patient person = new Patient();
-        person.setId(entity.getId());
-        person.setNameComplete(entity.getName());
-        person.setDocument(entity.getDocument());
-        person.setDate(entity.getDate());
-        person.setGender(entity.getGender());
-        person.setAddress(entity.getAddress());
-        person.setPhoneNumber(entity.getPhoneNumber());
-        person.setEmail(entity.getEmail());
-        person.setEmergencyContactName(entity.getEmergencyContactName());
-        person.setEmergencyContactNumber(entity.getEmergencyContactNumber());
-        person.setRelationshipPatient(entity.getRelationshipPatient());
-        return person;       
+        if (entity == null) {
+            return null;
+        }
+
+        Patient patient = new Patient();
+        if (entity.getId() != null) {
+            patient.setId(entity.getId());
+        }
+
+        patient.setNameComplete(entity.getName());
+        patient.setDocument(entity.getDocument());
+        patient.setDate(entity.getBirthDate());
+        patient.setGender(entity.getGender());
+        patient.setAddress(entity.getAddress());
+
+        if (entity.getPhoneNumber() != null && !entity.getPhoneNumber().isEmpty()) {
+            try {
+                patient.setPhoneNumber(Long.parseLong(entity.getPhoneNumber()));
+            } catch (NumberFormatException e) {
+                System.out.println("⚠️ Número telefónico inválido: " + entity.getPhoneNumber());
+            }
+        }
+
+        patient.setEmail(entity.getEmail());
+        patient.setEmergencyContactName(entity.getEmergencyContactName());
+
+        if (entity.getEmergencyContactNumber() != null && !entity.getEmergencyContactNumber().isEmpty()) {
+            try {
+                patient.setEmergencyContactNumber(Long.parseLong(entity.getEmergencyContactNumber()));
+            } catch (NumberFormatException e) {
+                System.out.println("⚠️ Número de contacto inválido: " + entity.getEmergencyContactNumber());
+            }
+        }
+
+        patient.setRelationshipPatient(entity.getRelationshipPatient());
+        return patient;
     }
 }

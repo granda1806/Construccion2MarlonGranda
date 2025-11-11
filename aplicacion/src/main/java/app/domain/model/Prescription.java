@@ -1,82 +1,65 @@
 package app.domain.model;
 
-public class Prescription
-{
-    
-    private String orderNumber;
+/**
+ * Representa una prescripción (medicamento) dentro de una historia clínica.
+ */
+public class Prescription {
+
+    private String orderNumber; // hasta 6 dígitos (string para permitir ceros iniciales)
     private String medicineId;
     private String dose;
     private String duration;
-    private String item;
+    private int item; // número dentro de la orden
 
-    public String getOrderNumber()
-    {
-        
-        return orderNumber;
-        
+    public Prescription() {
     }
 
-    public void setOrderNumber(String orderNumber)
-    {
-        
+    public Prescription(String orderNumber, String medicineId, String dose, String duration, int item) {
         this.orderNumber = orderNumber;
-        
-    }
-
-    public String getMedicineId()
-    {
-        
-        return medicineId;
-        
-    }
-
-    public void setMedicineId(String medicineId)
-    {
-        
         this.medicineId = medicineId;
-        
-    }
-
-    public String getDose()
-    {
-        
-        return dose;
-        
-    }
-
-    public void setDose(String dose)
-    {
-        
         this.dose = dose;
-        
-    }
-
-    public String getDuration()
-    {
-        
-        return duration;
-        
-    }
-
-    public void setDuration(String duration)
-    {
-        
         this.duration = duration;
-        
-    }
-
-    public String getItem()
-    {
-        
-        return item;
-        
-    }
-
-    public void setItem(String item)
-    {
-        
         this.item = item;
-        
     }
-    
+
+    // Getters / Setters
+    public String getOrderNumber() {
+        return orderNumber;
+    }
+
+    public void setOrderNumber(String orderNumber) {
+        this.orderNumber = orderNumber;
+    }
+
+    public String getMedicineId() {
+        return medicineId;
+    }
+
+    public void setMedicineId(String medicineId) {
+        this.medicineId = medicineId;
+    }
+
+    public String getDose() {
+        return dose;
+    }
+
+    public void setDose(String dose) {
+        this.dose = dose;
+    }
+
+    public String getDuration() {
+        return duration;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
+    }
+
+    public int getItem() {
+        return item;
+    }
+
+    public void setItem(int item) {
+        this.item = item;
+    }
 }

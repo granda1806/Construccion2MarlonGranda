@@ -6,9 +6,9 @@ public class Person
 {
 
     private String typeId;
-    private long id;
+    private Long id;
     public String nameComplete;
-    public long document;
+    public Long document;
     private String lastnameComplete;
     private String gender;
     private String date;
@@ -29,7 +29,7 @@ public class Person
         
     }
     
-    public void setId(long id)
+    public void setId(Long id)
     {
         
         this.id = id;
@@ -46,11 +46,11 @@ public class Person
     
     
 
-    public long getDocument() {
+    public Long getDocument() {
         return document;
     }
 
-    public void setDocument(long document) {
+    public void setDocument(Long document) {
         this.document = document;
     }
     
@@ -118,7 +118,7 @@ public class Person
     
     }
 
-    public long getId()
+    public Long getId()
     {
 
         return id;

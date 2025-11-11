@@ -1,171 +1,318 @@
 package app.application.usecases;
 
-import app.domain.model.*;
+import app.domain.model.DiagnosticAid;
+import app.domain.model.MedicalOrder;
+import app.domain.model.Prescription;
+import app.domain.model.Procedure;
+import app.infrastructure.persistence.entities.DoctorEntity;
+import app.infrastructure.persistence.entities.MedicalHistoryEntity;
+import app.infrastructure.persistence.repository.DoctorRepository;
+import app.infrastructure.persistence.repository.MedicalHistoryRepository;
+import app.infrastructure.persistence.repository.MedicalOrderRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
+import java.util.Optional;
 import java.util.Scanner;
 
-public class DoctorUseCase
-{
-    
+@Service
+public class DoctorUseCase {
+
     private final Scanner reader = new Scanner(System.in);
+
+    @Autowired
+    private MedicalHistoryRepository historyRepository;
+
+    @Autowired
+    private DoctorRepository doctorRepository;
+
+    @Autowired
+    private MedicalOrderRepository medicalOrderRepository;
+
+    // currentOrder ahora es local en cada flujo de menú para evitar problemas de singleton
     private MedicalOrder currentOrder;
 
-    public void searchMedicalHistory()
-    {
-        
+    // ================== MENÚ PRINCIPAL ==================
+    public void manageMedicalHistory() {
         System.out.print("\nIngrese el ID del paciente: ");
-        String patientId = reader.nextLine();
+        Long patientId;
+        try {
+            patientId = reader.nextLong();
+        } catch (NumberFormatException e) {
+            System.out.println("El ID del paciente debe ser numérico.");
+            return;
+        }
 
-        System.out.println("\nHistoria clínica encontrada para el paciente con ID: " + patientId);
+        boolean exists = historyRepository.existsByPatientId(patientId);
 
-        boolean alternatemenu  = true;
-        
-        while (alternatemenu)
-        {
-            
-            System.out.println("\nSUBMENU HISTORIA CLINICA");
-            System.out.println("1. Agregar informacion de la consulta");
+        if (!exists) {
+            System.out.println("No se encontró historia clínica para este paciente. Cree una primero (opción 1).");
+            return;
+        }
+
+        boolean alternatemenu = true;
+
+        while (alternatemenu) {
+            System.out.println("\nSUBMENÚ HISTORIA CLÍNICA");
+            System.out.println("1. Agregar información de la consulta");
             System.out.println("2. Recetar medicamentos");
-            System.out.println("3. Procedimiento medico");
-            System.out.println("4. Ayuda diagnostica");
-            System.out.println("5. Crear orden medica");
-            System.out.println("6. Volver al menu principal");
-            System.out.print("Seleccione una opcion: ");
+            System.out.println("3. Procedimiento médico");
+            System.out.println("4. Ayuda diagnóstica");
+            System.out.println("5. Crear orden médica");
+            System.out.println("6. Volver al menú principal");
+            System.out.print("Seleccione una opción: ");
             String option = reader.nextLine();
 
-            switch (option)
-            {
-                case "1" -> consultationInformation();
-                case "2" -> alternatemenu();
-                case "3" -> medicalProcedure();
-                case "4" -> diagnosticAssistance();
-                case "5" -> createMedicalOrder();
-                case "6" -> alternatemenu = false;
-                default -> System.out.println("Opcion no valida.");
+            switch (option) {
+                case "1" ->
+                    consultationInformation(patientId);
+                case "2" ->
+                    prescribeMedicine();
+                case "3" ->
+                    medicalProcedure();
+                case "4" ->
+                    diagnosticAssistance();
+                case "5" ->
+                    createMedicalOrder();
+                case "6" -> {
+                    System.out.println("Volviendo al menú principal...");
+                    alternatemenu = false;
+                }
+                default ->
+                    System.out.println("Opción no válida.");
             }
-            
         }
-        
     }
 
-    private void consultationInformation()
-    {
-        
-        System.out.println("\nAGREGAR INFORMACION DE LA CONSULTA");
-        HistoryRecord record = new HistoryRecord();
-        System.out.print("Fecha: "); record.setDate(reader.nextLine());
-        System.out.print("Cedula del medico: "); record.setDoctorId(reader.nextLine());
-        System.out.print("Motivo: "); record.setReason(reader.nextLine());
-        System.out.print("Sintomatologia: "); record.setSymptoms(reader.nextLine());
-        System.out.print("Diagnostico: "); record.setDiagnosis(reader.nextLine());
-        System.out.println("Consulta registrada.");
-        
+    // ================== MÉTODOS ==================
+    private void consultationInformation(Long patientId) {
+        System.out.println("\nAGREGAR INFORMACIÓN DE LA CONSULTA");
+
+        System.out.print("Fecha (YYYY-MM-DD): ");
+        String dateStr = reader.nextLine();
+        LocalDate date;
+        try {
+            date = LocalDate.parse(dateStr);
+        } catch (Exception e) {
+            System.out.println("Formato de fecha inválido. Use YYYY-MM-DD.");
+            return;
+        }
+
+        System.out.print("Cédula del médico: ");
+        String docStr = reader.nextLine();
+        Long doctorDocument;
+        try {
+            doctorDocument = Long.parseLong(docStr);
+        } catch (NumberFormatException e) {
+            System.out.println("La cédula del médico debe ser numérica.");
+            return;
+        }
+
+        Optional<DoctorEntity> doctorOpt = doctorRepository.findByDocument(doctorDocument);
+        if (doctorOpt.isEmpty()) {
+            System.out.println("❌ Error: No existe un médico registrado con cédula " + doctorDocument);
+            return;
+        }
+
+        System.out.print("Motivo consulta: ");
+        String reason = reader.nextLine();
+
+        System.out.print("Sintomatología: ");
+        String symptoms = reader.nextLine();
+
+        System.out.print("Diagnóstico: ");
+        String diagnosis = reader.nextLine();
+
+        MedicalHistoryEntity entity = new MedicalHistoryEntity();
+        entity.setPatientDocument(patientId.longValue()); // si la entidad usa String
+        entity.setDoctor(doctorOpt.get());
+        entity.setDate(date.toString());
+        entity.setReasonForConsultation(reason);
+        entity.setSymptoms(symptoms);
+        entity.setDiagnosis(diagnosis);
+
+        try {
+            historyRepository.save(entity);
+            System.out.println("✅ Historia clínica guardada correctamente.");
+        } catch (Exception e) {
+            System.out.println("⚠️ Error al guardar la historia clínica: " + e.getMessage());
+        }
     }
 
-    private void alternatemenu()
-    {
-        
-        if (currentOrder == null)
-        {
-            
-            currentOrder = new MedicalOrder();
-            System.out.print("Ingrese numero de orden medica: ");
-            currentOrder.setOrderNumber(reader.nextLine());
-            
+    private void prescribeMedicine() {
+        if (currentOrder == null) {
+            System.out.println("\nNo hay una orden médica activa. Cree una primero.");
+            return;
         }
 
         Prescription prescription = new Prescription();
-        System.out.print("ID medicamento: "); prescription.setMedicineId(reader.nextLine());
-        System.out.print("Dosis: "); prescription.setDose(reader.nextLine());
-        System.out.print("Duracion: "); prescription.setDuration(reader.nextLine());
-        System.out.print("Item: "); prescription.setItem(reader.nextLine());
+
+        System.out.print("Ingrese ID del medicamento: ");
+        prescription.setMedicineId(reader.nextLine());
+
+        System.out.print("Ingrese dosis: ");
+        prescription.setDose(reader.nextLine());
+
+        System.out.print("Ingrese duración del tratamiento: ");
+        prescription.setDuration(reader.nextLine());
+
+        System.out.print("Ingrese número de ítem: ");
+        int item = reader.nextInt();
+        reader.nextLine(); // limpiar buffer
+
+        if (currentOrder.containsItem(String.valueOf(item))) {
+            System.out.println("Ya existe un elemento con ese número de ítem en esta orden.");
+            return;
+        }
+
+        prescription.setItem(item);
 
         currentOrder.addPrescription(prescription);
-        System.out.println("Medicamento agregado a la orden.");
-        
+        System.out.println("Medicamento recetado correctamente.");
     }
 
-    private void medicalProcedure()
-    {
-        
-        if (currentOrder == null)
-        {
-            
+    private void medicalProcedure() {
+
+        if (currentOrder == null) {
+
             currentOrder = new MedicalOrder();
-            System.out.print("Ingrese numero de orden medica: ");
+
+            System.out.print("\nIngrese número de orden médica: ");
+
             currentOrder.setOrderNumber(reader.nextLine());
-            
+
         }
 
         Procedure procedure = new Procedure();
-        System.out.print("ID procedimiento: "); procedure.setProcedureId(reader.nextLine());
-        System.out.print("Cantidad: "); procedure.setQuantity(reader.nextLine());
-        System.out.print("Frecuencia: "); procedure.setFrequency(reader.nextLine());
-        System.out.print("¿Requiere especialista? (si/no): ");
-        String req = reader.nextLine();
-        
-        if (req.equalsIgnoreCase("si"))
-        {
-        
-            System.out.print("ID especialista: "); procedure.setSpecialistId(reader.nextLine());
-            
-        }
-        
-        System.out.print("Item: "); procedure.setItem(reader.nextLine());
 
-        currentOrder.addProcedure(procedure);
-        System.out.println("Procedimiento agregado a la orden.");
-        
+        System.out.print("ID del procedimiento: ");
+
+        String procedureId = reader.nextLine();
+
+        while (procedureId.isEmpty()) {
+
+            System.out.print("ID no puede estar vacío. Ingrese ID del procedimiento: ");
+
+            procedureId = reader.nextLine();
+
+        }
+
+        procedure.setProcedureId(procedureId);
+
+        System.out.print("Cantidad: ");
+
+        procedure.setQuantity(reader.nextLine());
+
+        System.out.print("Frecuencia: ");
+
+        procedure.setFrequency(reader.nextLine());
+
+        System.out.print("¿Requiere especialista? (si/no): ");
+
+        String req = reader.nextLine();
+
+        if (req.equalsIgnoreCase("si")) {
+
+            System.out.print("ID del especialista: ");
+
+            procedure.setSpecialistId(reader.nextLine());
+
+        }
+
+        System.out.print("Item: ");
+
+        procedure.setItem(reader.nextLine());
+
+        System.out.print("¿Desea agregar este procedimiento a la orden médica? (si/no): ");
+
+        String confirm = reader.nextLine();
+
+        if (confirm.equalsIgnoreCase("si")) {
+
+            currentOrder.addProcedure(procedure);
+
+            System.out.println("Procedimiento agregado correctamente a la orden médica N°: "
+                    + currentOrder.getOrderNumber());
+
+        } else {
+
+            System.out.println("Procedimiento cancelado por el usuario.");
+
+        }
+
     }
 
-    private void diagnosticAssistance()
-    {
-        
-        if (currentOrder == null)
-        {
-            
+    private void diagnosticAssistance() {
+        if (currentOrder == null) {
             currentOrder = new MedicalOrder();
-            System.out.print("Ingrese numero de orden medica: ");
+            System.out.print("\nIngrese número de orden médica: ");
             currentOrder.setOrderNumber(reader.nextLine());
-            
         }
 
         DiagnosticAid aid = new DiagnosticAid();
-        System.out.print("ID ayuda diagnostica (examen): "); aid.setDiagnosticId(reader.nextLine());
-        System.out.print("Cantidad: "); aid.setQuantity(reader.nextLine());
+
+        System.out.print("ID ayuda diagnóstica (examen): ");
+        String diagnosticId = reader.nextLine().trim();
+        while (diagnosticId.isEmpty()) {
+            System.out.print("El ID no puede estar vacío. Ingrese nuevamente: ");
+            diagnosticId = reader.nextLine();
+        }
+        aid.setDiagnosticId(diagnosticId);
+
+        System.out.print("Cantidad: ");
+        aid.setQuantity(reader.nextLine());
+
         System.out.print("¿Requiere especialista? (si/no): ");
         String req = reader.nextLine();
-        
-        if (req.equalsIgnoreCase("si"))
-        {
-            
-            System.out.print("ID especialista: "); aid.setSpecialistId(reader.nextLine());
-            
+        if (req.equalsIgnoreCase("si")) {
+            System.out.print("ID especialista: ");
+            aid.setSpecialistId(reader.nextLine());
         }
-        
-        System.out.print("Item: "); aid.setItem(reader.nextLine());
+
+        System.out.print("Item: ");
+        String item = reader.nextLine();
+        if (currentOrder.containsItem(item)) {
+            System.out.println("Ya existe un elemento con ese número de ítem en esta orden.");
+            return;
+        }
+        aid.setItem(item);
 
         currentOrder.addDiagnosticAid(aid);
-        System.out.println("Ayuda diagnostica agregada a la orden.");
-        
+        System.out.println("Ayuda diagnóstica agregada correctamente a la orden N°: " + currentOrder.getOrderNumber());
     }
 
-    private void createMedicalOrder()
-    {
-        
-        if (currentOrder == null)
-        {
-            
-            System.out.println("No hay datos cargados en la orden.");
+    private void createMedicalOrder() {
+        if (currentOrder == null) {
+            System.out.println("\nNo hay una orden médica activa o cargada.");
             return;
-            
         }
 
-        System.out.println("\nORDEN MEDICA FINALIZADA:");
-        System.out.println(currentOrder);
+        boolean hasContent
+                = (currentOrder.getPrescriptions() != null && !currentOrder.getPrescriptions().isEmpty())
+                || (currentOrder.getProcedures() != null && !currentOrder.getProcedures().isEmpty())
+                || (currentOrder.getDiagnosticAids() != null && !currentOrder.getDiagnosticAids().isEmpty());
 
-        // Espacio para persistir la orden en un repositorio
-        currentOrder = null; // Vacía la instancia de registros para crear una nueva orden
-        
+        if (!hasContent) {
+            System.out.println("\nLa orden médica está vacía. Agregue algún elemento antes de guardar.");
+            return;
+        }
+
+        System.out.print("\n¿Desea guardar esta orden médica? (si/no): ");
+        String confirm = reader.nextLine();
+
+        if (confirm.trim().equalsIgnoreCase("si")) {
+            try {
+                medicalOrderRepository.save(currentOrder);
+                System.out.println("✅ Orden médica guardada correctamente.");
+            } catch (Exception e) {
+                System.out.println("⚠️ Error al guardar la orden médica: " + e.getMessage());
+            }
+        } else {
+            System.out.println("Orden médica cancelada por el usuario.");
+        }
+
+        currentOrder = null;
     }
-    
 }
