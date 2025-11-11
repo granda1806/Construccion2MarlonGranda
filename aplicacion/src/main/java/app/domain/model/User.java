@@ -105,11 +105,16 @@ public class User extends Person {
     }
 
     // 🔧 FIX: Métodos corregidos
+<<<<<<< HEAD
     public void setDocument(long document) {
         this.document = document;
+=======
+    public void setDocument(Long document) {
+        this.document = document; 
+>>>>>>> 930cfa164b6bb60b05a6ac40ae6032838b2a843b
     }
 
-    public long getDocument() {
+    public Long getDocument() {
         return this.document;
     }
 

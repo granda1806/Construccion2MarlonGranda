@@ -1,64 +1,67 @@
-
 package app.infrastructure.persistence.entities;
 
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Patient")
+@Table(name = "patients")
 public class PatientEntity {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
-    @Column(nullable = false, length = 100)
+
+    @Column(nullable = false)
     private String name;
-    
-    @Column(nullable = true)
+
+    @Column(nullable = false, unique = true)
     private Long document;
-    
-    @Column(nullable = false, length = 100)
-    private String date;
-    
-    @Column(nullable = false, length = 50)
+
+    // 🔹 Mantén el tipo String porque en tu dominio también es String ("date")
+    @Column(name = "birth_date", nullable = false, length = 10)
+    private String birthDate;
+
+    @Column(length = 20)
     private String gender;
-    
-    @Column(nullable = false, length = 150)
+
+    @Column(length = 100)
     private String address;
-    
-    @Column(nullable = true, length = 10)
-    private Long phoneNumber;
-    
-    @Column(nullable = true, length = 100)
-    private String Email;
-    
-    @Column(nullable = false, length = 100)
+
+    @Column(length = 20)
+    private String phoneNumber;
+
+    @Column(length = 50)
+    private String email;
+
+    @Column(name = "emergency_contact_name", length = 50)
     private String emergencyContactName;
-    
-    @Column(nullable = false, length = 10)
-    private Long emergencyContactNumber;
-    
-    @Column(nullable = false, length = 100)
+
+    @Column(name = "emergency_contact_number", length = 20)
+    private String emergencyContactNumber;
+
+    @Column(name = "relationship_patient", length = 30)
     private String relationshipPatient;
-    
+
     public PatientEntity() {
     }
 
-    public PatientEntity(Long id, String name, Long document, String date, String gender, String address, Long phoneNumber,
-            String Email, String emergencyContactName, Long emergencyContactNumber, String relationshipPatient) {
+    public PatientEntity(Long id, String name, Long document, String birthDate, String gender,
+            String address, String phoneNumber, String email,
+            String emergencyContactName, String emergencyContactNumber,
+            String relationshipPatient) {
         this.id = id;
         this.name = name;
         this.document = document;
-        this.date = date;
+        this.birthDate = birthDate;
         this.gender = gender;
         this.address = address;
         this.phoneNumber = phoneNumber;
-        this.Email = Email;
+        this.email = email;
         this.emergencyContactName = emergencyContactName;
         this.emergencyContactNumber = emergencyContactNumber;
         this.relationshipPatient = relationshipPatient;
     }
 
+    // === Getters y Setters ===
     public Long getId() {
         return id;
     }
@@ -83,12 +86,12 @@ public class PatientEntity {
         this.document = document;
     }
 
-    public String getDate() {
-        return date;
+    public String getBirthDate() {
+        return birthDate;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
     }
 
     public String getGender() {
@@ -107,20 +110,20 @@ public class PatientEntity {
         this.address = address;
     }
 
-    public Long getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(Long phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
-    public void setEmail(String Email) {
-        this.Email = Email;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getEmergencyContactName() {
@@ -131,11 +134,11 @@ public class PatientEntity {
         this.emergencyContactName = emergencyContactName;
     }
 
-    public Long getEmergencyContactNumber() {
+    public String getEmergencyContactNumber() {
         return emergencyContactNumber;
     }
 
-    public void setEmergencyContactNumber(Long emergencyContactNumber) {
+    public void setEmergencyContactNumber(String emergencyContactNumber) {
         this.emergencyContactNumber = emergencyContactNumber;
     }
 

@@ -1,44 +1,68 @@
 package app.adapter.in.client;
 
-import app.application.usecases.NursesUseCase;
+import app.application.usecases.SearchPatientUseCase;
+import app.application.usecases.RegisterVitalSignsUseCase;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+
 import java.util.Scanner;
 import org.springframework.stereotype.Controller;
 
 @Controller
 public class NursesClient {
 
+    private static final String MENU = "Ingrese una opción:\n"
+            + "1. Buscar paciente\n"
+            + "2. Registrar signos vitales\n"
+            + "3. Salir al menu principal.";
+
     private static final Scanner reader = new Scanner(System.in);
-    private final NursesUseCase nursesUseCase = new NursesUseCase();
+
+    private final SearchPatientUseCase searchPatientUseCase;
+    private final RegisterVitalSignsUseCase registerVitalSignsUseCase;
+
+    @Autowired
+    public NursesClient(SearchPatientUseCase searchPatientUseCase,
+            RegisterVitalSignsUseCase registerVitalSignsUseCase) {
+        this.searchPatientUseCase = searchPatientUseCase;
+        this.registerVitalSignsUseCase = registerVitalSignsUseCase;
+    }
 
     public void session() {
         boolean session = true;
-
         while (session) {
-            System.out.println("\nMENU ENFERMERIA");
-            System.out.println("1. Buscar paciente");
-            System.out.println("2. Registrar signos vitales");
-            System.out.println("3. Registrar administracion de ordenes");
-            System.out.println("4. Buscar orden medica");
-            System.out.println("5. Salir");
+            session = menu();
+        }
+    }
+
+    private boolean menu() {
+        try {
+            System.out.println("\n===== MENU ENFERMERAS =====");
+            System.out.println(MENU);
             System.out.print("Seleccione una opcion: ");
             String option = reader.nextLine();
 
             switch (option) {
-                case "1" ->
-                    nursesUseCase.searchForPatient();
-                case "2" ->
-                    nursesUseCase.registerVitalSigns();
-                case "3" ->
-                    nursesUseCase.registerOrderAdministration();
-                case "4" ->
-                    nursesUseCase.searchForAMedicalOrder();
-                case "5" -> {
-                    System.out.println("Cerrando sesion de enfermeria...");
-                    session = false;
+                case "1" -> {
+                    searchPatientUseCase.execute();
+                    return true;
                 }
-                default ->
-                    System.out.println("Opcion invalida.");
+                case "2" -> {
+                    registerVitalSignsUseCase.execute();
+                    return true;
+                }
+                case "3" -> {
+                    System.out.println("Saliendo del modulo de enfermería...");
+                    return false;
+                }
+                default -> {
+                    System.out.println("Ingrese una opcion valida.");
+                    return true;
+                }
             }
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+            return true;
         }
     }
 }

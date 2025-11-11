@@ -4,10 +4,10 @@ public class User
 {
 
     private Long id;
-    private String document;
+    private Long document;
     private String name;
     
-    public User(Long id1, String document1, String name1)
+    public User(Long id1, Long document1, String name1)
     {
     
     }
@@ -26,14 +26,14 @@ public class User
         
     }
 
-    public String getDocument()
+    public Long getDocument()
     {
         
         return document;
         
     }
 
-    public void setDocument(String document)
+    public void setDocument(Long document)
     {
         
         this.document = document;
