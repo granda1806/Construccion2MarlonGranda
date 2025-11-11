@@ -14,7 +14,8 @@ public class ClinicalUseCase {
     
     //aqui agregar crear orden clinica, buscar orden clinica y crear historial clinica. De momento solo usare user
     
-    public void createUSer(HResourcesClient user) throws Exception{
+    public void createUSer(HResourcesClient user) throws Exception
+    {
         user.session();
     }
     

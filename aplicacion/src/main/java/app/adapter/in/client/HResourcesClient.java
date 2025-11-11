@@ -1,5 +1,6 @@
 package app.adapter.in.client;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import app.application.usecases.HResourcesUseCase;
 import app.domain.model.User;
@@ -8,126 +9,127 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 @Controller
-public class HResourcesClient {
-    private static final String MENU = "Ingrese una opcion: \n" +
-            
-                                       "1. Crear administrador \n" +
-                                       "2. Crear soporte de informacion \n" +
-                                       "3. Crear enfermera \n" +
-                                       "4. Crear Doctor. \n" +
-                                       "5. Crear Recuersos Humanos. \n"+
-                                       "6. Regresar al menu principal.";
-    
-    private static Scanner reader = new Scanner(System.in);
+public class HResourcesClient
+{
+
     @Autowired
     private HResourcesUseCase resourcesUseCase;
+
     @Autowired
     private UserBuilder userBuilder;
-    
-    public void session() {
-        
-        boolean session = true;
-        while(session)
-        {
-            session = menu();
-        }
-        
-    }
-    
-    private boolean menu()
+
+    private Scanner reader = new Scanner(System.in);
+
+    public boolean session()
     {
-        
-        try
+
+        boolean session = true;
+
+        while (session)
         {
             
-            System.out.println(MENU);
-            String option = reader.nextLine();
-            
-            switch (option)
+            try
             {
+                System.out.print(
+                                "\nIngreso Recursos Humanos.\n" +
+                                        
+                                "1. Crear administrador\n" +
+                                "2. Crear soporte de información\n" +
+                                "3. Crear enfermera\n" +
+                                "4. Crear doctor\n" +
+                                "5. Crear recursos humanos\n" +
+                                "6. Volver al menú principal\n\n" +
+                                        
+                                "Ingrese una opción: "
+                );
 
-                case "1":
-                {
-                    User user = readInfoFromUser();
-                    resourcesUseCase.createAdmin(user);
-                    return true;
-                }
+                int menu = reader.nextInt();
+                reader.nextLine();
 
-                case "2":
+                switch (menu)
                 {
-                    User user = readInfoFromUser();
-                    resourcesUseCase.createSupport(user);
-                    return true;
-                }
-
-                case "3":
-                {
-                    User user = readInfoFromUser();
-                    resourcesUseCase.createNurse(user);
-                    return true;
-                }
-
-                case "4":
-                {
-                    User user = readInfoFromUser();
-                    resourcesUseCase.createDoctor(user);
-                    return true;
-                }
-
-                case "5":
-                {
-                    User user = readInfoFromUser();
-                    resourcesUseCase.createHResources(user);
-                    return true;
-                }
-
-                case "6":
-                {
-                    System.out.println("Salindo de Recursos humanos...");
-                    return false;
-                }
-
-                default:
-                {
-                    System.out.println("Ingrese una opcion valida.");
-                    return true;
+                    case 1:
+                        resourcesUseCase.createAdmin(readInfoFromUser());
+                        break;
+                        
+                    case 2:
+                        resourcesUseCase.createSupport(readInfoFromUser());
+                        break;
+                        
+                    case 3:
+                        resourcesUseCase.createNurse(readInfoFromUser());
+                        break;
+                        
+                    case 4:
+                        resourcesUseCase.createDoctor(readInfoFromUser());
+                        break;
+                        
+                    case 5:
+                        resourcesUseCase.createHResources(readInfoFromUser());
+                        break;
+                        
+                    case 6:
+                        System.out.println("Retroceso al menú principal.");
+                        session = false;
+                        break;
+                        
+                    default:
+                        System.out.println("Ingrese una opción válida.");
+                        break;
+                        
                 }
 
             }
-        
+            catch (InputMismatchException e)
+            {
+                
+                System.out.println("\nIngrese por favor un valor numérico válido.\n");
+                reader.nextLine();
+                
+            }
+            catch (Exception e)
+            {
+                
+                System.out.println("Error: " + e.getMessage());
+                
+            }
+            
         }
-        catch(Exception e)
-        {
-            System.out.println(e.getMessage());
-            return true;
-        }
+
+        return false;
         
     }
-    
- private User readInfoFromUser() throws Exception {
 
-    System.out.println("Ingrese nombre: ");
-    String nameComplete = reader.nextLine();
-    System.out.println("Ingrese apellido: ");
-    String lastnameComplete = reader.nextLine();
-    System.out.println("Ingrese cedula: ");
-    String document = reader.nextLine();
-    System.out.println("Ingrese la edad: ");
-    String age = reader.nextLine();
-    System.out.println("Ingrese usuario: ");
-    String userName = reader.nextLine();
-    System.out.println("Ingrese Contraseña: ");
-    String password = reader.nextLine();
+    private User readInfoFromUser() throws Exception
+    {
 
-    return userBuilder.buildHResources(
-            nameComplete,
-            lastnameComplete,
-            document,
-            age,
-            userName,
-            password
-    );
-}
+        System.out.println("Ingrese nombre: ");
+        String nameComplete = reader.nextLine();
 
+        System.out.println("Ingrese apellido: ");
+        String lastnameComplete = reader.nextLine();
+
+        System.out.println("Ingrese cédula: ");
+        String document = reader.nextLine();
+
+        System.out.println("Ingrese la edad: ");
+        String age = reader.nextLine();
+
+        // Crear usuario automáticamente (genera usuario y contraseña)
+        User user = userBuilder.buildHResources
+        (
+                nameComplete,
+                lastnameComplete,
+                document,
+                age
+        );
+
+        System.out.println("\nUsuario creado exitosamente:");
+        System.out.println("Usuario: " + user.getUserName());
+        System.out.println("Contraseña generada: " + user.getPassword());
+
+        return user;
+        
+    }
     
 }

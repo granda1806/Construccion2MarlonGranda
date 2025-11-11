@@ -2,7 +2,9 @@ package app.adapter.in.client;
 
 import app.application.usecases.NursesUseCase;
 import java.util.Scanner;
+import org.springframework.stereotype.Controller;
 
+@Controller
 public class NursesClient {
 
     private static final Scanner reader = new Scanner(System.in);

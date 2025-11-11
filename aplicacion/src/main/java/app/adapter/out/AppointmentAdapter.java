@@ -1,4 +1,3 @@
-
 package app.adapter.out;
 
 import app.domain.model.Appointment;
@@ -14,31 +13,49 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AppointmentAdapter implements AppointmentPort{
+public class AppointmentAdapter implements AppointmentPort
+{
     
     @Autowired
     private AppointmentRepository appointmentRepository;
     
     @Override
-    public Appointment findById(Appointment appointment) throws Exception {
+    public Appointment findById(Appointment appointment) throws Exception
+    {
+        
         AppointmentEntity appointmentEntity = appointmentRepository.findById(appointment.getId());
+        
         return AppointmentMapper.toDomain(appointmentEntity);
+        
     }
     
     @Override
-    public List<Appointment> findByDocumentPatient(Patient patient) throws Exception {
-		List<Appointment> appointments = new ArrayList<Appointment>();
-		List<AppointmentEntity> appointmentEntities = appointmentRepository.findByPatient(PatientMapper.toEntity(patient));
-		for (AppointmentEntity entity : appointmentEntities) {
+    public List<Appointment> findByDocumentPatient(Patient patient) throws Exception
+    {
+		
+        List<Appointment> appointments = new ArrayList<Appointment>();
+		
+                List<AppointmentEntity> appointmentEntities = appointmentRepository.findByPatient(PatientMapper.toEntity(patient));
+		
+                for (AppointmentEntity entity : appointmentEntities)
+                {
+                    
 			appointments.add(AppointmentMapper.toDomain(entity));
+                        
 		}
+                
 		return appointments;
+                
 	}
     
     @Override
-    public void save(Appointment appointment) throws Exception{
+    public void save(Appointment appointment) throws Exception
+    {
+        
         appointmentRepository.save(AppointmentMapper.toEntity(appointment));
         System.out.println("El administrador " + appointment.getAdmin().getNameComplete() +
                 " ha agendado la cita del paciente " + appointment.getPatient().getNameComplete() + " correctamente");  
+        
     }
+    
 }

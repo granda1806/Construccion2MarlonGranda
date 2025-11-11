@@ -18,9 +18,6 @@ public class Person
     private Long phoneNumber;
     private String address;
     
-    
-
-
     /*Methods setter*/
     public void setTypeId(String typeId)
     {

@@ -1,13 +1,23 @@
 package app.domain.model;
 
+import jakarta.persistence.Column;
 import java.security.SecureRandom;
 
 public class User extends Person {
 
+    @Column(nullable = false, unique = true)
     private String userName;
+
+    @Column(nullable = false)  // 🔹 Agregado para Hibernate
+    private String nameComplete;
+
+    @Column(nullable = false)  // 🔹 Agregado para Hibernate
+    private String lastnameComplete;
+
     private String password;
 
-    public User() {} // Empty Constructor
+    public User() {
+    } // Empty Constructor
 
     // Methods for generating credentials
     private String generateUserName(String nameComplete, String lastnameComplete) {
@@ -23,12 +33,16 @@ public class User extends Person {
     }
 
     public User(String nameComplete, String lastnameComplete) {
+        this.nameComplete = nameComplete;         // 🔹 Se asigna el nombre completo
+        this.lastnameComplete = lastnameComplete; // 🔹 Se asigna el apellido completo
         this.userName = generateUserName(nameComplete, lastnameComplete);
         this.password = generatePassword(10);
     }
 
     private String generatePassword(int length) {
-        if (length < 4) throw new IllegalArgumentException("length must be >= 4");
+        if (length < 4) {
+            throw new IllegalArgumentException("length must be >= 4");
+        }
 
         final String U = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         final String L = "abcdefghijklmnopqrstuvwxyz";
@@ -58,7 +72,6 @@ public class User extends Person {
         return new String(arr);
     }
 
-
     public String getUserName() {
         return userName;
     }
@@ -75,9 +88,25 @@ public class User extends Person {
         this.password = password;
     }
 
+    public String getNameComplete() {
+        return nameComplete;
+    }
+
+    public void setNameComplete(String nameComplete) {
+        this.nameComplete = nameComplete;
+    }
+
+    public String getLastnameComplete() {
+        return lastnameComplete;
+    }
+
+    public void setLastnameComplete(String lastnameComplete) {
+        this.lastnameComplete = lastnameComplete;
+    }
+
     // 🔧 FIX: Métodos corregidos
     public void setDocument(long document) {
-        this.document = document; 
+        this.document = document;
     }
 
     public long getDocument() {

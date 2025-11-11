@@ -11,8 +11,11 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 100)
-    private String name;
+    @Column(name = "name_complete", nullable = false, length = 100)
+    private String nameComplete;
+
+    @Column(name = "lastname_complete", nullable = false, length = 100)
+    private String lastnameComplete;
 
     @Column(unique = true, nullable = false)
     private Long document;
@@ -30,14 +33,13 @@ public class UserEntity {
     @Column(nullable = false)
     private String password;
 
-   
     public UserEntity() {
     }
-    
 
-    public UserEntity(Long id, String name, Long document, Integer age, Role role, String userName, String password) {
+    public UserEntity(Long id, String nameComplete, String lastnameComplete, Long document, Integer age, Role role, String userName, String password) {
         this.id = id;
-        this.name = name;
+        this.nameComplete = nameComplete;
+        this.lastnameComplete = lastnameComplete;
         this.document = document;
         this.age = age;
         this.role = role;
@@ -52,11 +54,18 @@ public class UserEntity {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getNameComplete() {
+        return nameComplete;
     }
-    public void setName(String name) {
-        this.name = name;
+    public void setNameComplete(String nameComplete) {
+        this.nameComplete = nameComplete;
+    }
+
+    public String getLastnameComplete() {
+        return lastnameComplete;
+    }
+    public void setLastnameComplete(String lastnameComplete) {
+        this.lastnameComplete = lastnameComplete;
     }
 
     public Long getDocument() {
@@ -94,4 +103,3 @@ public class UserEntity {
         this.password = password;
     }
 }
-

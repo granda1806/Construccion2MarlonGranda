@@ -26,7 +26,9 @@ public class PatientMapper {
     }
     
     // Entity -> Domain
-    public static Patient toDomain(PatientEntity entity) {
+    public static Patient toDomain(PatientEntity entity)
+    {
+        
         if (entity == null) return null;
         
         Patient person = new Patient();
@@ -41,6 +43,8 @@ public class PatientMapper {
         person.setEmergencyContactName(entity.getEmergencyContactName());
         person.setEmergencyContactNumber(entity.getEmergencyContactNumber());
         person.setRelationshipPatient(entity.getRelationshipPatient());
-        return person;       
+        return person;
+        
     }
+    
 }

@@ -8,8 +8,7 @@ import app.infrastructure.persistence.entities.PatientEntity;
 import app.infrastructure.persistence.entities.UserEntity;
 
 public class AppointmentMapper {
-    
-    // Convierte un modelo de dominio a una entidad JPA
+
     public static AppointmentEntity toEntity(Appointment appointment) {
         if (appointment == null) {
             return null;
@@ -19,12 +18,14 @@ public class AppointmentMapper {
         entity.setId(appointment.getId());
         entity.setDate(appointment.getDate());
 
-        // Conversión de relaciones (User y Patient)
+        // User -> UserEntity
         User admin = appointment.getAdmin();
         if (admin != null) {
             UserEntity adminEntity = new UserEntity();
             adminEntity.setId(admin.getId());
-            adminEntity.setName(admin.getNameComplete());
+            // Si User tiene nameComplete y lastnameComplete, los guardamos por separado
+            adminEntity.setNameComplete(admin.getNameComplete());
+            adminEntity.setLastnameComplete(admin.getLastnameComplete());
             adminEntity.setDocument(admin.getDocument());
             adminEntity.setAge(admin.getAge());
             adminEntity.setRole(admin.getRole());
@@ -33,6 +34,7 @@ public class AppointmentMapper {
             entity.setAdmin(adminEntity);
         }
 
+        // Patient -> PatientEntity (se asume que PatientEntity tiene 'name' como antes)
         Patient patient = appointment.getPatient();
         if (patient != null) {
             PatientEntity patientEntity = new PatientEntity();
@@ -45,7 +47,6 @@ public class AppointmentMapper {
         return entity;
     }
 
-    // Convierte una entidad JPA a un modelo de dominio
     public static Appointment toDomain(AppointmentEntity entity) {
         if (entity == null) {
             return null;
@@ -55,12 +56,14 @@ public class AppointmentMapper {
         appointment.setId(entity.getId());
         appointment.setDate(entity.getDate());
 
-        // Conversión de relaciones (UserEntity → User)
+        // UserEntity -> User
         UserEntity adminEntity = entity.getAdmin();
         if (adminEntity != null) {
             User admin = new User();
             admin.setId(adminEntity.getId());
-            admin.setName(adminEntity.getName());
+            // Si User tiene setNameComplete / setLastnameComplete:
+            admin.setNameComplete(adminEntity.getNameComplete());
+            admin.setLastnameComplete(adminEntity.getLastnameComplete());
             admin.setDocument(adminEntity.getDocument());
             admin.setAge(adminEntity.getAge());
             admin.setRole(adminEntity.getRole());
@@ -69,6 +72,7 @@ public class AppointmentMapper {
             appointment.setAdmin(admin);
         }
 
+        // PatientEntity -> Patient
         PatientEntity patientEntity = entity.getPatient();
         if (patientEntity != null) {
             Patient patient = new Patient();
@@ -81,5 +85,3 @@ public class AppointmentMapper {
         return appointment;
     }
 }
-
-

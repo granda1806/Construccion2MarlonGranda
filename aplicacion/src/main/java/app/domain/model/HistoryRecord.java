@@ -3,12 +3,27 @@ package app.domain.model;
 public class HistoryRecord
 {
     
+    private String patientId;
     private String date;
     private String doctorId;
     private String reason;
     private String symptoms;
     private String diagnosis;
+    
+    public String getPatientId()
+    {
+        
+        return patientId;
+        
+    }
 
+    public void setPatientId(String patientId)
+    {
+        
+        this.patientId = patientId;
+        
+    }
+    
     public String getDate()
     {
         

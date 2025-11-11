@@ -7,25 +7,30 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserMapper {
 
+    // Convierte del modelo de dominio a la entidad JPA
     public static UserEntity toEntity(User user) {
         if (user == null) return null;
-        return new UserEntity(
-                null,
-                user.getNameComplete(),
-                user.getDocument(),
-                user.getAge(),
-                user.getRole(),
-                user.getUserName(),
-                user.getPassword()
-        );
+
+        UserEntity entity = new UserEntity();
+        entity.setId(null);
+        entity.setNameComplete(user.getNameComplete());
+        entity.setLastnameComplete(user.getLastnameComplete());
+        entity.setDocument(user.getDocument());
+        entity.setAge(user.getAge());
+        entity.setRole(user.getRole());
+        entity.setUserName(user.getUserName());
+        entity.setPassword(user.getPassword());
+        return entity;
     }
 
+    // Convierte de la entidad JPA al modelo de dominio
     public static User toDomain(UserEntity entity) {
         if (entity == null) return null;
 
         User user = new User();
         user.setId(entity.getId());
-        user.setName(entity.getName());
+        user.setNameComplete(entity.getNameComplete());
+        user.setLastnameComplete(entity.getLastnameComplete());
         user.setDocument(entity.getDocument());
         user.setAge(entity.getAge());
         user.setRole(entity.getRole());
@@ -34,4 +39,3 @@ public class UserMapper {
         return user;
     }
 }
-

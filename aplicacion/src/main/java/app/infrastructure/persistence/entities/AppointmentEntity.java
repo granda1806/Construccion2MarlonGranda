@@ -1,4 +1,3 @@
-
 package app.infrastructure.persistence.entities;
 
 import jakarta.persistence.*;
@@ -28,24 +27,36 @@ public class AppointmentEntity {
     // --- Constructores ---
     public AppointmentEntity() {}
 
-    public AppointmentEntity(Integer id, UserEntity admin, PatientEntity patient, Date date) {
+    public AppointmentEntity(Integer id, UserEntity admin, PatientEntity patient, Date date)
+    {
+        
         this.id = id;
         this.admin = admin;
         this.patient = patient;
         this.date = date;
+        
     }
 
     // --- Getters y Setters ---
-    public Integer getId() {
+    public Integer getId()
+    {
+        
         return id;
+        
     }
 
-    public void setId(Integer id) {
+    public void setId(Integer id)
+    {
+        
         this.id = id;
+        
     }
 
-    public UserEntity getAdmin() {
+    public UserEntity getAdmin()
+    {
+        
         return admin;
+        
     }
 
     public void setAdmin(UserEntity admin) {
@@ -56,15 +67,25 @@ public class AppointmentEntity {
         return patient;
     }
 
-    public void setPatient(PatientEntity patient) {
+    public void setPatient(PatientEntity patient)
+    {
+        
         this.patient = patient;
+        
     }
 
-    public Date getDate() {
+    public Date getDate()
+    {
+        
         return date;
+        
     }
 
-    public void setDate(Date date) {
+    public void setDate(Date date)
+    {
+        
         this.date = date;
+        
     }
+    
 }

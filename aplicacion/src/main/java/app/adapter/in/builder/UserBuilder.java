@@ -2,8 +2,10 @@ package app.adapter.in.builder;
 
 import app.adapter.in.validators.UserValidator;
 import app.domain.model.Patient;
+import app.domain.model.enums.Role;
 import app.domain.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -12,19 +14,21 @@ public class UserBuilder {
     @Autowired
     private UserValidator userValidator;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder; // 🔹 Inyección de BCrypt
+
     /**
      * Construye un usuario de tipo HResources
      */
-    public User buildHResources(String nameComplete, String lastnameComplete, String document,
-                                String age, String userName, String password) throws Exception {
+    public User buildHResources(String nameComplete, String lastnameComplete, String document, String age) {
+        User user = new User(nameComplete, lastnameComplete);
 
-        User user = new User();
-        user.setNameComplete(userValidator.nameValidator(nameComplete));
-        user.setLastnameComplete(userValidator.nameValidator(lastnameComplete));
-        user.setDocument(userValidator.documentValidator(document));
-        user.setAge(userValidator.ageValidator(age));
-        user.setUserName(userValidator.userNameValidator(userName));
-        user.setPassword(userValidator.passwordValidator(password));
+        user.setDocument(Long.parseLong(document));
+        user.setAge(Integer.parseInt(age));
+        user.setRole(Role.HRESOURCES);
+
+        // 🔹 Codifica la contraseña antes de persistir
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         return user;
     }
