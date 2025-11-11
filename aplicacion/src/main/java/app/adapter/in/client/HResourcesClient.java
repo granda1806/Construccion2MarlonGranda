@@ -1,3 +1,4 @@
+
 package app.adapter.in.client;
 
 import java.util.InputMismatchException;

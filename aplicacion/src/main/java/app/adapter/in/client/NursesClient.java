@@ -1,3 +1,4 @@
+
 package app.adapter.in.client;
 
 import app.application.usecases.SearchPatientUseCase;

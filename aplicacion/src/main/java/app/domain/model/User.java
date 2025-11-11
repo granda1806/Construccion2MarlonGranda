@@ -1,3 +1,4 @@
+
 package app.domain.model;
 
 import jakarta.persistence.Column;

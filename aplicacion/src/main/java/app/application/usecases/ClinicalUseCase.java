@@ -1,4 +1,3 @@
-
 package app.application.usecases;
 
 import app.adapter.in.client.HResourcesClient;

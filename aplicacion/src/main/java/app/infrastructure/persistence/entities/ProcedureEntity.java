@@ -1,3 +1,4 @@
+
 package app.infrastructure.persistence.entities;
 
 import jakarta.persistence.*;

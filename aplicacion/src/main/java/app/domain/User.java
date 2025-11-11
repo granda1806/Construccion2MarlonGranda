@@ -1,3 +1,4 @@
+
 package app.domain;
 
 public class User

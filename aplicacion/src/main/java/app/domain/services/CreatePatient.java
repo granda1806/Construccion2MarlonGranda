@@ -1,4 +1,3 @@
-
 package app.domain.services;
 
 import app.domain.model.Patient;

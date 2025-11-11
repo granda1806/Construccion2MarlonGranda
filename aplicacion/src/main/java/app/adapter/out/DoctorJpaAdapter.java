@@ -1,3 +1,4 @@
+
 package app.adapter.out;
 
 import org.springframework.stereotype.Component;

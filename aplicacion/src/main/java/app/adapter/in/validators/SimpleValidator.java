@@ -1,3 +1,4 @@
+
 package app.adapter.in.validators;
 
 public abstract class SimpleValidator

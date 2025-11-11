@@ -1,4 +1,3 @@
-
 package app.adapter.in.client;
 
 import app.adapter.in.builder.UserBuilder;

@@ -1,3 +1,4 @@
+
 package app.domain.model;
 
 public class Patient extends Person{
