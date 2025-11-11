@@ -8,18 +8,29 @@ public class User extends Person {
     @Column(nullable = false, unique = true)
     private String userName;
 
-    @Column(nullable = false)  // 🔹 Agregado para Hibernate
+    @Column(nullable = false)
     private String nameComplete;
 
-    @Column(nullable = false)  // 🔹 Agregado para Hibernate
+    @Column(nullable = false)
     private String lastnameComplete;
 
     private String password;
 
     public User() {
-    } // Empty Constructor
+        // Constructor vacío requerido por frameworks (Hibernate, etc.)
+    }
 
-    // Methods for generating credentials
+    // ==================== Constructores ====================
+
+    public User(String nameComplete, String lastnameComplete) {
+        this.nameComplete = nameComplete;
+        this.lastnameComplete = lastnameComplete;
+        this.userName = generateUserName(nameComplete, lastnameComplete);
+        this.password = generatePassword(10);
+    }
+
+    // ==================== Métodos de generación ====================
+
     private String generateUserName(String nameComplete, String lastnameComplete) {
         String firstNameOnly = (nameComplete != null && !nameComplete.isBlank())
                 ? nameComplete.trim().split("\\s+")[0]
@@ -30,13 +41,6 @@ public class User extends Person {
                 : "surname";
 
         return (firstNameOnly + "." + firstLastnameOnly).toLowerCase();
-    }
-
-    public User(String nameComplete, String lastnameComplete) {
-        this.nameComplete = nameComplete;         // 🔹 Se asigna el nombre completo
-        this.lastnameComplete = lastnameComplete; // 🔹 Se asigna el apellido completo
-        this.userName = generateUserName(nameComplete, lastnameComplete);
-        this.password = generatePassword(10);
     }
 
     private String generatePassword(int length) {
@@ -62,6 +66,7 @@ public class User extends Person {
             sb.append(ALL.charAt(rnd.nextInt(ALL.length())));
         }
 
+        // Mezcla aleatoria final
         char[] arr = sb.toString().toCharArray();
         for (int i = arr.length - 1; i > 0; i--) {
             int j = rnd.nextInt(i + 1);
@@ -69,8 +74,11 @@ public class User extends Person {
             arr[i] = arr[j];
             arr[j] = tmp;
         }
+
         return new String(arr);
     }
+
+    // ==================== Getters y Setters ====================
 
     public String getUserName() {
         return userName;
@@ -104,18 +112,12 @@ public class User extends Person {
         this.lastnameComplete = lastnameComplete;
     }
 
-    // 🔧 FIX: Métodos corregidos
-<<<<<<< HEAD
-    public void setDocument(long document) {
-        this.document = document;
-=======
-    public void setDocument(Long document) {
-        this.document = document; 
->>>>>>> 930cfa164b6bb60b05a6ac40ae6032838b2a843b
-    }
-
     public Long getDocument() {
         return this.document;
+    }
+
+    public void setDocument(Long document) {
+        this.document = document;
     }
 
     public void setName(String name) {

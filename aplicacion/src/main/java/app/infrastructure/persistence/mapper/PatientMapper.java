@@ -5,7 +5,7 @@ import app.infrastructure.persistence.entities.PatientEntity;
 
 public class PatientMapper {
 
-    // Domain → Entity
+    // ===== Domain → Entity =====
     public static PatientEntity toEntity(Patient patient) {
         if (patient == null) {
             return null;
@@ -25,37 +25,15 @@ public class PatientMapper {
                 patient.getRelationshipPatient()
         );
     }
-<<<<<<< HEAD
-    
-    // Entity -> Domain
-    public static Patient toDomain(PatientEntity entity)
-    {
-        
-        if (entity == null) return null;
-        
-        Patient person = new Patient();
-        person.setId(entity.getId());
-        person.setNameComplete(entity.getName());
-        person.setDocument(entity.getDocument());
-        person.setDate(entity.getDate());
-        person.setGender(entity.getGender());
-        person.setAddress(entity.getAddress());
-        person.setPhoneNumber(entity.getPhoneNumber());
-        person.setEmail(entity.getEmail());
-        person.setEmergencyContactName(entity.getEmergencyContactName());
-        person.setEmergencyContactNumber(entity.getEmergencyContactNumber());
-        person.setRelationshipPatient(entity.getRelationshipPatient());
-        return person;
-        
-=======
 
-    // Entity → Domain
+    // ===== Entity → Domain =====
     public static Patient toDomain(PatientEntity entity) {
         if (entity == null) {
             return null;
         }
 
         Patient patient = new Patient();
+
         if (entity.getId() != null) {
             patient.setId(entity.getId());
         }
@@ -66,6 +44,7 @@ public class PatientMapper {
         patient.setGender(entity.getGender());
         patient.setAddress(entity.getAddress());
 
+        // Conversión de teléfono
         if (entity.getPhoneNumber() != null && !entity.getPhoneNumber().isEmpty()) {
             try {
                 patient.setPhoneNumber(Long.parseLong(entity.getPhoneNumber()));
@@ -77,6 +56,7 @@ public class PatientMapper {
         patient.setEmail(entity.getEmail());
         patient.setEmergencyContactName(entity.getEmergencyContactName());
 
+        // Conversión de contacto de emergencia
         if (entity.getEmergencyContactNumber() != null && !entity.getEmergencyContactNumber().isEmpty()) {
             try {
                 patient.setEmergencyContactNumber(Long.parseLong(entity.getEmergencyContactNumber()));
@@ -87,7 +67,5 @@ public class PatientMapper {
 
         patient.setRelationshipPatient(entity.getRelationshipPatient());
         return patient;
->>>>>>> 930cfa164b6bb60b05a6ac40ae6032838b2a843b
     }
-    
 }

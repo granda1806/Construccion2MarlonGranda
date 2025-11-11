@@ -1,59 +1,14 @@
 package app.infrastructure.persistence.entities;
 
 import jakarta.persistence.*;
-<<<<<<< HEAD
-import java.sql.Date;
-
-@Entity
-@Table(name = "medical_history")
-=======
 import java.util.Date;
 
 @Entity
 @Table(name = "medical_histories")
->>>>>>> 930cfa164b6bb60b05a6ac40ae6032838b2a843b
 public class MedicalHistoryEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-<<<<<<< HEAD
-    private Integer id;
-
-    @Column(name = "patient_id", nullable = false)
-    private Long patientId;
-
-    @Column(name = "doctor_id", nullable = false)
-    private Long doctorId;
-
-    @Column(nullable = false)
-    private Date date;
-
-    private String reason;
-    private String symptoms;
-    private String diagnosis;
-
-    // --- Getters y Setters ---
-    public Integer getId() { return id; }
-    public void setId(Integer id) { this.id = id; }
-
-    public Long getPatientId() { return patientId; }
-    public void setPatientId(Long patientId) { this.patientId = patientId; }
-
-    public Long getDoctorId() { return doctorId; }
-    public void setDoctorId(Long doctorId) { this.doctorId = doctorId; }
-
-    public Date getDate() { return date; }
-    public void setDate(Date date) { this.date = date; }
-
-    public String getReason() { return reason; }
-    public void setReason(String reason) { this.reason = reason; }
-
-    public String getSymptoms() { return symptoms; }
-    public void setSymptoms(String symptoms) { this.symptoms = symptoms; }
-
-    public String getDiagnosis() { return diagnosis; }
-    public void setDiagnosis(String diagnosis) { this.diagnosis = diagnosis; }
-=======
     private Long id;
 
     // ✅ Usamos Date correctamente con @Temporal
@@ -65,7 +20,7 @@ public class MedicalHistoryEntity {
     private String observations;
 
     @Column(name = "patient_document", nullable = false)
-    private String patientDocument; // ✅ En el mapper se maneja como String
+    private String patientDocument; // ✅ Se maneja como String
 
     @Column(name = "reason_for_consultation", length = 300)
     private String reasonForConsultation;
@@ -160,5 +115,4 @@ public class MedicalHistoryEntity {
     public void setDoctor(DoctorEntity doctor) {
         this.doctor = doctor;
     }
->>>>>>> 930cfa164b6bb60b05a6ac40ae6032838b2a843b
 }

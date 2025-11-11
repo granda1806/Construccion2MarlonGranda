@@ -11,21 +11,29 @@ import java.util.Date;
 
 public class DoctorMapper {
 
+    // ==================== ENTITY → DOMAIN ====================
     public static ClinicalHistoryRecord toDomain(MedicalHistoryEntity entity) {
         if (entity == null) return null;
 
         ClinicalHistoryRecord record = new ClinicalHistoryRecord();
 
         // ID
-        record.setId(entity.getId());
+        if (entity.getId() != null) {
+            record.setId(entity.getId());
+        }
 
-        // Conversión de fecha (admite String o Date)
+        // Conversión segura de fecha (Date o String)
         LocalDate parsedDate;
         try {
-            if (entity.getDate() instanceof Date dateObj) {
-                parsedDate = dateObj.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            Object rawDate = entity.getDate();
+            if (rawDate instanceof Date dateObj) {
+                parsedDate = dateObj.toInstant()
+                        .atZone(ZoneId.systemDefault())
+                        .toLocalDate();
+            } else if (rawDate instanceof String strDate && !strDate.isBlank()) {
+                parsedDate = LocalDate.parse(strDate);
             } else {
-                parsedDate = LocalDate.parse(String.valueOf(entity.getDate()));
+                parsedDate = LocalDate.now();
             }
         } catch (Exception e) {
             parsedDate = LocalDate.now();
@@ -33,54 +41,67 @@ public class DoctorMapper {
         record.setDate(parsedDate);
 
         // Doctor
-        if (entity.getDoctor() != null) {
+        if (entity.getDoctor() != null && entity.getDoctor().getId() != null) {
             record.setDoctorId(entity.getDoctor().getId());
         }
 
-        // Campos simples (si existen)
-        record.setPatientDocument(entity.getPatientDocument());
-        try {
-            record.setReasonForConsultation(entity.getReasonForConsultation());
-            record.setSymptoms(entity.getSymptoms());
-            record.setDiagnosis(entity.getDiagnosis());
-        } catch (Exception ignored) {
+        // Documentos y campos simples
+        if (entity.getPatientDocument() != null && !entity.getPatientDocument().isBlank()) {
+            try {
+                record.setPatientDocument(Long.parseLong(entity.getPatientDocument()));
+            } catch (NumberFormatException e) {
+                System.out.println("⚠️ Documento del paciente inválido: " + entity.getPatientDocument());
+            }
         }
 
-        // Inicialización de listas
+        record.setReasonForConsultation(entity.getReasonForConsultation());
+        record.setSymptoms(entity.getSymptoms());
+        record.setDiagnosis(entity.getDiagnosis());
+
+        // Inicialización segura de listas
         record.setPrescriptions(new ArrayList<>());
         record.setProcedures(new ArrayList<>());
 
         return record;
     }
 
+    // ==================== DOMAIN → ENTITY ====================
     public static MedicalHistoryEntity toEntity(ClinicalHistoryRecord record) {
         if (record == null) return null;
 
         MedicalHistoryEntity entity = new MedicalHistoryEntity();
 
+        // ID
         if (record.getId() != null) {
             entity.setId(record.getId());
         }
 
-        // LocalDate → Date
+        // LocalDate → java.util.Date
         try {
-            LocalDate localDate = record.getDate();
-            Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-            entity.setDate(date);
+            if (record.getDate() != null) {
+                Date date = Date.from(record.getDate()
+                        .atStartOfDay(ZoneId.systemDefault())
+                        .toInstant());
+                entity.setDate(date);
+            } else {
+                entity.setDate(new Date());
+            }
         } catch (Exception e) {
             entity.setDate(new Date());
         }
 
-        // Campos simples
-        entity.setPatientDocument(record.getPatientDocument());
-        try {
-            entity.setReasonForConsultation(record.getReasonForConsultation());
-            entity.setSymptoms(record.getSymptoms());
-            entity.setDiagnosis(record.getDiagnosis());
-        } catch (Exception ignored) {
+        // Documento (Long → String)
+        if (record.getPatientDocument() != null) {
+            entity.setPatientDocument(String.valueOf(record.getPatientDocument()));
         }
 
-        if (entity.getObservations() == null) {
+        // Campos simples
+        entity.setReasonForConsultation(record.getReasonForConsultation());
+        entity.setSymptoms(record.getSymptoms());
+        entity.setDiagnosis(record.getDiagnosis());
+
+        // Observaciones automáticas si no existen
+        if (entity.getObservations() == null || entity.getObservations().isBlank()) {
             entity.setObservations("Generado automáticamente por DoctorMapper");
         }
 
