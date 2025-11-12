@@ -1,4 +1,3 @@
-
 package app.infrastructure.persistence.mapper;
 
 import app.domain.model.ClinicalHistoryRecord;
@@ -14,7 +13,9 @@ public class DoctorMapper {
 
     // ==================== ENTITY → DOMAIN ====================
     public static ClinicalHistoryRecord toDomain(MedicalHistoryEntity entity) {
-        if (entity == null) return null;
+        if (entity == null) {
+            return null;
+        }
 
         ClinicalHistoryRecord record = new ClinicalHistoryRecord();
 
@@ -47,12 +48,10 @@ public class DoctorMapper {
         }
 
         // Documentos y campos simples
-        if (entity.getPatientDocument() != null && !entity.getPatientDocument().isBlank()) {
-            try {
-                record.setPatientDocument(Long.parseLong(entity.getPatientDocument()));
-            } catch (NumberFormatException e) {
-                System.out.println("⚠️ Documento del paciente inválido: " + entity.getPatientDocument());
-            }
+        if (entity.getPatientDocument() != null && entity.getPatientDocument() > 0) {
+            record.setPatientDocument(entity.getPatientDocument());
+        } else {
+            System.out.println("⚠️ Documento del paciente inválido: " + entity.getPatientDocument());
         }
 
         record.setReasonForConsultation(entity.getReasonForConsultation());
@@ -68,7 +67,9 @@ public class DoctorMapper {
 
     // ==================== DOMAIN → ENTITY ====================
     public static MedicalHistoryEntity toEntity(ClinicalHistoryRecord record) {
-        if (record == null) return null;
+        if (record == null) {
+            return null;
+        }
 
         MedicalHistoryEntity entity = new MedicalHistoryEntity();
 
@@ -92,8 +93,10 @@ public class DoctorMapper {
         }
 
         // Documento (Long → String)
-        if (record.getPatientDocument() != null) {
-            entity.setPatientDocument(String.valueOf(record.getPatientDocument()));
+        if (record.getPatientDocument() != null && record.getPatientDocument() > 0) {
+            entity.setPatientDocument(record.getPatientDocument());
+        } else {
+            System.out.println("⚠️ Documento del paciente inválido o nulo: " + record.getPatientDocument());
         }
 
         // Campos simples

@@ -2,6 +2,7 @@
 package app.infrastructure.persistence.entities;
 
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -14,6 +15,7 @@ public class MedicalOrderEntity {
 
     private String orderNumber;
     private String observations;
+    private LocalDateTime createdAt;
 
     // Relación con historia clínica (clave foránea)
     @ManyToOne
@@ -72,8 +74,20 @@ public class MedicalOrderEntity {
     public List<ProcedureEntity> getProcedures() {
         return procedures;
     }
+    
+    
 
     public void setProcedures(List<ProcedureEntity> procedures) {
         this.procedures = procedures;
     }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+    
+    
 }

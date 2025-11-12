@@ -7,7 +7,7 @@ public class DiagnosticAid
     private String diagnosticId;
     private String quantity;
     private String specialistId;
-    private String item;
+    private int item;
  
     public String getOrderNumber()
     {
@@ -49,12 +49,12 @@ public class DiagnosticAid
         this.specialistId = specialistId;
     }
  
-    public String getItem()
+    public int getItem()
     {
         return item;
     }
  
-    public void setItem(String item)
+    public void setItem(int item)
     {
         this.item = item;
     }

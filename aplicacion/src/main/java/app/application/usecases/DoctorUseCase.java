@@ -1,4 +1,3 @@
-
 package app.application.usecases;
 
 import app.domain.model.DiagnosticAid;
@@ -156,7 +155,7 @@ public class DoctorUseCase {
         prescription.setDuration(reader.nextLine());
 
         System.out.print("Ingrese número de ítem: ");
-        String item = reader.nextLine();
+        int item = reader.nextInt();
 
         if (currentOrder.containsItem(item)) {
             System.out.println("⚠️ Ya existe un elemento con ese número de ítem en esta orden.");
@@ -227,7 +226,7 @@ public class DoctorUseCase {
         }
 
         System.out.print("Item: ");
-        aid.setItem(reader.nextLine());
+        aid.setItem(reader.nextInt());
 
         System.out.print("¿Desea agregar esta ayuda diagnóstica? (si/no): ");
         if (reader.nextLine().equalsIgnoreCase("si")) {

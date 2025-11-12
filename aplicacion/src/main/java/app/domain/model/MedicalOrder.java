@@ -1,4 +1,3 @@
-
 package app.domain.model;
 
 import java.util.ArrayList;
@@ -80,19 +79,31 @@ public class MedicalOrder {
     }
 
     // ====================== MÉTODO PARA VERIFICAR ÍTEM DUPLICADO ======================
-    public boolean containsItem(String itemNumber) {
-        if (itemNumber == null || itemNumber.isBlank()) {
+    public boolean containsItem(int itemNumber) {
+        // Validación básica: 0 se considera un valor no válido
+        if (itemNumber <= 0) {
             return false;
         }
 
+        // Buscar en prescripciones
         for (Prescription p : prescriptions) {
-            if (itemNumber.equals(p.getItem())) return true;
+            if (p != null && itemNumber == p.getItem()) {
+                return true;
+            }
         }
+
+        // Buscar en procedimientos
         for (Procedure pr : procedures) {
-            if (itemNumber.equals(pr.getItem())) return true;
+            if (pr != null && itemNumber == pr.getItem()) {
+                return true;
+            }
         }
+
+        // Buscar en ayudas diagnósticas
         for (DiagnosticAid d : diagnosticAids) {
-            if (itemNumber.equals(d.getItem())) return true;
+            if (d != null && itemNumber == d.getItem()) {
+                return true;
+            }
         }
 
         return false;
