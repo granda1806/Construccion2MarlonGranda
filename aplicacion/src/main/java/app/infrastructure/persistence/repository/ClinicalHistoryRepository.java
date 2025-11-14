@@ -1,4 +1,3 @@
-
 package app.infrastructure.persistence.repository;
 
 import app.infrastructure.persistence.entities.MedicalHistoryEntity;

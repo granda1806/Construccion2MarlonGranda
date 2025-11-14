@@ -1,4 +1,3 @@
-
 package app.infrastructure.persistence.mapper;
 
 import app.domain.model.Patient;
@@ -69,4 +68,5 @@ public class PatientMapper {
         patient.setRelationshipPatient(entity.getRelationshipPatient());
         return patient;
     }
+    
 }

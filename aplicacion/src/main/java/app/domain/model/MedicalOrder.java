@@ -79,29 +79,28 @@ public class MedicalOrder {
     }
 
     // ====================== MÉTODO PARA VERIFICAR ÍTEM DUPLICADO ======================
-    public boolean containsItem(int itemNumber) {
-        // Validación básica: 0 se considera un valor no válido
-        if (itemNumber <= 0) {
+    public boolean containsItem(String itemNumber) {
+        if (itemNumber == null || itemNumber.isEmpty()) {
             return false;
         }
 
         // Buscar en prescripciones
         for (Prescription p : prescriptions) {
-            if (p != null && itemNumber == p.getItem()) {
+            if (p != null && itemNumber.equals(p.getItem())) {
                 return true;
             }
         }
 
         // Buscar en procedimientos
         for (Procedure pr : procedures) {
-            if (pr != null && itemNumber == pr.getItem()) {
+            if (pr != null && itemNumber.equals(pr.getItem())) {
                 return true;
             }
         }
 
         // Buscar en ayudas diagnósticas
         for (DiagnosticAid d : diagnosticAids) {
-            if (d != null && itemNumber == d.getItem()) {
+            if (d != null && itemNumber.equals(d.getItem())) {
                 return true;
             }
         }

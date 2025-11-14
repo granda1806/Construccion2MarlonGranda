@@ -1,4 +1,3 @@
-
 package app.application.usecases;
 
 import app.infrastructure.persistence.entities.MedicalOrderEntity;

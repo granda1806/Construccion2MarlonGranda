@@ -1,4 +1,3 @@
-
 package app.adapter.out;
 
 import app.domain.model.Appointment;
@@ -8,10 +7,11 @@ import app.infrastructure.persistence.entities.AppointmentEntity;
 import app.infrastructure.persistence.mapper.AppointmentMapper;
 import app.infrastructure.persistence.mapper.PatientMapper;
 import app.infrastructure.persistence.repository.AppointmentRepository;
-import java.util.ArrayList;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class AppointmentAdapter implements AppointmentPort
@@ -31,32 +31,12 @@ public class AppointmentAdapter implements AppointmentPort
     }
     
     @Override
-    public List<Appointment> findByDocumentPatient(Patient patient) throws Exception
-    {
-		
-        List<Appointment> appointments = new ArrayList<Appointment>();
-		
-                List<AppointmentEntity> appointmentEntities = appointmentRepository.findByPatient(PatientMapper.toEntity(patient));
-		
-                for (AppointmentEntity entity : appointmentEntities)
-                {
-                    
-			appointments.add(AppointmentMapper.toDomain(entity));
-                        
-		}
-                
-		return appointments;
-                
-	}
-    
-    @Override
     public void save(Appointment appointment) throws Exception
     {
         
         appointmentRepository.save(AppointmentMapper.toEntity(appointment));
         System.out.println("El administrador " + appointment.getAdmin().getNameComplete() +
-                " ha agendado la cita del paciente " + appointment.getPatient().getNameComplete() + " correctamente");  
-        
+                " ha agendado la cita del paciente " + appointment.getPatient().getNameComplete() + " con fecha: " + appointment.getDate());
     }
     
 }

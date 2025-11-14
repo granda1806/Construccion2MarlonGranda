@@ -1,4 +1,3 @@
-
 package app.adapter.in.client;
 
 import app.application.usecases.AuthUseCase;
@@ -44,7 +43,7 @@ public class LoginClient {
     private NursesClient nursesClient;
 
     @Autowired
-    private PasswordEncoder passwordEncoder; // BCrypt inyectado
+    private PasswordEncoder passwordEncoder;
 
     /**
      * Proceso de autenticación de usuario.
@@ -59,13 +58,13 @@ public class LoginClient {
 
             Role role;
 
-            // 🔹 Usuario administrador local (solo para uso administrativo)
+            // Usuario administrador local (solo para uso administrativo)
             if ("Admin".equalsIgnoreCase(userName) && "','".equals(password)) {
-                System.out.println("\nAutenticación exitosa.");
+                System.out.println("\n✅ Autenticación exitosa.");
                 System.out.println("Usuario creado localmente únicamente para uso administrativo.");
                 role = Role.HRESOURCES;
             } else {
-                // 🔹 Busca el usuario en la base de datos
+                // Busca el usuario en la base de datos
                 User user = authUseCase.findByUserName(userName);
 
                 if (user == null) {
@@ -73,7 +72,7 @@ public class LoginClient {
                     return;
                 }
 
-                // 🔹 Verifica la contraseña (BCrypt)
+                // Verifica la contraseña (BCrypt)
                 if (!passwordEncoder.matches(password, user.getPassword())) {
                     System.out.println("❌ Contraseña incorrecta.");
                     return;
@@ -83,7 +82,7 @@ public class LoginClient {
                 role = user.getRole();
             }
 
-            // 🔹 Redirección según el rol
+            // Redirección según el rol
             switch (role) {
                 case HRESOURCES -> hResourcesClient.session();
                 case ADMIN -> adminClient.session();

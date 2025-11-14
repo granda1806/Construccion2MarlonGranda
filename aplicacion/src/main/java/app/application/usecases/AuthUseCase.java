@@ -1,4 +1,3 @@
-
 package app.application.usecases;
 
 import app.domain.model.User;

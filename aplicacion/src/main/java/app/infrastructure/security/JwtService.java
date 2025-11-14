@@ -1,4 +1,3 @@
-
 package app.infrastructure.security;
 
 import io.jsonwebtoken.Jwts;

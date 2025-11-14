@@ -76,6 +76,35 @@ public class UserValidator extends SimpleValidator
         return stringValidator("Direccion de la persona",value);
         
     }
+    
+    //policy info
+    
+    public long policyNumber(String value) throws Exception
+    {
+        
+        return longValidator("Numero de la poliza",value);
+        
+    }
+    
+    public String policyName(String value) throws Exception
+    {
+        
+        return stringValidator("Nombre de la poliza",value);
+        
+    }
+    
+    public boolean policyStatus(String value) throws Exception
+    {
+        return booleanValidator("Estado de la poliza",value);
+    }
+    
+    public String policyEndDate(String value) throws Exception
+    {
+        return stringValidator("Fecha fin de la poliza",value);       
+    }
+    
+    
+    //contact emergency into
      
     public String contactNameValidator(String value) throws Exception
     {

@@ -1,84 +1,54 @@
 
 package app.adapter.in.validators;
 
-public abstract class SimpleValidator
-{
-    
-    public String stringValidator(String element, String value)throws Exception
-    {
-        
-        if (value == null || value.equals(""))
-        {
-            
-            throw new Exception(element + " no puede tener un valor vacio.");
-            
+public abstract class SimpleValidator {
+
+    public String stringValidator(String element, String value) throws Exception {
+        if (value == null || value.trim().isEmpty()) {
+            throw new Exception(element + " no puede tener un valor vacío.");
         }
-        
-        return value;
-        
+        return value.trim();
     }
-    
-    public int integerValidator(String element, String value) throws Exception
-    {
-        
-        stringValidator(element,value);
-        
-        try
-        {
-            
-            int intValue = Integer.parseInt(value);
-            return intValue;
-            
+
+    public int integerValidator(String element, String value) throws Exception {
+        stringValidator(element, value);
+        try {
+            return Integer.parseInt(value);
+        } catch (NumberFormatException e) {
+            throw new Exception(element + " debe ser un valor numérico entero.");
         }
-        catch(Exception e)
-        {
-            
-            throw new Exception(element + " debe ser un valor numerico.");
-            
-        }
-        
     }
-    
-    public long longValidator(String element, String value) throws Exception
-    {
-        
-        stringValidator(element,value);
-        
-        try
-        {
-            
-            long longValue = Long.parseLong(value);
-            return longValue;
-            
+
+    public long longValidator(String element, String value) throws Exception {
+        stringValidator(element, value);
+        try {
+            return Long.parseLong(value);
+        } catch (NumberFormatException e) {
+            throw new Exception(element + " debe ser un valor numérico largo.");
         }
-        catch(Exception e)
-        {
-            
-            throw new Exception(element + " debe ser un valor numerico.");
-            
-        }
-        
     }
-    
-    public long dateValidator(String element, String value) throws Exception
-    {
-        
-        stringValidator(element,value);
-        
-        try
-        {
-            
-            long longValue = Long.parseLong(value);
-            return longValue;
-            
+
+    public long dateValidator(String element, String value) throws Exception {
+        stringValidator(element, value);
+        try {
+            return Long.parseLong(value);
+        } catch (NumberFormatException e) {
+            throw new Exception(element + " debe ser un valor numérico de fecha (timestamp).");
         }
-        catch(Exception e)
-        {
-            
-            throw new Exception(element + " debe ser un valor numerico.");
-            
-        }
-        
     }
-    
+
+    public boolean booleanValidator(String element, String value) throws Exception {
+        stringValidator(element, value);
+        String lowerValue = value.trim().toLowerCase();
+
+        if (lowerValue.equals("true") || lowerValue.equals("false")) {
+            return Boolean.parseBoolean(lowerValue);
+        } else if (lowerValue.equals("1")) {
+            return true;
+        } else if (lowerValue.equals("2")) {
+            return false;
+        } else {
+            throw new Exception(element + " debe ser un valor booleano válido (true/false o 1/2).");
+        }
+    }
 }

@@ -48,10 +48,19 @@ public class DoctorMapper {
         }
 
         // Documentos y campos simples
-        if (entity.getPatientDocument() != null && entity.getPatientDocument() > 0) {
-            record.setPatientDocument(entity.getPatientDocument());
+        if (entity.getPatientDocument() != null && !entity.getPatientDocument().trim().isEmpty()) {
+            try {
+                Long patientDoc = Long.parseLong(entity.getPatientDocument().trim());
+                if (patientDoc > 0) {
+                    record.setPatientDocument(patientDoc);
+                } else {
+                    System.out.println("⚠️ Documento del paciente inválido: " + entity.getPatientDocument());
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("⚠️ Documento del paciente no es un número válido: " + entity.getPatientDocument());
+            }
         } else {
-            System.out.println("⚠️ Documento del paciente inválido: " + entity.getPatientDocument());
+            System.out.println("⚠️ Documento del paciente inválido o nulo");
         }
 
         record.setReasonForConsultation(entity.getReasonForConsultation());
@@ -94,7 +103,7 @@ public class DoctorMapper {
 
         // Documento (Long → String)
         if (record.getPatientDocument() != null && record.getPatientDocument() > 0) {
-            entity.setPatientDocument(record.getPatientDocument());
+            entity.setPatientDocument(String.valueOf(record.getPatientDocument()));
         } else {
             System.out.println("⚠️ Documento del paciente inválido o nulo: " + record.getPatientDocument());
         }

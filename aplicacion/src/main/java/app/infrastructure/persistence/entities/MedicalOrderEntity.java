@@ -1,4 +1,3 @@
-
 package app.infrastructure.persistence.entities;
 
 import jakarta.persistence.*;
@@ -74,8 +73,6 @@ public class MedicalOrderEntity {
     public List<ProcedureEntity> getProcedures() {
         return procedures;
     }
-    
-    
 
     public void setProcedures(List<ProcedureEntity> procedures) {
         this.procedures = procedures;
@@ -88,6 +85,4 @@ public class MedicalOrderEntity {
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
-    
-    
 }

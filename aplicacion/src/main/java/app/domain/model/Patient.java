@@ -1,12 +1,15 @@
 
 package app.domain.model;
+import app.domain.model.enums.TypePolicy;
 
 public class Patient extends Person{
   
+    
     private String emergencyContactName;
     private String genderEmergencyContact;
     private long emergencyContactNumber;
     private String relationshipPatient;
+    
 
     public String getEmergencyContactName() {
         return emergencyContactName;
@@ -38,19 +41,5 @@ public class Patient extends Person{
 
     public void setRelationshipPatient(String relationshipPatient) {
         this.relationshipPatient = relationshipPatient;
-    }
-    
-     // Actualizar desde otro paciente
-   // public void updateFrom(Patient other) {
-     //   if (other.getName() != null) {
-     //       this.name = other.getName();
-     //   }
-   // }
-
-   // @Override
-   // public String toString() {
-    //    return "Patient{id=" + id + ", name='" + name + "'}";
-    //}
-
-   
+    }  
 }

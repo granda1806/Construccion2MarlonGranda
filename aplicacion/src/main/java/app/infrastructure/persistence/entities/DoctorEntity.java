@@ -1,4 +1,3 @@
-
 package app.infrastructure.persistence.entities;
 
 import jakarta.persistence.*;
@@ -12,7 +11,7 @@ public class DoctorEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     private Long documentNumber;
 
     @Column(nullable = false, length = 120)
@@ -108,5 +107,4 @@ public class DoctorEntity {
     public void setDocumentNumber(Long documentNumber) {
         this.documentNumber = documentNumber;
     }
-    
 }

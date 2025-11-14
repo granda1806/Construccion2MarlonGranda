@@ -15,11 +15,9 @@ public class HResourcesUseCase
     private CreateUser createUser;
     
     public void createAdmin(User user) throws Exception
-    {
-        
+    { 
         user.setRole(Role.ADMIN);
-        createUser.create(user);
-        
+        createUser.create(user);   
     }
     
     public void createSupport(User user) throws Exception

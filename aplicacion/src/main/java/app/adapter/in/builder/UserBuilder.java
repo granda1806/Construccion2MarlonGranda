@@ -50,6 +50,7 @@ public class UserBuilder {
         user.setDate(userValidator.dateValidator(date));
         user.setGender(userValidator.genderValidator(gender));
         user.setAddress(userValidator.addresValidator(address));
+        
         user.setEmergencyContactName(userValidator.contactNameValidator(contactName));
         user.setRelationshipPatient(userValidator.relationshipValidator(relationship));
         user.setEmergencyContactNumber(userValidator.contactNumberValidator(contactNumber));

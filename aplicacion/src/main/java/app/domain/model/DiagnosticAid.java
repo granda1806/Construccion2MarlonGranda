@@ -1,4 +1,3 @@
-
 package app.domain.model;
  
 public class DiagnosticAid
@@ -7,7 +6,7 @@ public class DiagnosticAid
     private String diagnosticId;
     private String quantity;
     private String specialistId;
-    private int item;
+    private String item;
  
     public String getOrderNumber()
     {
@@ -49,12 +48,12 @@ public class DiagnosticAid
         this.specialistId = specialistId;
     }
  
-    public int getItem()
+    public String getItem()
     {
         return item;
     }
  
-    public void setItem(int item)
+    public void setItem(String item)
     {
         this.item = item;
     }

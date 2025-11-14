@@ -12,7 +12,7 @@ public class User extends Person {
     @Column(nullable = false)
     private String nameComplete;
 
-    @Column(nullable = false)
+    @Column(nullable = false)  // 🔹 Agregado para Hibernate
     private String lastnameComplete;
 
     private String password;
@@ -24,8 +24,8 @@ public class User extends Person {
     // ==================== Constructores ====================
 
     public User(String nameComplete, String lastnameComplete) {
-        this.nameComplete = nameComplete;
-        this.lastnameComplete = lastnameComplete;
+        this.nameComplete = nameComplete;         // 🔹 Se asigna el nombre completo
+        this.lastnameComplete = lastnameComplete; // 🔹 Se asigna el apellido completo
         this.userName = generateUserName(nameComplete, lastnameComplete);
         this.password = generatePassword(10);
     }

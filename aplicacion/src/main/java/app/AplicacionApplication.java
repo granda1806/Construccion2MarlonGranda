@@ -1,4 +1,3 @@
-/**/
 package app;
 
 import app.adapter.in.client.LoginClient;

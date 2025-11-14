@@ -123,7 +123,7 @@ public class DoctorUseCase {
         MedicalHistoryEntity entity = new MedicalHistoryEntity();
         entity.setDoctor(doctorOpt.get());
         entity.setPatientId(patientId);
-        entity.setDate(java.sql.Date.valueOf(date));
+        entity.setDate(java.sql.Date.valueOf(date.toString()));
         entity.setReasonForConsultation(reason);
         entity.setSymptoms(symptoms);
         entity.setDiagnosis(diagnosis);
@@ -156,8 +156,9 @@ public class DoctorUseCase {
 
         System.out.print("Ingrese número de ítem: ");
         int item = reader.nextInt();
+        reader.nextLine(); // limpiar buffer
 
-        if (currentOrder.containsItem(item)) {
+        if (currentOrder.containsItem(String.valueOf(item))) {
             System.out.println("⚠️ Ya existe un elemento con ese número de ítem en esta orden.");
             return;
         }
@@ -177,26 +178,48 @@ public class DoctorUseCase {
         Procedure procedure = new Procedure();
 
         System.out.print("ID del procedimiento: ");
-        procedure.setProcedureId(reader.nextLine());
+        String procedureId = reader.nextLine();
+        while (procedureId.isEmpty()) {
+            System.out.print("ID no puede estar vacío. Ingrese ID del procedimiento: ");
+            procedureId = reader.nextLine();
+        }
+
+        procedure.setProcedureId(procedureId);
 
         System.out.print("Cantidad: ");
-        procedure.setQuantity(reader.nextInt());
-        reader.nextLine(); // limpiar buffer
+        try {
+            procedure.setQuantity(Integer.parseInt(reader.nextLine().trim()));
+        } catch (NumberFormatException e) {
+            System.out.println("⚠️ La cantidad debe ser un número válido.");
+            return;
+        }
 
         System.out.print("Frecuencia: ");
         procedure.setFrequency(reader.nextLine());
 
         System.out.print("¿Requiere especialista? (si/no): ");
-        if (reader.nextLine().equalsIgnoreCase("si")) {
+        String req = reader.nextLine();
+
+        if (req.equalsIgnoreCase("si")) {
             System.out.print("ID del especialista: ");
             procedure.setSpecialistId(reader.nextLine());
         }
 
         System.out.print("Item: ");
-        procedure.setItem(reader.nextInt());
+        int item = reader.nextInt();
+        reader.nextLine(); // limpiar buffer
 
-        System.out.print("¿Agregar este procedimiento a la orden médica? (si/no): ");
-        if (reader.nextLine().equalsIgnoreCase("si")) {
+        if (currentOrder.containsItem(String.valueOf(item))) {
+            System.out.println("⚠️ Ya existe un elemento con ese número de ítem en esta orden.");
+            return;
+        }
+
+        procedure.setItem(item);
+
+        System.out.print("¿Desea agregar este procedimiento a la orden médica? (si/no): ");
+        String confirm = reader.nextLine();
+
+        if (confirm.equalsIgnoreCase("si")) {
             currentOrder.addProcedure(procedure);
             System.out.println("✅ Procedimiento agregado a la orden N° " + currentOrder.getOrderNumber());
         } else {
@@ -214,22 +237,40 @@ public class DoctorUseCase {
         DiagnosticAid aid = new DiagnosticAid();
 
         System.out.print("ID ayuda diagnóstica (examen): ");
-        aid.setDiagnosticId(reader.nextLine());
+        String diagnosticId = reader.nextLine().trim();
+        while (diagnosticId.isEmpty()) {
+            System.out.print("El ID no puede estar vacío. Ingrese nuevamente: ");
+            diagnosticId = reader.nextLine();
+        }
+
+        aid.setDiagnosticId(diagnosticId);
 
         System.out.print("Cantidad: ");
         aid.setQuantity(reader.nextLine());
 
         System.out.print("¿Requiere especialista? (si/no): ");
-        if (reader.nextLine().equalsIgnoreCase("si")) {
+        String req = reader.nextLine();
+
+        if (req.equalsIgnoreCase("si")) {
             System.out.print("ID especialista: ");
             aid.setSpecialistId(reader.nextLine());
         }
 
         System.out.print("Item: ");
-        aid.setItem(reader.nextInt());
+        int item = reader.nextInt();
+        reader.nextLine(); // limpiar buffer
+
+        if (currentOrder.containsItem(String.valueOf(item))) {
+            System.out.println("⚠️ Ya existe un elemento con ese número de ítem en esta orden.");
+            return;
+        }
+
+        aid.setItem(String.valueOf(item));
 
         System.out.print("¿Desea agregar esta ayuda diagnóstica? (si/no): ");
-        if (reader.nextLine().equalsIgnoreCase("si")) {
+        String confirm = reader.nextLine();
+
+        if (confirm.equalsIgnoreCase("si")) {
             currentOrder.addDiagnosticAid(aid);
             System.out.println("✅ Ayuda diagnóstica agregada correctamente a la orden N° " + currentOrder.getOrderNumber());
         } else {
@@ -253,13 +294,16 @@ public class DoctorUseCase {
             return;
         }
 
-        System.out.print("¿Desea guardar esta orden médica? (si/no): ");
+        System.out.println("\nORDEN MÉDICA A GUARDAR:");
+        System.out.println(currentOrder);
+
+        System.out.print("\n¿Desea guardar esta orden médica? (si/no): ");
         if (reader.nextLine().trim().equalsIgnoreCase("si")) {
             try {
-                // 🔹 Conversión manual al entity para persistir con JPA
+                // Conversión manual al entity para persistir con JPA
                 MedicalOrderEntity entity = new MedicalOrderEntity();
                 entity.setOrderNumber(currentOrder.getOrderNumber());
-                entity.setCreatedAt(LocalDateTime.now()); // ✅ CORREGIDO: compatible con LocalDateTime
+                entity.setCreatedAt(LocalDateTime.now()); // Compatible con LocalDateTime
                 entity.setObservations("Generado automáticamente desde DoctorUseCase");
 
                 medicalOrderRepository.save(entity);

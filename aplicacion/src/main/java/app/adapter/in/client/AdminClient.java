@@ -2,10 +2,12 @@
 package app.adapter.in.client;
 
 import app.adapter.in.builder.AppointmentBuilder;
+import app.adapter.in.builder.PolicyBuilder;
 import app.adapter.in.builder.UserBuilder;
 import app.application.usecases.AdminUseCase;
 import app.domain.model.Appointment;
 import app.domain.model.Patient;
+import app.domain.model.Policy;
 import java.util.Scanner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,6 +30,10 @@ public class AdminClient
     private UserBuilder userBuilder;
     @Autowired
     private AppointmentBuilder appointmentBuilder;
+    @Autowired
+    private PolicyBuilder policyBuilder;
+    @Autowired
+    private PolicyClient policyClient;
     
     public void session()
     {
@@ -69,7 +75,8 @@ public class AdminClient
                 
                 case "4":
                 {
-                    System.out.println("En proceso...");
+
+                    policyClient.session();
                     return true;
                 }
                 
@@ -112,7 +119,6 @@ private Patient readInfoFromPatient() throws Exception {
     String gender = reader.nextLine();
     System.out.println("Ingrese direccion: ");
     String address = reader.nextLine();
-
     System.out.println("Datos de contacto.");
     System.out.println("Ingrese nombre contacto de emergencia: ");
     String contactName = reader.nextLine();
@@ -133,7 +139,7 @@ private Patient readInfoFromPatient() throws Exception {
             relationship,
             contactNumber
     );
-}
+} 
 
 private Appointment readInfoFromAppointment() throws Exception {
     System.out.println("Ingrese documento de admin: ");
@@ -143,4 +149,6 @@ private Appointment readInfoFromAppointment() throws Exception {
     
     return appointmentBuilder.appointmentBuilder(documentAdmin,documentPatient);
     }
+
+
 }

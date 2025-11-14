@@ -1,4 +1,3 @@
-
 package app.application.usecases;
 
 import org.springframework.beans.factory.annotation.Autowired;
