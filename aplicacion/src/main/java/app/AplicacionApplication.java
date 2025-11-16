@@ -1,3 +1,7 @@
+/*
+Error al eliminar el token: class java.lang.Integer cannot be cast to class java.lang.Boolean (java.lang.Integer and java.lang.Boolean are in module java.base of loader 'bootstrap')
+*/
+
 package app;
 
 import app.adapter.in.client.LoggingClient;
