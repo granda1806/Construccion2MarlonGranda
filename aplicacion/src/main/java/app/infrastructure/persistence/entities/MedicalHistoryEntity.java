@@ -1,3 +1,4 @@
+
 package app.infrastructure.persistence.entities;
 
 import jakarta.persistence.*;
@@ -23,7 +24,7 @@ public class MedicalHistoryEntity {
     private String observations;
 
     @Column(name = "patient_document", nullable = false)
-    private String patientDocument; // ✅ Se maneja como String
+    private Long patientDocument; // ✅ Se maneja como String
 
     @Column(name = "reason_for_consultation", length = 300)
     private String reasonForConsultation;
@@ -42,7 +43,7 @@ public class MedicalHistoryEntity {
     public MedicalHistoryEntity() {
     }
 
-    public MedicalHistoryEntity(Date date, String observations, String patientDocument,
+    public MedicalHistoryEntity(Date date, String observations, Long patientDocument,
                                 String reasonForConsultation, String symptoms,
                                 String diagnosis, DoctorEntity doctor) {
         this.date = date;
@@ -79,11 +80,11 @@ public class MedicalHistoryEntity {
         this.observations = observations;
     }
 
-    public String getPatientDocument() {
+    public Long getPatientDocument() {
         return patientDocument;
     }
 
-    public void setPatientDocument(String patientDocument) {
+    public void setPatientDocument(Long patientDocument) {
         this.patientDocument = patientDocument;
     }
 

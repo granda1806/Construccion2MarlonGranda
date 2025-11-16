@@ -1,6 +1,6 @@
 package app;
 
-import app.adapter.in.client.LoginClient;
+import app.adapter.in.client.LoggingClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class AplicacionApplication implements CommandLineRunner {
 
     @Autowired
-    private LoginClient login;
+    private LoggingClient login;
 
     public static void main(String[] args) {
         SpringApplication.run(AplicacionApplication.class, args);
@@ -19,6 +19,6 @@ public class AplicacionApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         System.out.println("Aplicación corriendo correctamente...");
-        login.session();
+        login.StartSession();
     }
 }

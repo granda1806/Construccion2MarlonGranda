@@ -21,10 +21,16 @@ public class UserValidator extends SimpleValidator
         
     }
     
-    public int ageValidator(String value) throws Exception
+    public int ageValidator(int value) throws Exception
     {
+        if (value < 0 || value > 150)
+        {
+            
+            throw new Exception("Edad de la persona debe estar entre 0 y 150 años.");
+            
+        }
         
-        return integerValidator("Edad de la persona",value);
+        return integerValidator("Edad de la persona", value);
         
     }
     

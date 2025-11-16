@@ -8,7 +8,7 @@ public class MedicationEntity {
 
     @Id
     @Column(length = 50)
-    private String id;
+    private Long id;
 
     @Column(nullable = false, length = 150)
     private String name;
@@ -19,18 +19,18 @@ public class MedicationEntity {
     public MedicationEntity() {
     }
 
-    public MedicationEntity(String id, String name, double cost) {
+    public MedicationEntity(Long id, String name, double cost) {
         this.id = id;
         this.name = name;
         this.cost = cost;
     }
 
     // Getters / Setters
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

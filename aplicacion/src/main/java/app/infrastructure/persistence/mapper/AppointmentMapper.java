@@ -7,6 +7,7 @@ import app.domain.model.User;
 import app.infrastructure.persistence.entities.AppointmentEntity;
 import app.infrastructure.persistence.entities.PatientEntity;
 import app.infrastructure.persistence.entities.UserEntity;
+import java.util.Optional;
 
 public class AppointmentMapper {
 
@@ -48,17 +49,24 @@ public class AppointmentMapper {
         return entity;
     }
 
-    public static Appointment toDomain(AppointmentEntity entity) {
-        if (entity == null) {
+    public static Appointment toDomain(Optional<AppointmentEntity> entity)
+    {
+        
+        AppointmentEntity e = entity.orElse(null);
+        
+        if (entity == null)
+        {
+            
             return null;
+            
         }
 
         Appointment appointment = new Appointment();
-        appointment.setId(entity.getId());
-        appointment.setDate(entity.getDate());
+        appointment.setId(e.getId());
+        appointment.setDate(e.getDate());
 
         // UserEntity -> User
-        UserEntity adminEntity = entity.getAdmin();
+        UserEntity adminEntity = e.getAdmin();
         if (adminEntity != null) {
             User admin = new User();
             admin.setId(adminEntity.getId());
@@ -74,7 +82,7 @@ public class AppointmentMapper {
         }
 
         // PatientEntity -> Patient
-        PatientEntity patientEntity = entity.getPatient();
+        PatientEntity patientEntity = e.getPatient();
         if (patientEntity != null) {
             Patient patient = new Patient();
             patient.setId(patientEntity.getId());

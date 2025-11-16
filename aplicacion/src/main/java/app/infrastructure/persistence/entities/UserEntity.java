@@ -1,4 +1,3 @@
-
 package app.infrastructure.persistence.entities;
 
 import app.domain.model.enums.Role;
@@ -6,7 +5,8 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "users")
-public class UserEntity {
+public class UserEntity
+{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,7 +22,7 @@ public class UserEntity {
     private Long document;
 
     @Column(nullable = false)
-    private Integer age;
+    private int age;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -37,7 +37,7 @@ public class UserEntity {
     public UserEntity() {
     }
 
-    public UserEntity(Long id, String nameComplete, String lastnameComplete, Long document, Integer age, Role role, String userName, String password) {
+    public UserEntity(Long id, String nameComplete, String lastnameComplete, Long document, int age, Role role, String userName, String password) {
         this.id = id;
         this.nameComplete = nameComplete;
         this.lastnameComplete = lastnameComplete;
@@ -76,10 +76,10 @@ public class UserEntity {
         this.document = document;
     }
 
-    public Integer getAge() {
+    public int getAge() {
         return age;
     }
-    public void setAge(Integer age) {
+    public void setAge(int age) {
         this.age = age;
     }
 

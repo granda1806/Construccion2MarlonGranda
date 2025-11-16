@@ -5,16 +5,16 @@ import java.sql.Date;
 
 public class Appointment {
     
-    private Integer id;
+    private Long id;
     private User admin;
     private Patient patient;
     private Date date;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

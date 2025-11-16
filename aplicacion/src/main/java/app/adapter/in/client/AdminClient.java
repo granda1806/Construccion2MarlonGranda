@@ -1,4 +1,3 @@
-
 package app.adapter.in.client;
 
 import app.adapter.in.builder.AppointmentBuilder;
@@ -112,7 +111,7 @@ private Patient readInfoFromPatient() throws Exception {
     System.out.println("Ingrese cedula: ");
     String document = reader.nextLine();
     System.out.println("Ingrese edad: ");
-    String age = reader.nextLine();
+    int age = reader.nextInt();
     System.out.println("Ingrese fecha de nacimiento: ");
     String date = reader.nextLine();
     System.out.println("Ingrese genero: ");

@@ -12,7 +12,7 @@ public class DoctorEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long documentNumber;
+    private Long document;
 
     @Column(nullable = false, length = 120)
     private String name;
@@ -101,10 +101,10 @@ public class DoctorEntity {
     }
 
     public Long getDocumentNumber() {
-        return documentNumber;
+        return document;
     }
 
-    public void setDocumentNumber(Long documentNumber) {
-        this.documentNumber = documentNumber;
+    public void setDocumentNumber(Long document) {
+        this.document = document;
     }
 }

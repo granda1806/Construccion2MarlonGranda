@@ -1,5 +1,8 @@
-package app.application.usecases;
+package app.adapter.in.client;
 
+import app.application.usecases.RegisterClinicalHistoryUseCase;
+import app.application.usecases.UpdateClinicalHistoryUseCase;
+import app.application.usecases.ViewPatientInfoUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import java.util.Scanner;

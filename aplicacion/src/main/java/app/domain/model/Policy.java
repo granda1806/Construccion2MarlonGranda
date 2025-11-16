@@ -7,7 +7,7 @@ import java.sql.Date;
 public class Policy
 {
     
-    private Integer id;
+    private Long id;
     private User admin;
     private Patient patient;
     private TypePolicy policyName;
@@ -15,11 +15,11 @@ public class Policy
     private boolean policyStatus;
     private Date policyTerminationDate;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -71,6 +71,4 @@ public class Policy
         this.policyTerminationDate = policyTerminationDate;
     }
 
-    
- 
 }

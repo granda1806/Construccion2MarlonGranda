@@ -9,7 +9,7 @@ public class AppointmentEntity {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     // Relación con el administrador (User)
     @ManyToOne(fetch = FetchType.LAZY)
@@ -27,7 +27,7 @@ public class AppointmentEntity {
     // --- Constructores ---
     public AppointmentEntity() {}
 
-    public AppointmentEntity(Integer id, UserEntity admin, PatientEntity patient, Date date)
+    public AppointmentEntity(Long id, UserEntity admin, PatientEntity patient, Date date)
     {
         
         this.id = id;
@@ -38,14 +38,14 @@ public class AppointmentEntity {
     }
 
     // --- Getters y Setters ---
-    public Integer getId()
+    public Long getId()
     {
         
         return id;
         
     }
 
-    public void setId(Integer id)
+    public void setId(Long id)
     {
         
         this.id = id;

@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 public interface AuthTokenRepository extends JpaRepository<AuthTokenEntity, Long> {
     AuthTokenEntity findByUserName(String userName);
     AuthTokenEntity findByToken(String token);
+    boolean deleteByUserName(String userName);
 }

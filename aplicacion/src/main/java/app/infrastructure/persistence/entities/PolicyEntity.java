@@ -11,7 +11,7 @@ public class PolicyEntity {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     
     // Relación con el administrador (User)
     @ManyToOne(fetch = FetchType.LAZY)
@@ -40,7 +40,7 @@ public class PolicyEntity {
     
     }
 
-    public PolicyEntity(Integer id, UserEntity admin, PatientEntity patient, TypePolicy namePolicy, Long policyNumber, boolean policyStatus, Date policyTerminationDate) {
+    public PolicyEntity(Long id, UserEntity admin, PatientEntity patient, TypePolicy namePolicy, Long policyNumber, boolean policyStatus, Date policyTerminationDate) {
         this.id = id;
         this.admin = admin;
         this.patient = patient;
@@ -50,11 +50,11 @@ public class PolicyEntity {
         this.policyTerminationDate = policyTerminationDate;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

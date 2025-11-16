@@ -10,13 +10,12 @@ public abstract class SimpleValidator {
         return value.trim();
     }
 
-    public int integerValidator(String element, String value) throws Exception {
-        stringValidator(element, value);
-        try {
-            return Integer.parseInt(value);
-        } catch (NumberFormatException e) {
-            throw new Exception(element + " debe ser un valor numérico entero.");
+    public int integerValidator(String element, int value) throws Exception
+    {
+        if (value < 0) {
+            throw new Exception(element + " no puede ser negativo.");
         }
+        return value;
     }
 
     public long longValidator(String element, String value) throws Exception {

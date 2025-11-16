@@ -1,17 +1,13 @@
 package app.adapter.out;
 
 import app.domain.model.Appointment;
-import app.domain.model.Patient;
 import app.domain.ports.AppointmentPort;
 import app.infrastructure.persistence.entities.AppointmentEntity;
 import app.infrastructure.persistence.mapper.AppointmentMapper;
-import app.infrastructure.persistence.mapper.PatientMapper;
 import app.infrastructure.persistence.repository.AppointmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AppointmentAdapter implements AppointmentPort
@@ -24,7 +20,7 @@ public class AppointmentAdapter implements AppointmentPort
     public Appointment findById(Appointment appointment) throws Exception
     {
         
-        AppointmentEntity appointmentEntity = appointmentRepository.findById(appointment.getId());
+        Optional<AppointmentEntity> appointmentEntity = appointmentRepository.findById(appointment.getId());
         
         return AppointmentMapper.toDomain(appointmentEntity);
         

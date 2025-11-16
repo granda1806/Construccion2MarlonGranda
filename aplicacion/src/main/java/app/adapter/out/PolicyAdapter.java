@@ -6,6 +6,7 @@ import app.domain.ports.PolicyPort;
 import app.infrastructure.persistence.entities.PolicyEntity;
 import app.infrastructure.persistence.mapper.PolicyMapper;
 import app.infrastructure.persistence.repository.PolicyRepository;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,7 @@ public class PolicyAdapter implements PolicyPort{
     
     @Override
     public Policy findById(Policy policy) throws Exception {
-        PolicyEntity policyEntity = policyRepository.findById(policy.getId());
+        Optional<PolicyEntity> policyEntity = policyRepository.findById(policy.getId());
         return PolicyMapper.toDomain(policyEntity);
     }
 

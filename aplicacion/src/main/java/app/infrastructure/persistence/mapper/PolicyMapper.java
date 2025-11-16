@@ -6,6 +6,7 @@ import app.domain.model.User;
 import app.infrastructure.persistence.entities.PatientEntity;
 import app.infrastructure.persistence.entities.PolicyEntity;
 import app.infrastructure.persistence.entities.UserEntity;
+import java.util.Optional;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -53,20 +54,26 @@ public class PolicyMapper {
     }
 
     // Entity → Domain
-    public static Policy toDomain(PolicyEntity entity) {
-        if (entity == null) {
+    public static Policy toDomain(Optional<PolicyEntity> entity) {
+        
+        PolicyEntity e = entity.orElse(null);
+        
+        if (entity == null)
+        {
+            
             return null;
+            
         }
 
         Policy policy = new Policy();
-        policy.setId(entity.getId());
-        policy.setPolicyTerminationDate(entity.getPolicyTerminationDate());
-        policy.setPolicyNumber(entity.getPolicyNumber());
-        policy.setPolicyStatus(entity.isPolicyStatus());
-        policy.setPolicyName(entity.getNamePolicy());
+        policy.setId(e.getId());
+        policy.setPolicyTerminationDate(e.getPolicyTerminationDate());
+        policy.setPolicyNumber(e.getPolicyNumber());
+        policy.setPolicyStatus(e.isPolicyStatus());
+        policy.setPolicyName(e.getNamePolicy());
 
         // Admin
-        UserEntity adminEntity = entity.getAdmin();
+        UserEntity adminEntity = e.getAdmin();
         if (adminEntity != null) {
             User admin = new User();
             admin.setId(adminEntity.getId());
@@ -80,7 +87,7 @@ public class PolicyMapper {
         }
 
         // Patient
-        PatientEntity patientEntity = entity.getPatient();
+        PatientEntity patientEntity = e.getPatient();
         if (patientEntity != null) {
             Patient patient = new Patient();
             patient.setId(patientEntity.getId());

@@ -1,10 +1,9 @@
-
 package app.domain.model;
 
 import jakarta.persistence.Column;
-import java.security.SecureRandom;
 
-public class User extends Person {
+public class User extends Person
+{
 
     @Column(nullable = false, unique = true)
     private String userName;
@@ -12,12 +11,13 @@ public class User extends Person {
     @Column(nullable = false)
     private String nameComplete;
 
-    @Column(nullable = false)  // 🔹 Agregado para Hibernate
+    @Column(nullable = false)  // Agregado para Hibernate
     private String lastnameComplete;
 
     private String password;
 
-    public User() {
+    public User()
+    {
         // Constructor vacío requerido por frameworks (Hibernate, etc.)
     }
 
@@ -27,7 +27,6 @@ public class User extends Person {
         this.nameComplete = nameComplete;         // 🔹 Se asigna el nombre completo
         this.lastnameComplete = lastnameComplete; // 🔹 Se asigna el apellido completo
         this.userName = generateUserName(nameComplete, lastnameComplete);
-        this.password = generatePassword(10);
     }
 
     // ==================== Métodos de generación ====================
@@ -42,41 +41,6 @@ public class User extends Person {
                 : "surname";
 
         return (firstNameOnly + "." + firstLastnameOnly).toLowerCase();
-    }
-
-    private String generatePassword(int length) {
-        if (length < 4) {
-            throw new IllegalArgumentException("length must be >= 4");
-        }
-
-        final String U = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        final String L = "abcdefghijklmnopqrstuvwxyz";
-        final String D = "0123456789";
-        final String S = "+-*/.,_";
-        final String ALL = U + L + D + S;
-
-        SecureRandom rnd = new SecureRandom();
-        StringBuilder sb = new StringBuilder(length);
-
-        sb.append(U.charAt(rnd.nextInt(U.length())));
-        sb.append(L.charAt(rnd.nextInt(L.length())));
-        sb.append(D.charAt(rnd.nextInt(D.length())));
-        sb.append(S.charAt(rnd.nextInt(S.length())));
-
-        for (int i = 4; i < length; i++) {
-            sb.append(ALL.charAt(rnd.nextInt(ALL.length())));
-        }
-
-        // Mezcla aleatoria final
-        char[] arr = sb.toString().toCharArray();
-        for (int i = arr.length - 1; i > 0; i--) {
-            int j = rnd.nextInt(i + 1);
-            char tmp = arr[i];
-            arr[i] = arr[j];
-            arr[j] = tmp;
-        }
-
-        return new String(arr);
     }
 
     // ==================== Getters y Setters ====================
