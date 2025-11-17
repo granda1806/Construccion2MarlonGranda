@@ -11,10 +11,12 @@ public class CreatePatient {
     private UserPortPatient userPortPatient;
 
     public void create (Patient patient) throws Exception {
-
-        if (userPortPatient.findByDocument(patient) != null) {
+        Patient existingPatient = userPortPatient.findByDocument(patient);
+        
+        if (existingPatient != null) {
             throw new Exception("Ya hay un paciente registrado con este documento");
         }
+        
         userPortPatient.save(patient);
     }
 }

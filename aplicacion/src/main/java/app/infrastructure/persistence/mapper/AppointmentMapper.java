@@ -51,15 +51,11 @@ public class AppointmentMapper {
 
     public static Appointment toDomain(Optional<AppointmentEntity> entity)
     {
-        
-        AppointmentEntity e = entity.orElse(null);
-        
-        if (entity == null)
-        {
-            
+        if (entity == null || !entity.isPresent()) {
             return null;
-            
         }
+
+        AppointmentEntity e = entity.get();
 
         Appointment appointment = new Appointment();
         appointment.setId(e.getId());

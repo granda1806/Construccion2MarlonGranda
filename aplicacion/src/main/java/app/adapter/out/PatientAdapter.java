@@ -18,11 +18,8 @@ public class PatientAdapter implements UserPortPatient {
 
     @Override
     public Patient findByDocument(Patient user) throws Exception {
-        PatientEntity patientEntity = patientRepository.findByDocument(user.getDocument());
-        if (patientEntity == null) {
-            throw new RuntimeException("Paciente no encontrado");
-        }
-        return PatientMapper.toDomain(patientEntity);
+        java.util.Optional<PatientEntity> patientEntityOpt = patientRepository.findByDocument(user.getDocument());
+        return patientEntityOpt.map(PatientMapper::toDomain).orElse(null);
     }
 
     @Override

@@ -1,6 +1,5 @@
 
 package app.domain.model;
-import app.domain.model.enums.TypePolicy;
 
 public class Patient extends Person{
   

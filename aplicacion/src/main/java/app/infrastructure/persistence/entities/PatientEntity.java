@@ -1,5 +1,6 @@
 package app.infrastructure.persistence.entities;
 
+import java.time.LocalDate;
 import jakarta.persistence.*;
 
 @Entity
@@ -15,10 +16,6 @@ public class PatientEntity {
 
     @Column(nullable = false, unique = true)
     private Long document;
-
-    // 🔹 Mantén el tipo String porque en tu dominio también es String ("date")
-    @Column(name = "birth_date", nullable = false, length = 10)
-    private String birthDate;
 
     @Column(length = 20)
     private String gender;
@@ -44,14 +41,20 @@ public class PatientEntity {
     public PatientEntity() {
     }
 
-    public PatientEntity(Long id, String name, Long document, String birthDate, String gender,
-            String address, String phoneNumber, String email,
-            String emergencyContactName, String emergencyContactNumber,
+    public PatientEntity(
+            Long id,
+            String name,
+            Long document,
+            String gender,
+            String address,
+            String phoneNumber,
+            String email,
+            String emergencyContactName,
+            String emergencyContactNumber,
             String relationshipPatient) {
         this.id = id;
         this.name = name;
         this.document = document;
-        this.birthDate = birthDate;
         this.gender = gender;
         this.address = address;
         this.phoneNumber = phoneNumber;
@@ -84,14 +87,6 @@ public class PatientEntity {
 
     public void setDocument(Long document) {
         this.document = document;
-    }
-
-    public String getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(String birthDate) {
-        this.birthDate = birthDate;
     }
 
     public String getGender() {

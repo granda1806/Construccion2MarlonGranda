@@ -36,6 +36,17 @@ public abstract class SimpleValidator {
         }
     }
 
+    /**
+     * Overload para validar valores Long ya parseados.
+     * Retorna el mismo objeto Long o lanza excepción si es nulo.
+     */
+    public Long longValidator(String element, Long value) throws Exception {
+        if (value == null) {
+            throw new Exception(element + " no puede ser nulo.");
+        }
+        return value;
+    }
+
     public boolean booleanValidator(String element, String value) throws Exception {
         stringValidator(element, value);
         String lowerValue = value.trim().toLowerCase();

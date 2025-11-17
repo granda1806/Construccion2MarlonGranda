@@ -1,12 +1,14 @@
 package app.adapter.in.client;
 
 import app.adapter.in.builder.AppointmentBuilder;
-import app.adapter.in.builder.PolicyBuilder;
 import app.adapter.in.builder.UserBuilder;
 import app.application.usecases.AdminUseCase;
 import app.domain.model.Appointment;
 import app.domain.model.Patient;
-import app.domain.model.Policy;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,8 +31,7 @@ public class AdminClient
     private UserBuilder userBuilder;
     @Autowired
     private AppointmentBuilder appointmentBuilder;
-    @Autowired
-    private PolicyBuilder policyBuilder;
+    
     @Autowired
     private PolicyClient policyClient;
     
@@ -108,12 +109,33 @@ private Patient readInfoFromPatient() throws Exception {
     String nameComplete = reader.nextLine();
     System.out.println("Ingrese apellido: ");
     String lastnameComplete = reader.nextLine();
-    System.out.println("Ingrese cedula: ");
-    String document = reader.nextLine();
-    System.out.println("Ingrese edad: ");
-    int age = reader.nextInt();
-    System.out.println("Ingrese fecha de nacimiento: ");
-    String date = reader.nextLine();
+
+    Long document = null;
+    while (document == null) {
+        System.out.println("Ingrese cedula: ");
+        String docStr = reader.nextLine();
+        try {
+            document = Long.parseLong(docStr);
+        } catch (NumberFormatException e) {
+            System.out.println("Cédula inválida. Ingrese solo números, intente de nuevo.");
+        }
+    }
+
+    Integer age = null;
+    while (age == null) {
+        System.out.println("Ingrese edad: ");
+        String ageStr = reader.nextLine();
+        try {
+            age = Integer.parseInt(ageStr);
+            if (age < 0 || age > 150) {
+                System.out.println("Edad inválida");
+                age = null;
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Edad inválida. Ingrese un número entero.");
+        }
+    }
+
     System.out.println("Ingrese genero: ");
     String gender = reader.nextLine();
     System.out.println("Ingrese direccion: ");
@@ -131,14 +153,13 @@ private Patient readInfoFromPatient() throws Exception {
             lastnameComplete,
             document,
             age,
-            date,
             gender,
             address,
             contactName,
             relationship,
             contactNumber
     );
-} 
+}
 
 private Appointment readInfoFromAppointment() throws Exception {
     System.out.println("Ingrese documento de admin: ");

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import java.security.SecureRandom;
+import java.time.LocalDate;
 
 @Component
 public class UserBuilder {
@@ -80,8 +81,8 @@ public class UserBuilder {
     /**
      * Construye un usuario de tipo Paciente
      */
-    public Patient buildAdmin(String nameComplete, String lastnameComplete, String document,
-                           int age, String date, String gender, String address,
+    public Patient buildAdmin(String nameComplete, String lastnameComplete, Long document,
+                           int age, String gender, String address,
                            String contactName, String relationship,
                            String contactNumber) throws Exception {
 
@@ -90,7 +91,6 @@ public class UserBuilder {
         user.setLastnameComplete(userValidator.nameValidator(lastnameComplete));
         user.setDocument(userValidator.documentValidator(document));
         user.setAge(userValidator.ageValidator(age));
-        user.setDate(userValidator.dateValidator(date));
         user.setGender(userValidator.genderValidator(gender));
         user.setAddress(userValidator.addresValidator(address));
         

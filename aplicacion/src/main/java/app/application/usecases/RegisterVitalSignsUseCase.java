@@ -2,6 +2,7 @@ package app.application.usecases;
 
 import app.infrastructure.persistence.entities.*;
 import app.infrastructure.persistence.repository.*;
+import java.util.Optional;
 import org.springframework.stereotype.Service;
 import java.util.Scanner;
 
@@ -23,14 +24,16 @@ public class RegisterVitalSignsUseCase {
 
     public void execute() {
         System.out.print("\nIngrese la cédula del paciente: ");
-        long document = Long.parseLong(reader.nextLine());
+        Long document = Long.valueOf(reader.nextLine());
 
-        PatientEntity patient = patientRepository.findByDocument(document);
+        Optional<PatientEntity> patientOpt = patientRepository.findByDocument(document);
 
-        if (patient == null) {
+        if (patientOpt.isEmpty()) {
             System.out.println("Paciente no encontrado.");
             return;
         }
+
+        PatientEntity patient = patientOpt.get();
 
         System.out.print("Ingrese número de orden médica: ");
         String orderNum = reader.nextLine();

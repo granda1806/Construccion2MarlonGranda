@@ -55,15 +55,11 @@ public class PolicyMapper {
 
     // Entity → Domain
     public static Policy toDomain(Optional<PolicyEntity> entity) {
-        
-        PolicyEntity e = entity.orElse(null);
-        
-        if (entity == null)
-        {
-            
+        if (entity == null || !entity.isPresent()) {
             return null;
-            
         }
+
+        PolicyEntity e = entity.get();
 
         Policy policy = new Policy();
         policy.setId(e.getId());

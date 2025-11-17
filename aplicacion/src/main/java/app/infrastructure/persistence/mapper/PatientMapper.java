@@ -11,19 +11,21 @@ public class PatientMapper {
             return null;
         }
 
-        return new PatientEntity(
-                null, // ID autogenerado por la BD
-                patient.getNameComplete(),
-                patient.getDocument(),
-                patient.getDate(), // 🔹 String, igual que en tu dominio
-                patient.getGender(),
-                patient.getAddress(),
-                patient.getPhoneNumber() != null ? String.valueOf(patient.getPhoneNumber()) : null,
-                patient.getEmail(),
-                patient.getEmergencyContactName(),
-                String.valueOf(patient.getEmergencyContactNumber()),
-                patient.getRelationshipPatient()
-        );
+        PatientEntity entity = new PatientEntity();
+
+        // No seteamos id (BD lo genera)
+        entity.setName(patient.getNameComplete());
+        entity.setDocument(patient.getDocument());
+        entity.setGender(patient.getGender());
+        entity.setAddress(patient.getAddress());
+        entity.setPhoneNumber(patient.getPhoneNumber() != null ? String.valueOf(patient.getPhoneNumber()) : null);
+        entity.setEmail(patient.getEmail());
+        entity.setEmergencyContactName(patient.getEmergencyContactName());
+        entity.setEmergencyContactNumber(
+                patient.getEmergencyContactNumber() != 0 ? String.valueOf(patient.getEmergencyContactNumber()) : null);
+        entity.setRelationshipPatient(patient.getRelationshipPatient());
+
+        return entity;
     }
 
     // ===== Entity → Domain =====
@@ -40,7 +42,6 @@ public class PatientMapper {
 
         patient.setNameComplete(entity.getName());
         patient.setDocument(entity.getDocument());
-        patient.setDate(entity.getBirthDate());
         patient.setGender(entity.getGender());
         patient.setAddress(entity.getAddress());
 
@@ -49,7 +50,7 @@ public class PatientMapper {
             try {
                 patient.setPhoneNumber(Long.parseLong(entity.getPhoneNumber()));
             } catch (NumberFormatException e) {
-                System.out.println("⚠️ Número telefónico inválido: " + entity.getPhoneNumber());
+                System.out.println("Número telefónico inválido: " + entity.getPhoneNumber());
             }
         }
 
@@ -61,12 +62,12 @@ public class PatientMapper {
             try {
                 patient.setEmergencyContactNumber(Long.parseLong(entity.getEmergencyContactNumber()));
             } catch (NumberFormatException e) {
-                System.out.println("⚠️ Número de contacto inválido: " + entity.getEmergencyContactNumber());
+                System.out.println("Número de contacto inválido: " + entity.getEmergencyContactNumber());
             }
         }
 
         patient.setRelationshipPatient(entity.getRelationshipPatient());
         return patient;
     }
-    
+
 }

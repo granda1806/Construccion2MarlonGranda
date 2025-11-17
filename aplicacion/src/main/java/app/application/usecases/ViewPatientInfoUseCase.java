@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import app.infrastructure.persistence.repository.PatientRepository;
+import java.util.Optional;
 import app.infrastructure.persistence.repository.ClinicalHistoryRepository;
 import app.infrastructure.persistence.entities.PatientEntity;
 import app.infrastructure.persistence.entities.MedicalHistoryEntity;
@@ -19,7 +20,7 @@ public class ViewPatientInfoUseCase {
 
     @Autowired
     public ViewPatientInfoUseCase(PatientRepository patientRepository,
-                                  ClinicalHistoryRepository clinicalHistoryRepository) {
+            ClinicalHistoryRepository clinicalHistoryRepository) {
         this.patientRepository = patientRepository;
         this.clinicalHistoryRepository = clinicalHistoryRepository;
     }
@@ -37,22 +38,23 @@ public class ViewPatientInfoUseCase {
 
             Long document = Long.parseLong(input);
 
-            PatientEntity patient = patientRepository.findByDocument(document);
-            if (patient == null) {
+            Optional<PatientEntity> patientOpt = patientRepository.findByDocument(document);
+            if (patientOpt.isEmpty()) {
                 System.out.println("⚠️ Paciente no encontrado en la base de datos.");
                 return;
             }
 
+            PatientEntity patient = patientOpt.get();
+
             // 🩺 Información básica del paciente
             System.out.println("\n===== INFORMACIÓN DEL PACIENTE =====");
-            System.out.println("🧑 Nombre completo: " + safe(patient.getName()));
-            System.out.println("🪪 Documento: " + patient.getDocument());
-            System.out.println("🎂 Fecha de nacimiento: " + safe(patient.getBirthDate()));
-            System.out.println("⚧ Género: " + safe(patient.getGender()));
-            System.out.println("🏠 Dirección: " + safe(patient.getAddress()));
-            System.out.println("📞 Teléfono: " + safe(patient.getPhoneNumber()));
-            System.out.println("📧 Correo electrónico: " + safe(patient.getEmail()));
-            System.out.println("🚨 Contacto de emergencia: " 
+            System.out.println("Nombre completo: " + safe(patient.getName()));
+            System.out.println("Documento: " + patient.getDocument());
+            System.out.println("Género: " + safe(patient.getGender()));
+            System.out.println("Dirección: " + safe(patient.getAddress()));
+            System.out.println("Teléfono: " + safe(patient.getPhoneNumber()));
+            System.out.println("Correo electrónico: " + safe(patient.getEmail()));
+            System.out.println("Contacto de emergencia: "
                     + safe(patient.getEmergencyContactName())
                     + " (" + safe(patient.getRelationshipPatient()) + "), Tel: "
                     + safe(patient.getEmergencyContactNumber()));
@@ -61,14 +63,15 @@ public class ViewPatientInfoUseCase {
             // 🩺 Mostrar historia clínica si existe
             List<MedicalHistoryEntity> histories = clinicalHistoryRepository.findByPatientDocument(document);
             if (histories == null || histories.isEmpty()) {
-                System.out.println("\n📋 No existen historias clínicas registradas para este paciente.");
+                System.out.println("\nNo existen historias clínicas registradas para este paciente.");
                 return;
             }
 
             System.out.println("\n===== HISTORIAS CLÍNICAS =====");
             for (MedicalHistoryEntity h : histories) {
                 System.out.println("\n📅 Fecha: " + safe(h.getDate()));
-                System.out.println("👨‍⚕️ Médico ID: " + (h.getDoctor() != null ? h.getDoctor().getId() : "No registrado"));
+                System.out.println(
+                        "👨‍⚕️ Médico ID: " + (h.getDoctor() != null ? h.getDoctor().getId() : "No registrado"));
                 System.out.println("🩻 Motivo: " + safe(h.getReasonForConsultation()));
                 System.out.println("🤒 Síntomas: " + safe(h.getSymptoms()));
                 System.out.println("🧠 Diagnóstico: " + safe(h.getDiagnosis()));
