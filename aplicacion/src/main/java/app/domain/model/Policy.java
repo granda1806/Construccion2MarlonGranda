@@ -1,19 +1,27 @@
-
 package app.domain.model;
 
 import app.domain.model.enums.TypePolicy;
 import java.sql.Date;
+import java.time.LocalDate;
 
-public class Policy
-{
-    
+public class Policy {
+
     private Long id;
     private User admin;
     private Patient patient;
     private TypePolicy policyName;
     private Long policyNumber;
     private boolean policyStatus;
+    private Date policyStartDate;
     private Date policyTerminationDate;
+
+    public Date getPolicyStartDate() {
+        return policyStartDate;
+    }
+
+    public void setPolicyStartDate(Date policyStartDate) {
+        this.policyStartDate = policyStartDate;
+    }
 
     public Long getId() {
         return id;
@@ -71,4 +79,15 @@ public class Policy
         this.policyTerminationDate = policyTerminationDate;
     }
 
+    public String getInsuranceCompanyName() {
+        return policyName != null ? policyName.name() : "Desconocida";
+    }
+
+    public LocalDate getEndDate() {
+        return policyTerminationDate != null ? policyTerminationDate.toLocalDate() : null;
+    }
+
+    public boolean isActive() {
+        return policyStatus;
+    }
 }

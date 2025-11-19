@@ -17,6 +17,9 @@ public class PatientEntity {
     @Column(nullable = false, unique = true)
     private Long document;
 
+    @Column(name = "age")
+    private int age;
+
     @Column(length = 20)
     private String gender;
 
@@ -143,5 +146,13 @@ public class PatientEntity {
 
     public void setRelationshipPatient(String relationshipPatient) {
         this.relationshipPatient = relationshipPatient;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 }

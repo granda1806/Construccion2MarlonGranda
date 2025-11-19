@@ -21,6 +21,13 @@ public class MedicalOrder {
     }
 
     public void setOrderNumber(String orderNumber) {
+        if (orderNumber == null) {
+            this.orderNumber = null;
+            return;
+        }
+        if (!orderNumber.matches("^\\d{1,6}$")) {
+            throw new IllegalArgumentException("El número de orden debe contener sólo dígitos y máximo 6 caracteres.");
+        }
         this.orderNumber = orderNumber;
     }
 
@@ -78,7 +85,8 @@ public class MedicalOrder {
         }
     }
 
-    // ====================== MÉTODO PARA VERIFICAR ÍTEM DUPLICADO ======================
+    // ====================== MÉTODO PARA VERIFICAR ÍTEM DUPLICADO
+    // ======================
     public boolean containsItem(String itemNumber) {
         if (itemNumber == null || itemNumber.isEmpty()) {
             return false;
@@ -113,10 +121,10 @@ public class MedicalOrder {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("\n===== ORDEN MÉDICA =====")
-          .append("\nNúmero de orden: ").append(orderNumber != null ? orderNumber : "Sin asignar")
-          .append("\nCédula paciente: ").append(patientId != null ? patientId : "No registrada")
-          .append("\nCédula médico: ").append(doctorId != null ? doctorId : "No registrada")
-          .append("\nFecha: ").append(date != null ? date : "No registrada");
+                .append("\nNúmero de orden: ").append(orderNumber != null ? orderNumber : "Sin asignar")
+                .append("\nCédula paciente: ").append(patientId != null ? patientId : "No registrada")
+                .append("\nCédula médico: ").append(doctorId != null ? doctorId : "No registrada")
+                .append("\nFecha: ").append(date != null ? date : "No registrada");
 
         // --- Prescripciones ---
         sb.append("\n\n--- PRESCRIPCIONES ---");
@@ -125,9 +133,9 @@ public class MedicalOrder {
         } else {
             for (Prescription p : prescriptions) {
                 sb.append("\n• Medicamento ID: ").append(p.getMedicineId())
-                  .append(" | Dosis: ").append(p.getDose())
-                  .append(" | Duración: ").append(p.getDuration())
-                  .append(" | Ítem: ").append(p.getItem());
+                        .append(" | Dosis: ").append(p.getDose())
+                        .append(" | Duración: ").append(p.getDuration())
+                        .append(" | Ítem: ").append(p.getItem());
             }
         }
 
@@ -138,12 +146,12 @@ public class MedicalOrder {
         } else {
             for (Procedure pr : procedures) {
                 sb.append("\n• Procedimiento ID: ").append(pr.getProcedureId())
-                  .append(" | Cantidad: ").append(pr.getQuantity())
-                  .append(" | Frecuencia: ").append(pr.getFrequency())
-                  .append(" | Costo: ").append(pr.getCost())
-                  .append(" | Especialista: ").append(
-                          pr.getSpecialistId() != null ? pr.getSpecialistId() : "No requerido")
-                  .append(" | Ítem: ").append(pr.getItem());
+                        .append(" | Cantidad: ").append(pr.getQuantity())
+                        .append(" | Frecuencia: ").append(pr.getFrequency())
+                        .append(" | Costo: ").append(pr.getCost())
+                        .append(" | Especialista: ").append(
+                                pr.getSpecialistId() != null ? pr.getSpecialistId() : "No requerido")
+                        .append(" | Ítem: ").append(pr.getItem());
             }
         }
 
@@ -154,10 +162,10 @@ public class MedicalOrder {
         } else {
             for (DiagnosticAid a : diagnosticAids) {
                 sb.append("\n• Diagnóstico ID: ").append(a.getDiagnosticId())
-                  .append(" | Cantidad: ").append(a.getQuantity())
-                  .append(" | Especialista: ").append(
-                          a.getSpecialistId() != null ? a.getSpecialistId() : "No requerido")
-                  .append(" | Ítem: ").append(a.getItem());
+                        .append(" | Cantidad: ").append(a.getQuantity())
+                        .append(" | Especialista: ").append(
+                                a.getSpecialistId() != null ? a.getSpecialistId() : "No requerido")
+                        .append(" | Ítem: ").append(a.getItem());
             }
         }
 

@@ -11,6 +11,45 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class PolicyMapper {
+    // Entity → Domain directo
+    public static Policy toDomain(PolicyEntity e) {
+        if (e == null) {
+            return null;
+        }
+
+        Policy policy = new Policy();
+        policy.setId(e.getId());
+        policy.setPolicyTerminationDate(e.getPolicyTerminationDate());
+        policy.setPolicyNumber(e.getPolicyNumber());
+        policy.setPolicyStatus(e.isPolicyStatus());
+        policy.setPolicyName(e.getNamePolicy());
+
+        // Admin
+        UserEntity adminEntity = e.getAdmin();
+        if (adminEntity != null) {
+            User admin = new User();
+            admin.setId(adminEntity.getId());
+            admin.setName(adminEntity.getNameComplete());
+            admin.setDocument(adminEntity.getDocument());
+            admin.setAge(adminEntity.getAge());
+            admin.setRole(adminEntity.getRole());
+            admin.setUserName(adminEntity.getUserName());
+            admin.setPassword(adminEntity.getPassword());
+            policy.setAdmin(admin);
+        }
+
+        // Patient
+        PatientEntity patientEntity = e.getPatient();
+        if (patientEntity != null) {
+            Patient patient = new Patient();
+            patient.setId(patientEntity.getId());
+            patient.setNameComplete(patientEntity.getName());
+            patient.setDocument(patientEntity.getDocument());
+            policy.setPatient(patient);
+        }
+
+        return policy;
+    }
 
     // Domain → Entity
     public static PolicyEntity toEntity(Policy policy) {
@@ -24,7 +63,8 @@ public class PolicyMapper {
         entity.setPolicyNumber(policy.getPolicyNumber());
         entity.setPolicyStatus(policy.isPolicyStatus());
 
-        // Si el dominio usa String para policyName, conviértelo al enum
+        // Asignar correctamente el tipo de póliza
+        entity.setNamePolicy(policy.getPolicyName());
 
         // Admin
         User admin = policy.getAdmin();

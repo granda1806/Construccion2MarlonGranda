@@ -48,11 +48,9 @@ public class DoctorMapper {
         }
 
         // Documentos y campos simples
-        if (entity.getPatientDocument() != null)
-        {
-            try
-            {
-                
+        if (entity.getPatientDocument() != null) {
+            try {
+
                 Long patientDoc = entity.getPatientDocument();
                 if (patientDoc > 0) {
                     record.setPatientDocument(patientDoc);
@@ -121,12 +119,12 @@ public class DoctorMapper {
             entity.setObservations("Generado automáticamente por DoctorMapper");
         }
 
-        // Doctor
-        if (record.getDoctorId() != null) {
-            DoctorEntity doctor = new DoctorEntity();
-            doctor.setId(record.getDoctorId());
-            entity.setDoctor(doctor);
-        }
+        // Doctor: no crear una entidad transitoria aquí.
+        // La resolución de la entidad `DoctorEntity` (obtener la entidad gestionada
+        // desde la BD) se realiza en el adaptador (`DoctorJpaAdapter`) antes de
+        // persistir. Si dejamos aquí una entidad con sólo id, JPA/DB puede producir
+        // errores de clave foránea si el doctor no existe.
+        // Por ello, no asignamos `entity.setDoctor(...)` desde el mapper.
 
         return entity;
     }

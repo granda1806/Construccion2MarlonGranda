@@ -71,7 +71,7 @@ public class UserBuilder {
         // 🔹 Generar una contraseña segura antes de codificarla
         String generatedPassword = generateSecurePassword(10);
         user.setPassword(generatedPassword);
-        
+
         // 🔹 Codificar la contraseña antes de persistir
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
@@ -82,9 +82,9 @@ public class UserBuilder {
      * Construye un usuario de tipo Paciente
      */
     public Patient buildAdmin(String nameComplete, String lastnameComplete, Long document,
-                           int age, String gender, String address,
-                           String contactName, String relationship,
-                           String contactNumber) throws Exception {
+            int age, String gender, String address,
+            String contactName, String relationship,
+            String contactNumber, String phoneNumber, String email) throws Exception {
 
         Patient user = new Patient();
         user.setNameComplete(userValidator.nameValidator(nameComplete));
@@ -93,10 +93,14 @@ public class UserBuilder {
         user.setAge(userValidator.ageValidator(age));
         user.setGender(userValidator.genderValidator(gender));
         user.setAddress(userValidator.addresValidator(address));
-        
+
         user.setEmergencyContactName(userValidator.contactNameValidator(contactName));
         user.setRelationshipPatient(userValidator.relationshipValidator(relationship));
         user.setEmergencyContactNumber(userValidator.contactNumberValidator(contactNumber));
+
+        // Validar y asignar teléfono y correo
+        user.setPhoneNumber(userValidator.phoneNumberValidator(phoneNumber));
+        user.setEmail(userValidator.emailValidator(email));
 
         return user;
     }

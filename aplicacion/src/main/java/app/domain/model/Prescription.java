@@ -16,7 +16,7 @@ public class Prescription {
     }
 
     public Prescription(String orderNumber, String medicineId, String dose, String duration, int item) {
-        this.orderNumber = orderNumber;
+        setOrderNumber(orderNumber);
         this.medicineId = medicineId;
         this.dose = dose;
         this.duration = duration;
@@ -29,6 +29,13 @@ public class Prescription {
     }
 
     public void setOrderNumber(String orderNumber) {
+        if (orderNumber == null) {
+            this.orderNumber = null;
+            return;
+        }
+        if (!orderNumber.matches("^\\d{1,6}$")) {
+            throw new IllegalArgumentException("El número de orden debe contener sólo dígitos y máximo 6 caracteres.");
+        }
         this.orderNumber = orderNumber;
     }
 

@@ -16,6 +16,9 @@ public class MedicalOrderEntity {
     private String observations;
     private LocalDateTime createdAt;
 
+    @Column(name = "patient_document", nullable = true)
+    private Long patientDocument;
+
     // Relación con historia clínica (clave foránea)
     @ManyToOne
     @JoinColumn(name = "medical_history_id")
@@ -26,8 +29,19 @@ public class MedicalOrderEntity {
     @JoinColumn(name = "patient_id", nullable = true)
     private PatientEntity patient;
 
+    // Relación con el doctor que creó la orden
+    @ManyToOne
+    @JoinColumn(name = "doctor_id", nullable = true)
+    private DoctorEntity doctor;
+
     @OneToMany(mappedBy = "medicalOrder", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProcedureEntity> procedures;
+
+    @OneToMany(mappedBy = "medicalOrder", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PrescriptionEntity> prescriptions;
+
+    @OneToMany(mappedBy = "medicalOrder", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<DiagnosticTestEntity> diagnosticTests;
 
     // --- Getters y Setters ---
     public Long getId() {
@@ -43,6 +57,14 @@ public class MedicalOrderEntity {
     }
 
     public void setOrderNumber(String orderNumber) {
+        if (orderNumber == null) {
+            this.orderNumber = null;
+            return;
+        }
+        // Allow only digits, maximum 6 characters
+        if (!orderNumber.matches("^\\d{1,6}$")) {
+            throw new IllegalArgumentException("El número de orden debe contener sólo dígitos y máximo 6 caracteres.");
+        }
         this.orderNumber = orderNumber;
     }
 
@@ -84,5 +106,37 @@ public class MedicalOrderEntity {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public Long getPatientDocument() {
+        return patientDocument;
+    }
+
+    public void setPatientDocument(Long patientDocument) {
+        this.patientDocument = patientDocument;
+    }
+
+    public DoctorEntity getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(DoctorEntity doctor) {
+        this.doctor = doctor;
+    }
+
+    public List<PrescriptionEntity> getPrescriptions() {
+        return prescriptions;
+    }
+
+    public void setPrescriptions(List<PrescriptionEntity> prescriptions) {
+        this.prescriptions = prescriptions;
+    }
+
+    public List<DiagnosticTestEntity> getDiagnosticTests() {
+        return diagnosticTests;
+    }
+
+    public void setDiagnosticTests(List<DiagnosticTestEntity> diagnosticTests) {
+        this.diagnosticTests = diagnosticTests;
     }
 }

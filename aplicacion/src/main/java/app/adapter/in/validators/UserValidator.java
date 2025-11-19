@@ -52,12 +52,29 @@ public class UserValidator extends SimpleValidator {
         return stringValidator("Genero de la persona", value);
     }
 
-    public String EmailValidator(String value) throws Exception {
-        return stringValidator("Email de la persona", value);
+    /**
+     * Valida el correo electrónico. Opcional, pero si se ingresa debe ser válido.
+     */
+    public String emailValidator(String value) throws Exception {
+        if (value == null || value.trim().isEmpty()) {
+            return null; // Opcional
+        }
+        String trimmed = value.trim();
+        // Validación simple de formato
+        if (!trimmed.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
+            throw new Exception("El correo electrónico no tiene un formato válido.");
+        }
+        return trimmed;
     }
 
-    public long PhoneNumber(String value) throws Exception {
-        return longValidator("Telefono de la persona", value);
+    /**
+     * Valida el número de teléfono: debe tener exactamente 10 dígitos.
+     */
+    public long phoneNumberValidator(String value) throws Exception {
+        if (value == null || !value.matches("^\\d{10}$")) {
+            throw new Exception("El número de teléfono debe tener exactamente 10 dígitos.");
+        }
+        return Long.parseLong(value);
     }
 
     public String addresValidator(String value) throws Exception {

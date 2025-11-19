@@ -7,14 +7,14 @@ package app.domain.model;
  */
 public class Procedure {
 
-    private String orderNumber;          // Número de la orden médica
-    private String procedureId;          // ID del procedimiento
-    private int quantity;                // Cantidad de veces que se realiza
-    private String frequency;            // Frecuencia (ej. "1 vez por semana")
-    private double cost;                 // Costo asociado
-    private boolean requiresSpecialist;  // Indica si requiere especialista
-    private String specialistId;         // ID o tipo del especialista
-    private int item;                    // Número de ítem dentro de la orden
+    private String orderNumber; // Número de la orden médica
+    private String procedureId; // ID del procedimiento
+    private int quantity; // Cantidad de veces que se realiza
+    private String frequency; // Frecuencia (ej. "1 vez por semana")
+    private double cost; // Costo asociado
+    private boolean requiresSpecialist; // Indica si requiere especialista
+    private String specialistId; // ID o tipo del especialista
+    private int item; // Número de ítem dentro de la orden
 
     public Procedure() {
     }
@@ -38,7 +38,11 @@ public class Procedure {
     }
 
     public void setOrderNumber(String orderNumber) {
-        this.orderNumber = orderNumber;
+        if (orderNumber != null && orderNumber.matches("^\\d{1,6}$")) {
+            this.orderNumber = orderNumber;
+        } else {
+            throw new IllegalArgumentException("El número de orden debe tener máximo 6 dígitos.");
+        }
     }
 
     public String getProcedureId() {
@@ -54,6 +58,9 @@ public class Procedure {
     }
 
     public void setQuantity(int quantity) {
+        if (quantity < 0) {
+            throw new IllegalArgumentException("La cantidad no puede ser negativa.");
+        }
         this.quantity = quantity;
     }
 
@@ -95,6 +102,34 @@ public class Procedure {
 
     public void setItem(int item) {
         this.item = item;
+    }
+
+    /**
+     * Consume (decrementa) la cantidad pedida desde el inventario asociado.
+     * Lanza IllegalArgumentException si el inventario es nulo o no tiene
+     * suficientes unidades.
+     */
+    public void consumeFromInventory(DiagnosticInventory inventory) {
+        if (inventory == null) {
+            throw new IllegalArgumentException("Inventario nulo.");
+        }
+        if (this.quantity <= 0) {
+            throw new IllegalArgumentException("La cantidad a consumir debe ser mayor que 0.");
+        }
+        inventory.decreaseCounter(this.quantity);
+    }
+
+    /**
+     * Libera (incrementa) la cantidad al inventario asociado.
+     */
+    public void releaseToInventory(DiagnosticInventory inventory) {
+        if (inventory == null) {
+            throw new IllegalArgumentException("Inventario nulo.");
+        }
+        if (this.quantity <= 0) {
+            throw new IllegalArgumentException("La cantidad a liberar debe ser mayor que 0.");
+        }
+        inventory.increaseCounter(this.quantity);
     }
 
     // ===== toString() =====

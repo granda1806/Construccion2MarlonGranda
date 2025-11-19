@@ -2,6 +2,7 @@ package app.infrastructure.persistence.repository;
 
 import app.infrastructure.persistence.entities.MedicalHistoryEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import java.sql.Date;
 import java.util.List;
@@ -32,10 +33,12 @@ public interface MedicalHistoryRepository extends JpaRepository<MedicalHistoryEn
 
     /**
      * Busca todas las historias clínicas de un paciente según su número de documento.
+     * Carga con EAGER el doctor para evitar LazyInitializationException
      *
      * @param patientDocument número de documento del paciente
      * @return lista de historias clínicas asociadas al documento
      */
+    @Query("SELECT h FROM MedicalHistoryEntity h LEFT JOIN FETCH h.doctor WHERE h.patientDocument = ?1")
     List<MedicalHistoryEntity> findByPatientDocument(Long patientDocument);
 
     /**

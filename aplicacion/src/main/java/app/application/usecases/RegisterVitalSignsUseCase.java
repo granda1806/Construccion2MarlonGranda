@@ -15,8 +15,8 @@ public class RegisterVitalSignsUseCase {
     private final MedicalOrderRepository orderRepository;
 
     public RegisterVitalSignsUseCase(PatientRepository patientRepository,
-                                     VitalSignsRepository vitalSignsRepository,
-                                     MedicalOrderRepository orderRepository) {
+            VitalSignsRepository vitalSignsRepository,
+            MedicalOrderRepository orderRepository) {
         this.patientRepository = patientRepository;
         this.vitalSignsRepository = vitalSignsRepository;
         this.orderRepository = orderRepository;
@@ -38,10 +38,21 @@ public class RegisterVitalSignsUseCase {
         System.out.print("Ingrese número de orden médica: ");
         String orderNum = reader.nextLine();
 
-        MedicalOrderEntity order = orderRepository.findByOrderNumber(orderNum);
-        if (order == null) {
+        java.util.List<MedicalOrderEntity> orders = orderRepository.findByOrderNumber(orderNum);
+        if (orders == null || orders.isEmpty()) {
             System.out.println("Orden médica no encontrada.");
             return;
+        }
+
+        MedicalOrderEntity order;
+        if (orders.size() > 1) {
+            System.out.println("⚠️ Atención: se encontraron " + orders.size()
+                    + " órdenes con el mismo número.");
+            order = SelectOrderHelper.chooseOrder(orders, reader);
+            if (order == null)
+                return;
+        } else {
+            order = orders.get(0);
         }
 
         VitalSignsEntity signos = new VitalSignsEntity();

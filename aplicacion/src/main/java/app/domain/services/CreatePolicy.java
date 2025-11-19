@@ -14,14 +14,14 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CreatePolicy {
-    
+
     @Autowired
     private UserPortOut userPort;
     @Autowired
     private UserPortPatient portPatient;
     @Autowired
     private PolicyPort policyPort;
-    
+
     public void create(Policy policy) throws Exception {
         User admin = userPort.findByDocument(policy.getAdmin());
         if (admin == null || !admin.getRole().equals(Role.ADMIN)) {
@@ -31,10 +31,15 @@ public class CreatePolicy {
         if (patient == null) {
             throw new Exception("El paciente no existe...");
         }
+        // Validación: un paciente solo puede tener una póliza
+        java.util.List<Policy> existing = policyPort.findByPatient(patient);
+        if (existing != null && !existing.isEmpty()) {
+            throw new Exception("El paciente ya cuenta con una póliza registrada.");
+        }
         policy.setPolicyTerminationDate(new Date(System.currentTimeMillis()));
         policy.setPatient(patient);
         policy.setAdmin(admin);
-        
+
         policyPort.save(policy);
     }
 }
